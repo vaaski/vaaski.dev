@@ -31,10 +31,10 @@ export default {
   position: relative
 
   .rain-front
-    transform: skewX(-20deg)
+    transform: skewX(-10deg)
 
   .rain-back
-    transform: skewX(-12deg)
+    transform: skewX(-15deg)
     opacity: 0.5
 
   .raindrop
