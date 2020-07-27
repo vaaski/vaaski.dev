@@ -54,10 +54,10 @@ svg
   filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.25))
 
   &.flicker
-    animation: 4s flicker steps(35, jump-start) infinite forwards
+    animation: 1.5s flicker steps(100, jump-start) backwards
 
 @keyframes flicker
-  for n in 1 .. 30
-    {1% * n}
+  for n in 1 .. 50
+    {2% * n}
       filter: drop-shadow(0 0 30px rgba(255, 255, 255, (random(0, 50) / 100)))
 </style>
