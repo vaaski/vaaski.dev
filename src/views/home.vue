@@ -32,8 +32,7 @@ export default {
 
     .box
       width: calc(20vw + 15vh)
-      max-width: 450px
-      // padding: 32px 48px
+      max-width: 400px
       padding: 64px
-      border-radius: 50% // 15px
+      border-radius: 50%
 </style>

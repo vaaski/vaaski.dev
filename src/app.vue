@@ -10,7 +10,7 @@
         <router-link to="/">Home</router-link>
         <router-link to="/">Home</router-link>
         <router-link to="/about">About</router-link>
-      </nav> -->
+      </nav>-->
       <router-view class="route" />
     </div>
   </div>
@@ -33,14 +33,12 @@ html, body
   width: 100%
   font-family: "Sora", sans-serif
   font-weight: 200
-  background: #19182d
+  background: linear-gradient(30deg, #19182d 0, #0c0c14 100%)
   color: #dcdce0
 
 #app
   height: 100%
   width: 100%
-  background: linear-gradient(30deg, #19182d 0, #0c0c14 100%)
-  color: #dcdce0
 
   a
     color: inherit
