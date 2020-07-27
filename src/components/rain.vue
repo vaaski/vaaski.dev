@@ -5,7 +5,7 @@
         class="raindrop"
         v-for="drop in amount / 2"
         :key="drop"
-        :style="{ left: `${random(0, 150)}%`, 'animation-delay': `${random(0, -1000)}ms`, height: `${random(75, 150)}px`, opacity: `${random(50, 75)}%` }"
+        :style="{ left: `${random(0, 150)}%`, 'animation-delay': `${random(0, -2000)}ms`, height: `${random(75, 150)}px`, opacity: `${random(50, 75)}%` }"
       ></div>
     </div>
   </div>
@@ -14,7 +14,7 @@
 <script>
 export default {
   data: () => ({
-    amount: 50,
+    amount: 80,
     containers: ["front", "back"],
   }),
   methods: {
@@ -44,11 +44,14 @@ export default {
     position: absolute
     left: 0
     top: -150px
-    animation: 1000ms rain linear infinite
+    animation: 2000ms rain linear infinite
 
 @keyframes rain
   0
     transform: translateY(-200px)
+
+  50%
+    transform: translateY(150vh)
 
   100%
     transform: translateY(150vh)

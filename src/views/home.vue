@@ -1,9 +1,7 @@
 <template>
   <div id="home">
-    <div class="outer">
-      <div class="box">
-        <logo color="rgba(255, 255, 255, 0.85)" />
-      </div>
+    <div class="box">
+      <logo color="rgba(255, 255, 255, 0.85)" />
     </div>
   </div>
 </template>
@@ -24,15 +22,9 @@ export default {
   justify-content: center
   align-items: center
 
-  .outer
-    width: 100%
-    display: flex
-    justify-content: center
-    align-items: center
-
-    .box
-      width: calc(20vw + 15vh)
-      max-width: 400px
-      padding: 64px
-      border-radius: 50%
+  .box
+    width: calc(20vw + 15vh)
+    max-width: 400px
+    padding: 64px
+    border-radius: 50%
 </style>
