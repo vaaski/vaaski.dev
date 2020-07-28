@@ -18,6 +18,7 @@
         <a
           v-else
           target="_blank"
+          rel="noreferrer"
           :style="{ 'transition-delay': `${i * 50}ms, 0s` }"
           class="link"
           :href="to"
