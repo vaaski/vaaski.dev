@@ -65,8 +65,8 @@ nav
 
   >.hamburger
     z-index: 4
-    margin: 24px
-    margin-bottom: 16px
+    padding: 24px
+    padding-bottom: 16px
     width: 24px
     transition: 1s $bezier
     transition-property: width, opacity
@@ -101,7 +101,7 @@ nav
       font-size: 1.5em
       text-decoration: none
       position: relative
-      margin-right: 0
+      margin-right: -24px
       transition: margin-right 1s $bezier, font-weight 100ms linear
       font-weight: 200
 
