@@ -18,15 +18,15 @@ export default {
   data: () => ({
     navigation: [
       {
-        text: "Home",
+        text: "home",
         to: "/",
       },
       {
-        text: "GitHub",
+        text: "github",
         to: "https://github.com/vaaski",
       },
       {
-        text: "W2G",
+        text: "w2g",
         to: "https://github.com/vaaski/w2g",
       },
     ],
@@ -35,6 +35,8 @@ export default {
 </script>
 
 <style lang="stylus">
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300&display=swap")
+
 $bezier = cubic-bezier(0.76, 0, 0.24, 1)
 
 html, body
@@ -42,7 +44,7 @@ html, body
   padding: 0
   height: 100%
   width: 100%
-  font-family: "Sora", sans-serif
+  font-family: "IBM Plex Sans", sans-serif
   font-weight: 200
   background: linear-gradient(30deg, #19182d 0, #0c0c14 100%)
   background-size: cover

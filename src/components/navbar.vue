@@ -45,6 +45,8 @@ export default {
 </script>
 
 <style lang="stylus">
+@import "../assets/globals"
+
 $bezier = cubic-bezier(0.76, 0, 0.24, 1)
 
 nav
@@ -60,7 +62,7 @@ nav
     opacity: 0
     transition: opacity 1s $bezier
 
-    @media only screen and (min-width: 500px)
+    @media only screen and (min-width: $mobile-break)
       opacity: 0 !important
 
   >.hamburger
@@ -102,10 +104,11 @@ nav
       text-decoration: none
       position: relative
       margin-right: -24px
-      transition: margin-right 1s $bezier, font-weight 100ms linear
-      font-weight: 200
+      transition: margin-right 1s $bezier, letter-spacing 100ms linear, padding-right 100ms linear
+      letter-spacing: 0
+      padding: 0
 
-      @media only screen and (max-width: 500px)
+      @media only screen and (max-width: $mobile-break)
         font-size: 2em
         margin: 8px 0
 
@@ -114,19 +117,8 @@ nav
         text-shadow: 0 0 5px rgba(255, 255, 255, 0.75)
 
       &:hover
-        font-weight: 500
-
-      &::before
-        content: ""
-        position: absolute
-        width: 100%
-        height: 1px
-        bottom: 3px
-        left: 0
-        background-color: #dcdce0bf
-        border-radius: 1px
-        transition: all 250ms cubic-bezier(0.45, 0, 0.55, 1)
-        box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.333)
+        letter-spacing: 2px
+        padding-right: 4px
 
   &.expanded
     >.overlay
