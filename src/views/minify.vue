@@ -1,0 +1,209 @@
+<template>
+  <div class="bookmarklet">
+    <section class="before">
+      <textarea
+        v-model="input"
+        class="input"
+        name="before"
+        placeholder="paste your code here"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        autofocus
+        ref="input"
+      ></textarea>
+    </section>
+    <section class="settings">
+      <div class="setting">
+        <input type="checkbox" name="iife" id="iife" v-model="conf.iife" />
+        <label for="iife" title="wrap into Immediately invoked function expression">wrap in IIFE</label>
+      </div>
+      <div class="setting">
+        <input type="checkbox" name="bookmarklet" id="bookmarklet" v-model="conf.bookmarklet" />
+        <label
+          for="bookmarklet"
+          title="urlEncode and prefix with javascript:"
+        >convert to bookmarklet</label>
+      </div>
+    </section>
+    <section class="after">
+      <textarea
+        v-model="output"
+        class="output"
+        readonly
+        name="after"
+        placeholder="output"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        :class="{ error }"
+      ></textarea>
+    </section>
+    <section class="lower">
+      <div class="copy">
+        <button class="copy" @click="copyToClipboard(output)">copy to clipboard</button>
+      </div>
+      <div class="bookmark" v-if="conf.bookmarklet">
+        <label
+          @click="bookmarkClick"
+          for="bookmark"
+        >bookmark:{{bookmarkName === "bookmarklet" ? " (click to rename)" : ""}}</label>
+        <input
+          v-if="editBookmarkName"
+          type="text"
+          name="bookmark name"
+          id="bookmark"
+          v-model="bookmarkName"
+          ref="bookmarkInput"
+          @keydown.enter="editBookmarkName = false"
+          @keydown.esc="editBookmarkName = false"
+          :style="{ width: `${bookmarkName.length}ch`}"
+        />
+        <a
+          v-else
+          @click="bookmarkClick"
+          id="bookmark"
+          :href="error || output === '' ? '/' : output"
+        >{{ bookmarkName }}</a>
+      </div>
+    </section>
+  </div>
+</template>
+
+<script>
+import minify from "../assets/minify"
+const copyToClipboard = str => {
+  const el = document.createElement("textarea")
+  el.value = str
+  el.setAttribute("readonly", "")
+  el.style.position = "absolute"
+  el.style.left = "-9999px"
+  document.body.appendChild(el)
+  const selected =
+    document.getSelection().rangeCount > 0 ? document.getSelection().getRangeAt(0) : false
+  el.select()
+  document.execCommand("copy")
+  document.body.removeChild(el)
+  if (selected) {
+    document.getSelection().removeAllRanges()
+    document.getSelection().addRange(selected)
+  }
+}
+
+export default {
+  name: "bookmarklet",
+  data: () => ({
+    conf: { iife: true, bookmarklet: true },
+    editBookmarkName: false,
+    input: "",
+    output: "",
+    error: false,
+    bookmarkName: "bookmarklet",
+  }),
+  async mounted() {
+    await this.$nextTick()
+    this.$refs.input.focus()
+  },
+  watch: {
+    input() {
+      this.transform()
+    },
+    conf: {
+      handler() {
+        this.transform()
+      },
+      deep: true,
+    },
+  },
+  methods: {
+    minify,
+    copyToClipboard,
+    async bookmarkClick(e) {
+      e.preventDefault()
+      this.editBookmarkName = !this.editBookmarkName
+      if (this.editBookmarkName) {
+        await this.$nextTick()
+        this.$refs.bookmarkInput.select()
+      }
+    },
+    transform() {
+      let out = this.input
+      if (out === "") return (this.output = "")
+      if (this.conf.iife) out = `(() => {${out}})()`
+      try {
+        out = this.minify(out)
+        this.error = false
+        if (this.conf.bookmarklet) out = `javascript:${encodeURIComponent(out)}`
+        this.output = out
+      } catch (error) {
+        this.error = error
+        this.output = error.message
+      }
+    },
+  },
+}
+</script>
+
+<style lang="stylus">
+@import "../assets/globals"
+
+.bookmarklet
+  display: flex
+  justify-content: center
+  align-items: center
+  flex-direction: column
+
+  section
+    width: 75%
+    max-width: 75vw
+    height: 20vh
+    display: flex
+    justify-content: center
+    align-items: center
+
+    @media screen and (max-width: $mobile-break)
+      width: 85%
+      max-width: 85vw
+
+    label
+      margin: 0 0.5ch
+      cursor: pointer
+
+    &.settings, &.lower
+      margin: 1em 0
+      height: unset
+
+      @media screen and (max-width: $mobile-break)
+        flex-direction: column
+
+        >div
+          display: flex
+          justify-content: center
+          align-items: center
+          margin: 0.5ch 0
+
+      >div
+        padding: 0 1em
+
+    &.lower
+      margin-bottom: 0
+
+      a
+        cursor: pointer
+        padding: 0.5ch 1ch
+
+      input
+        font-size: 1em
+        padding: 0.5ch 1ch
+
+    textarea
+      $padding = 15px
+      height: "calc(100% - 2*%s - 2px)" % $padding
+      width: "calc(100% - 2*%s - 2px)" % $padding
+      padding: $padding
+
+      &.error
+        color: #ff6565 !important
+</style>

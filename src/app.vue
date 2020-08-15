@@ -15,19 +15,33 @@ const navbar = require("./components/navbar").default
 export default {
   name: "app",
   components: { rain, navbar },
+  mounted() {
+    if (process.env.NODE_ENV === "development") window.vue = this
+  },
   data: () => ({
     navigation: [
       {
         text: "home",
         to: "/",
+        title: "home",
+      },
+      {
+        text: "minify/bookmarklet",
+        to: "/minify",
+        title: "minify and convert to bookmarklet format",
+      },
+      {
+        hr: true,
       },
       {
         text: "github",
         to: "https://github.com/vaaski",
+        title: "open source software",
       },
       {
         text: "w2g",
         to: "https://github.com/vaaski/w2g",
+        title: "watch youtube videos with your friends",
       },
     ],
   }),
@@ -35,7 +49,8 @@ export default {
 </script>
 
 <style lang="stylus">
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300&display=swap")
+@import "./assets/globals"
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap")
 
 $bezier = cubic-bezier(0.76, 0, 0.24, 1)
 
@@ -44,11 +59,11 @@ html, body
   padding: 0
   height: 100%
   width: 100%
-  font-family: "IBM Plex Sans", sans-serif
+  font-family: "Fira Code", monospace
   font-weight: 200
   background: linear-gradient(30deg, #19182d 0, #0c0c14 100%)
   background-size: cover
-  color: #dcdce0
+  color: $fg
   -webkit-tap-highlight-color: transparent
   -webkit-overflow-scrolling: touch
   overflow: hidden
@@ -56,7 +71,7 @@ html, body
   overscroll-behavior-y: none
 
 :root
-  --clr-text: #dcdce0
+  --clr-text: $fg
   --clr-background: #131221
   --grd-background: linear-gradient(30deg, #19182d 0, #0c0c14 100%)
 
@@ -67,9 +82,47 @@ html, body
   position: fixed
   top: 0
   overscroll-behavior-y: none
+  user-select: none
 
   a
     color: inherit
+
+  button
+    background: transparent
+    border: 1px solid $fg
+    color: $fg
+    font-family: "Fira Code", monospace
+    font-size: 1em
+    padding: 0.5ch 1ch
+    border-radius: 5px
+    outline: none
+    cursor: pointer
+    transition: 100ms
+    transition-delay: 250ms
+
+    &:active
+      background: rgba(255, 255, 255, 0.1)
+      transition-delay: 0s
+
+  textarea, input
+    background: rgba(255, 255, 255, 0.05)
+    border-radius: 15px
+    outline: none
+    color: $fg
+    scrollbars(0, transparent, transparent)
+    font-family: "Fira Code", monospace
+    resize: none
+    border: 1px solid $fg
+    outline: none
+    backdrop-filter: blur(2px)
+
+  input
+    border-radius: 5px
+    border: none
+
+  ::selection
+    background: #cfcdff
+    color: #1c1a35
 
   .rain
     position: fixed
@@ -92,7 +145,6 @@ html, body
       position: absolute
       z-index: 3
       height: 100%
-      width: 100%
       max-width: 500px
       right: 0
 </style>
