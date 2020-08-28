@@ -115,6 +115,13 @@ html, body
     border: 1px solid $fg
     outline: none
     backdrop-filter: blur(2px)
+    transition: background 100ms, color 100ms, border 100ms
+
+    &:focus:not([readonly])
+      border: 1px solid $focus
+
+    &[readonly]
+      border: 1px solid $disabled
 
   input
     border-radius: 5px

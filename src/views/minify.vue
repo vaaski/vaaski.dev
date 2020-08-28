@@ -43,7 +43,7 @@
     </section>
     <section class="lower">
       <div class="copy">
-        <button class="copy" @click="copyToClipboard(output)">copy to clipboard</button>
+        <button class="copy" @click="copy(output)">{{ copyText }}</button>
       </div>
       <div class="bookmark" v-if="conf.bookmarklet">
         <label
@@ -57,6 +57,10 @@
           id="bookmark"
           v-model="bookmarkName"
           ref="bookmarkInput"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
           @keydown.enter="editBookmarkName = false"
           @keydown.esc="editBookmarkName = false"
           :style="{ width: `${bookmarkName.length}ch`}"
@@ -74,23 +78,8 @@
 
 <script>
 import minify from "../assets/minify"
-const copyToClipboard = str => {
-  const el = document.createElement("textarea")
-  el.value = str
-  el.setAttribute("readonly", "")
-  el.style.position = "absolute"
-  el.style.left = "-9999px"
-  document.body.appendChild(el)
-  const selected =
-    document.getSelection().rangeCount > 0 ? document.getSelection().getRangeAt(0) : false
-  el.select()
-  document.execCommand("copy")
-  document.body.removeChild(el)
-  if (selected) {
-    document.getSelection().removeAllRanges()
-    document.getSelection().addRange(selected)
-  }
-}
+
+const { wait, copyToClipboard } = require("../assets/utils")
 
 export default {
   name: "bookmarklet",
@@ -100,6 +89,7 @@ export default {
     input: "",
     output: "",
     error: false,
+    copyText: "copy to clipboard",
     bookmarkName: "bookmarklet",
   }),
   async mounted() {
@@ -119,7 +109,19 @@ export default {
   },
   methods: {
     minify,
-    copyToClipboard,
+    async copy(str) {
+      const text = this.copyText
+      try {
+        copyToClipboard(str)
+        this.copyText = "copied"
+        await wait(2e3)
+        this.copyText = text
+      } catch (err) {
+        this.copyText = "could not copy"
+        await wait(2e3)
+        this.copyText = text
+      }
+    },
     async bookmarkClick(e) {
       e.preventDefault()
       this.editBookmarkName = !this.editBookmarkName
@@ -205,5 +207,6 @@ export default {
       padding: $padding
 
       &.error
-        color: #ff6565 !important
+        border-color: $error !important
+        color: $error !important
 </style>

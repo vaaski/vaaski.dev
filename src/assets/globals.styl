@@ -1,8 +1,10 @@
 $mobile-break = 500px
 $fg = #dcdce0
+$disabled = #858588
+$error = #ff6565
+$focus = #b1b1ff
 
 scrollbars($size, $foreground-color, $background-color)
-  // For Google Chrome
   &::-webkit-scrollbar
     width: $size
     height: $size
@@ -13,7 +15,6 @@ scrollbars($size, $foreground-color, $background-color)
   &::-webkit-scrollbar-track
     background: $background-color
 
-  // For Internet Explorer
   &
     scrollbar-face-color: $foreground-color
     scrollbar-track-color: $background-color
