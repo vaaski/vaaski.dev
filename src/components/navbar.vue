@@ -1,12 +1,18 @@
 <template>
   <nav :class="{ expanded }">
     <div class="overlay"></div>
-    <div class="hamburger" @click="expanded = !expanded">
+    <div
+      class="hamburger"
+      tabindex="0"
+      @keydown.enter="expand()"
+      @click="expand()"
+      @keydown.space="expand()"
+    >
       <div class="line upper"></div>
       <div class="line center"></div>
       <div class="line lower"></div>
     </div>
-    <div class="routes">
+    <div class="routes" @keydown.esc="expand(false)" ref="routes">
       <template v-for="({ text, to, title, hr }, i) in navigation">
         <hr v-if="hr" :key="hr+i" :style="{ 'transition-delay': `${i * 50}ms` }" />
         <router-link
@@ -17,6 +23,7 @@
           :style="{ 'transition-delay': `${i * 50}ms, 0s, 50ms` }"
           :title="title"
           @click.native="expanded = false"
+          @focus.native="expand(true)"
         >{{ text }}</router-link>
         <a
           v-else
@@ -27,6 +34,7 @@
           :href="to"
           :key="to"
           :title="title"
+          @focus="expand(true)"
         >{{ text }}</a>
       </template>
     </div>
@@ -39,6 +47,12 @@ export default {
   data: () => ({
     expanded: false,
   }),
+  methods: {
+    expand(e = "no") {
+      this.expanded = e === "no" ? !this.expanded : e
+      if (!e) this.$refs.routes.children.forEach(c => c.blur())
+    },
+  },
   props: {
     navigation: {
       type: Array,
@@ -81,6 +95,7 @@ nav
     opacity: 0.5
     align-self: flex-end
     cursor: pointer
+    outline: none
 
     >.line
       height: 2px
@@ -91,6 +106,10 @@ nav
       transition: 1s $bezier
       transition-property: width, box-shadow
       box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0)
+
+    &:focus>.line
+      background: $focus
+      box-shadow: 0 0 10px 0 $focus
 
   >.routes
     z-index: 4
@@ -146,7 +165,7 @@ nav
         &:after
           opacity: 0.75
 
-      &:hover
+      &:hover, &:focus
         letter-spacing: 1px
         padding-right: 4px
         font-weight: 500

@@ -1,9 +1,9 @@
 <template>
-  <div id="home">
+  <main id="home">
     <div class="box">
       <logo color="rgba(255, 255, 255, 0.85)" />
     </div>
-  </div>
+  </main>
 </template>
 
 <script>

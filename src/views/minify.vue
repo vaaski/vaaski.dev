@@ -1,5 +1,5 @@
 <template>
-  <div class="bookmarklet">
+  <main class="bookmarklet">
     <section class="before">
       <textarea
         v-model="input"
@@ -70,10 +70,11 @@
           @click="bookmarkClick"
           id="bookmark"
           :href="error || output === '' ? '/' : output"
+          :tabindex="focusindex + 1"
         >{{ bookmarkName }}</a>
       </div>
     </section>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -92,6 +93,12 @@ export default {
     copyText: "copy to clipboard",
     bookmarkName: "bookmarklet",
   }),
+  props: {
+    focusindex: {
+      type: Number,
+      default: 10,
+    },
+  },
   async mounted() {
     await this.$nextTick()
     this.$refs.input.focus()
