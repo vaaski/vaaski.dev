@@ -15,7 +15,11 @@
       ></textarea>
     </section>
     <section class="settings">
-      <div class="setting">
+      <div class="setting" v-for="(val, key) in conf" :key="key">
+        <input type="checkbox" :name="key" :id="key" v-model="conf[key]" />
+        <label :for="key" :title="getConfDesc(key, 'title')">{{ getConfDesc(key, 'label') }}</label>
+      </div>
+      <!-- <div class="setting">
         <input type="checkbox" name="iife" id="iife" v-model="conf.iife" />
         <label for="iife" title="wrap into Immediately invoked function expression">wrap in IIFE</label>
       </div>
@@ -25,7 +29,7 @@
           for="bookmarklet"
           title="urlEncode and prefix with javascript:"
         >convert to bookmarklet</label>
-      </div>
+      </div>-->
     </section>
     <section class="after">
       <textarea
@@ -78,14 +82,34 @@
 </template>
 
 <script>
-import minify from "../assets/minify"
+import _minify from "../assets/minify"
 
-const { wait, copyToClipboard } = require("../assets/utils")
+const { wait, copyToClipboard, debounce } = require("../assets/utils")
 
 export default {
-  name: "bookmarklet",
+  name: "minify",
   data: () => ({
-    conf: { iife: true, bookmarklet: true },
+    conf: { iife: true, bookmarklet: true, minify: true, env: false },
+    confDesc: {
+      iife: {
+        title:
+          "wrap into immediately invoked function expression, disable it to make declared variables unavailable to parent context",
+        label: "IIFE",
+      },
+      bookmarklet: {
+        title: "url encode and prefix with 'javascript:'",
+        label: "bookmarklet",
+      },
+      minify: {
+        title: "minify code using babel-preset-minify",
+        label: "minify",
+      },
+      env: {
+        title:
+          "transpile code to make it compatible with older browsers using @babel/preset-env with '> 0.25%, not dead'",
+        label: "babel transpile",
+      },
+    },
     editBookmarkName: false,
     input: "",
     output: "",
@@ -104,9 +128,9 @@ export default {
     this.$refs.input.focus()
   },
   watch: {
-    input() {
+    input: debounce(function () {
       this.transform()
-    },
+    }, 100),
     conf: {
       handler() {
         this.transform()
@@ -115,7 +139,13 @@ export default {
     },
   },
   methods: {
-    minify,
+    getConfDesc(key, val) {
+      return this.confDesc[key] ? this.confDesc[key][val] || "" : ""
+    },
+    minify(code) {
+      const { minify, env, iife } = this.conf
+      return _minify(code, { minify, env, iife })
+    },
     async copy(str) {
       const text = this.copyText
       try {
@@ -140,7 +170,6 @@ export default {
     transform() {
       let out = this.input
       if (out === "") return (this.output = "")
-      if (this.conf.iife) out = `(() => {${out}})()`
       try {
         out = this.minify(out)
         this.error = false

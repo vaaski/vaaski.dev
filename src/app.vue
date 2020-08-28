@@ -17,6 +17,13 @@ export default {
   components: { rain, navbar },
   mounted() {
     if (process.env.NODE_ENV === "development") window.vue = this
+    this.updateTitle()
+    this.$router.afterEach(this.updateTitle)
+  },
+  methods: {
+    updateTitle() {
+      document.title = `${document.location.host} // ${this.$route.name}`
+    },
   },
   data: () => ({
     navigation: [

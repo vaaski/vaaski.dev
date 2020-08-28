@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@babel/plugin-syntax-import-meta": "^7.10.4",
+    "@babel/preset-env": "^7.11.0",
     "@babel/standalone": "^7.11.3",
     "babel-preset-minify": "^0.5.1",
     "core-js": "^3.6.5",

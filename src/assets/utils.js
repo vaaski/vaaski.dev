@@ -17,4 +17,11 @@ const copyToClipboard = str => {
 }
 const wait = t => new Promise(r => setTimeout(r, t))
 
-module.exports = { copyToClipboard, wait }
+const debounce = (fn, ms = 0) => {
+  let tid
+  return function d(...args) {
+    clearTimeout(tid), (tid = setTimeout(() => fn.apply(this, args), ms))
+  }
+}
+
+module.exports = { copyToClipboard, wait, debounce }
