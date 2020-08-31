@@ -24,4 +24,9 @@ const debounce = (fn, ms = 0) => {
   }
 }
 
-module.exports = { copyToClipboard, wait, debounce }
+const ls = (key, value) =>
+  value === undefined
+    ? JSON.parse(localStorage.getItem(key))
+    : localStorage.setItem(key, JSON.stringify(value))
+
+module.exports = { copyToClipboard, wait, debounce, ls }

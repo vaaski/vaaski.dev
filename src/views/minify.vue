@@ -84,7 +84,7 @@
 <script>
 import _minify from "../assets/minify"
 
-const { wait, copyToClipboard, debounce } = require("../assets/utils")
+const { wait, copyToClipboard, debounce, ls } = require("../assets/utils")
 
 export default {
   name: "minify",
@@ -126,6 +126,7 @@ export default {
   async mounted() {
     await this.$nextTick()
     this.$refs.input.focus()
+    this.loadState()
   },
   watch: {
     input: debounce(function () {
@@ -167,8 +168,22 @@ export default {
         this.$refs.bookmarkInput.select()
       }
     },
+    saveState() {
+      const { conf, input } = this
+      ls("vaaski.dev-minify", { conf, input })
+    },
+    loadState() {
+      const state = ls("vaaski.dev-minify")
+      if (!state) return
+
+      const { conf, input } = state
+      this.conf = conf
+      this.input = input
+    },
     transform() {
       let out = this.input
+      this.saveState()
+
       if (out === "") return (this.output = "")
       try {
         out = this.minify(out)
