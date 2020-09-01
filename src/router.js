@@ -14,7 +14,10 @@ const routes = [
     name: "minify",
     component: () =>
       // eslint-disable-next-line no-inline-comments
-      import(/* webpackChunkName: "minify" */ "./views/minify.vue"),
+      import(
+        /* webpackChunkName: "minify" */
+        "./views/minify.vue"
+      ),
   },
 ]
 

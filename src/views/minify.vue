@@ -82,9 +82,10 @@
 </template>
 
 <script>
-import _minify from "../assets/minify"
+let _minify
 
-const { wait, copyToClipboard, debounce, ls } = require("../assets/utils")
+const { wait, copyToClipboard, debounce, ls, bytesize } = require("../assets/utils")
+window.bytesize = bytesize
 
 export default {
   name: "minify",
@@ -143,9 +144,18 @@ export default {
     getConfDesc(key, val) {
       return this.confDesc[key] ? this.confDesc[key][val] || "" : ""
     },
-    minify(code) {
+    async importMinify() {
+      const { default: _minify } = await import(
+        /* webpackChunkName: "minifyChunk" */ "../assets/min"
+      )
+      return _minify
+    },
+    async minify(code) {
+      if (!_minify) _minify = await this.importMinify()
+
       const { minify, env, iife } = this.conf
-      return _minify(code, { minify, env, iife })
+      const res = await _minify(code, { minify, env, iife })
+      return res
     },
     async copy(str) {
       const text = this.copyText
@@ -170,23 +180,24 @@ export default {
     },
     saveState() {
       const { conf, input } = this
-      ls("vaaski.dev-minify", { conf, input })
+      ls("vaaski.dev-minify-conf", conf)
+      ls("vaaski.dev-minify-input", input)
     },
     loadState() {
-      const state = ls("vaaski.dev-minify")
-      if (!state) return
+      const conf = ls("vaaski.dev-minify-conf", conf)
+      if (conf) this.conf = conf
 
-      const { conf, input } = state
-      this.conf = conf
-      this.input = input
+      const input = ls("vaaski.dev-minify-input", input)
+      if (input) this.input = input
     },
-    transform() {
+    async transform() {
       let out = this.input
       this.saveState()
 
       if (out === "") return (this.output = "")
+      this.output = "loading..."
       try {
-        out = this.minify(out)
+        out = await this.minify(out)
         this.error = false
         if (this.conf.bookmarklet) out = `javascript:${encodeURIComponent(out)}`
         this.output = out

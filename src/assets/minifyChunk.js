@@ -28,6 +28,7 @@ export default (_code, { minify, env, iife } = {}) => {
       comments: false,
     }).code
   }
+
   return transform(code, {
     presets,
     plugins: ["@babel/plugin-syntax-import-meta"],

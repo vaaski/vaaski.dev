@@ -2,6 +2,9 @@ module.exports = {
   devServer: {
     disableHostCheck: true,
   },
+  chainWebpack: config => {
+    config.plugins.delete("prefetch")
+  },
   pwa: {
     themeColor: "#19182d",
     msTileColor: "#19182d",
