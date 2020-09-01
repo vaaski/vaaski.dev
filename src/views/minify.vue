@@ -1,49 +1,22 @@
 <template>
   <main class="bookmarklet">
     <section class="before">
-      <textarea
+      <codearea
         v-model="input"
         class="input"
-        name="before"
         placeholder="paste your code here"
-        autocomplete="off"
-        autocorrect="off"
-        autocapitalize="off"
-        spellcheck="false"
         autofocus
         ref="input"
-      ></textarea>
+      />
     </section>
     <section class="settings">
       <div class="setting" v-for="(val, key) in conf" :key="key">
         <input type="checkbox" :name="key" :id="key" v-model="conf[key]" />
         <label :for="key" :title="getConfDesc(key, 'title')">{{ getConfDesc(key, 'label') }}</label>
       </div>
-      <!-- <div class="setting">
-        <input type="checkbox" name="iife" id="iife" v-model="conf.iife" />
-        <label for="iife" title="wrap into Immediately invoked function expression">wrap in IIFE</label>
-      </div>
-      <div class="setting">
-        <input type="checkbox" name="bookmarklet" id="bookmarklet" v-model="conf.bookmarklet" />
-        <label
-          for="bookmarklet"
-          title="urlEncode and prefix with javascript:"
-        >convert to bookmarklet</label>
-      </div>-->
     </section>
     <section class="after">
-      <textarea
-        v-model="output"
-        class="output"
-        readonly
-        name="after"
-        placeholder="output"
-        autocomplete="off"
-        autocorrect="off"
-        autocapitalize="off"
-        spellcheck="false"
-        :class="{ error }"
-      ></textarea>
+      <codearea v-model="output" class="output" placeholder="output" :class="{ error }" readonly />
     </section>
     <section class="lower">
       <div class="copy">
@@ -84,11 +57,13 @@
 <script>
 let _minify
 
-const { wait, copyToClipboard, debounce, ls, bytesize } = require("../assets/utils")
-window.bytesize = bytesize
+import codearea from "../components/codearea"
+
+const { wait, copyToClipboard, debounce, ls } = require("../assets/utils")
 
 export default {
   name: "minify",
+  components: { codearea },
   data: () => ({
     conf: { iife: true, bookmarklet: true, minify: true, env: false },
     confDesc: {
@@ -126,7 +101,7 @@ export default {
   },
   async mounted() {
     await this.$nextTick()
-    this.$refs.input.focus()
+    this.$refs.input.$el.focus()
     this.loadState()
   },
   watch: {
@@ -241,6 +216,7 @@ export default {
 
       @media screen and (max-width: $mobile-break)
         flex-direction: column
+        margin: 0.5em 0
 
         >div
           display: flex
@@ -262,13 +238,11 @@ export default {
         font-size: 1em
         padding: 0.5ch 1ch
 
-    textarea
-      $padding = 15px
-      height: "calc(100% - 2*%s - 2px)" % $padding
-      width: "calc(100% - 2*%s - 2px)" % $padding
-      padding: $padding
+    .codearea
+      height: 100%
+      width: 100%
 
-      &.error
+      &.error textarea
         border-color: $error !important
         color: $error !important
 </style>

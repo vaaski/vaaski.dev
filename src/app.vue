@@ -101,7 +101,7 @@ html, body
     font-family: "Fira Code", monospace
     font-size: 1em
     padding: 0.5ch 1ch
-    border-radius: 5px
+    border-radius: $border-radius
     outline: none
     cursor: pointer
     transition: 100ms
@@ -113,7 +113,7 @@ html, body
 
   textarea, input
     background: rgba(255, 255, 255, 0.05)
-    border-radius: 15px
+    border-radius: $border-radius-large
     outline: none
     color: $fg
     scrollbars(0, transparent, transparent)
@@ -131,7 +131,7 @@ html, body
       border: 1px solid $disabled
 
   input
-    border-radius: 5px
+    border-radius: $border-radius
     border: none
 
   ::selection

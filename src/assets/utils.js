@@ -29,4 +29,7 @@ const ls = (key, value) =>
     ? JSON.parse(localStorage.getItem(key))
     : localStorage.setItem(key, JSON.stringify(value))
 
-module.exports = { copyToClipboard, wait, debounce, ls }
+const ByteSize = require("byte-size")
+const bytesize = str => ByteSize(new Blob([str]).size)
+
+module.exports = { copyToClipboard, wait, debounce, ls, bytesize }
