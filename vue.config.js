@@ -10,6 +10,7 @@ module.exports = {
     workboxPluginMode: "InjectManifest",
     workboxOptions: {
       swSrc: "public/service-worker.js",
+      exclude: [/_redirects/],
     },
     themeColor: "#19182d",
     msTileColor: "#19182d",
