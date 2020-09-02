@@ -35,7 +35,7 @@ export default {
       {
         text: "minify/bookmarklet",
         to: "/minify",
-        title: "minify and convert to bookmarklet format",
+        title: "minify your code and convert to bookmarklet format",
       },
       {
         hr: true,
