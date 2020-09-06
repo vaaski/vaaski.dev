@@ -4,6 +4,7 @@
       <codearea
         v-model="input"
         class="input"
+        name="input"
         placeholder="paste your code here"
         autofocus
         ref="input"
@@ -16,7 +17,14 @@
       </div>
     </section>
     <section class="after">
-      <codearea v-model="output" class="output" placeholder="output" :class="{ error }" readonly />
+      <codearea
+        v-model="output"
+        class="output"
+        placeholder="output"
+        name="output"
+        :class="{ error }"
+        readonly
+      />
     </section>
     <section class="lower">
       <div class="copy">
@@ -47,7 +55,7 @@
           @click="bookmarkClick"
           id="bookmark"
           :href="error || output === '' ? '/' : output"
-          :tabindex="focusindex + 1"
+          tabindex="0"
         >{{ bookmarkName }}</a>
       </div>
     </section>
@@ -93,12 +101,6 @@ export default {
     copyText: "copy to clipboard",
     bookmarkName: "bookmarklet",
   }),
-  props: {
-    focusindex: {
-      type: Number,
-      default: 10,
-    },
-  },
   async mounted() {
     await this.$nextTick()
     this.$refs.input.$el.focus()
@@ -164,13 +166,13 @@ export default {
 
       const input = ls("vaaski.dev-minify-input", input)
       if (input) this.input = input
+      else this.input = ""
     },
     async transform() {
       let out = this.input
       this.saveState()
 
       if (out === "") return (this.output = "")
-      this.output = "loading..."
       try {
         out = await this.minify(out)
         this.error = false
