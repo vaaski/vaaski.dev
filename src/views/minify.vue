@@ -63,17 +63,23 @@
 </template>
 
 <script>
+// cspell:words uncrushed uncrush
 let _minify
 
 import codearea from "../components/codearea"
 
 const { wait, copyToClipboard, debounce, ls } = require("../assets/utils")
+const { JSONCrush, JSONUncrush } = require("../assets/JSONCrush")
 
 export default {
   name: "minify",
   components: { codearea },
   data: () => ({
-    conf: { iife: true, bookmarklet: true, minify: true, env: false },
+    conf: { iife: true, bookmarklet: false, minify: true, env: false },
+    shareConf: {
+      bookmarkName: true,
+      input: false,
+    },
     confDesc: {
       iife: {
         title:
@@ -95,16 +101,22 @@ export default {
       },
     },
     editBookmarkName: false,
+    bookmarkName: "bookmarklet",
     input: "",
     output: "",
     error: false,
     copyText: "copy to clipboard",
-    bookmarkName: "bookmarklet",
   }),
   async mounted() {
+    if (process.env.NODE_ENV === "development") window.minify = this
     await this.$nextTick()
     this.$refs.input.$el.focus()
     this.loadState()
+
+    window.onhashchange = this.applyHashConfig
+  },
+  beforeDestroy() {
+    window.onhashchange = null
   },
   watch: {
     input: debounce(function () {
@@ -118,6 +130,57 @@ export default {
     },
   },
   methods: {
+    getSharableUrl() {
+      const out = {}
+      const { bookmarkName, input } = this.shareConf
+
+      if (bookmarkName && this.conf.bookmarklet) out.bookmarkName = this.bookmarkName
+      if (input) out.input = this.input
+      else out.output = this.output
+
+      const encodedOut = JSON.stringify(out)
+      const crushed = JSONCrush(encodedOut)
+      const url = new URL(location)
+      url.hash = crushed
+
+      return url
+    },
+    parseSharableUrl({ hash }) {
+      const decoded = decodeURIComponent(hash.slice(1))
+      try {
+        const uncrushed = JSONUncrush(decoded)
+        if (!uncrushed.length) return false
+        const parsed = JSON.parse(uncrushed)
+
+        return parsed
+      } catch (error) {
+        console.log("hash parsing error", error)
+        return false
+      }
+    },
+    applyHashConfig() {
+      const urlConf = this.parseSharableUrl(this.$route)
+      if (urlConf) {
+        if (urlConf.bookmarkName) this.bookmarkName = urlConf.bookmarkName
+        if (urlConf.input) this.input = urlConf.input
+        else if (urlConf.output) this.output = urlConf.output
+      }
+    },
+    saveState() {
+      const { conf, input } = this
+      ls("vaaski.dev-minify-conf", conf)
+      ls("vaaski.dev-minify-input", input)
+    },
+    loadState() {
+      const conf = ls("vaaski.dev-minify-conf", conf)
+      if (conf) this.conf = conf
+
+      const input = ls("vaaski.dev-minify-input", input)
+      if (input) this.input = input
+      else this.input = ""
+
+      this.applyHashConfig()
+    },
     getConfDesc(key, val) {
       return this.confDesc[key] ? this.confDesc[key][val] || "" : ""
     },
@@ -154,19 +217,6 @@ export default {
         await this.$nextTick()
         this.$refs.bookmarkInput.select()
       }
-    },
-    saveState() {
-      const { conf, input } = this
-      ls("vaaski.dev-minify-conf", conf)
-      ls("vaaski.dev-minify-input", input)
-    },
-    loadState() {
-      const conf = ls("vaaski.dev-minify-conf", conf)
-      if (conf) this.conf = conf
-
-      const input = ls("vaaski.dev-minify-input", input)
-      if (input) this.input = input
-      else this.input = ""
     },
     async transform() {
       let out = this.input
