@@ -199,7 +199,7 @@ export default {
   section
     width: 75%
     max-width: 75vw
-    height: 20vh
+    height: 25vh
     display: flex
     justify-content: center
     align-items: center

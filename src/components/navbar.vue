@@ -49,7 +49,6 @@ export default {
   }),
   methods: {
     expand(e) {
-      console.log("espand")
       this.expanded = e === undefined ? !this.expanded : e
       if (!e) this.$refs.routes.children.forEach(c => c.blur())
     },

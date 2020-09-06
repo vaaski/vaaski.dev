@@ -9,7 +9,7 @@
       autocapitalize="off"
       spellcheck="false"
     ></textarea>
-    <div class="bytesize">{{size}}</div>
+    <div class="bytesize">{{size}} ({{ value.length }} chars)</div>
   </div>
 </template>
 
@@ -50,7 +50,8 @@ export default {
     border: 1px solid $disabled
     border-right: none
     border-bottom: none
-    background: rgba(0, 0, 0, 0.25)
+    background: rgba(0, 0, 0, 0.125)
     backdrop-filter: blur(5px)
     border-radius: $border-radius-large 0 $border-radius-large 0
+    pointer-events: none
 </style>
