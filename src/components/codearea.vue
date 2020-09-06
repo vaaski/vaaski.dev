@@ -58,13 +58,12 @@ export default {
     pointer-events: none
 
   .clear
-    right: unset
-    left: 1px
+    bottom: unset
+    top: 1px
     pointer-events: unset
     border-radius: 0 $border-radius-large 0 $border-radius-large
     border: 1px solid $disabled
-    border-bottom: none
-    border-left: none
+    border-top: none
     cursor: pointer
     transition: 200ms $ease
 </style>
