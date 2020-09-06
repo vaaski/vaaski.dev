@@ -1,6 +1,6 @@
 <template>
-  <nav :class="{ expanded }">
-    <div class="overlay"></div>
+  <nav :class="{ expanded }" @keydown.esc="expand(false)">
+    <div class="overlay" @click="expand(false)"></div>
     <div
       class="hamburger"
       tabindex="0"
@@ -12,7 +12,7 @@
       <div class="line center"></div>
       <div class="line lower"></div>
     </div>
-    <div class="routes" @keydown.esc="expand(false)" ref="routes">
+    <div class="routes" ref="routes" @click="expand(false)">
       <template v-for="({ text, to, title, hr }, i) in navigation">
         <hr v-if="hr" :key="hr+i" :style="{ 'transition-delay': `${i * 50}ms` }" />
         <router-link
@@ -48,8 +48,9 @@ export default {
     expanded: false,
   }),
   methods: {
-    expand(e = "no") {
-      this.expanded = e === "no" ? !this.expanded : e
+    expand(e) {
+      console.log("espand")
+      this.expanded = e === undefined ? !this.expanded : e
       if (!e) this.$refs.routes.children.forEach(c => c.blur())
     },
   },
