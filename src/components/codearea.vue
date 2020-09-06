@@ -10,6 +10,7 @@
       spellcheck="false"
     ></textarea>
     <div class="bytesize">{{size}} ({{ value.length }} chars)</div>
+    <div class="clear" v-if="clearable" @click="$emit('input', '')">clear</div>
   </div>
 </template>
 
@@ -25,6 +26,7 @@ export default {
   },
   props: {
     value: String,
+    clearable: { type: Boolean, default: false },
   },
 }
 </script>
@@ -41,7 +43,7 @@ export default {
     width: "calc(100% - 2*%s - 2px)" % $padding
     padding: $padding
 
-  .bytesize
+  .bytesize, .clear
     font-size: 0.75em
     position: absolute
     padding: $padding
@@ -54,4 +56,15 @@ export default {
     backdrop-filter: blur(5px)
     border-radius: $border-radius-large 0 $border-radius-large 0
     pointer-events: none
+
+  .clear
+    right: unset
+    left: 1px
+    pointer-events: unset
+    border-radius: 0 $border-radius-large 0 $border-radius-large
+    border: 1px solid $disabled
+    border-bottom: none
+    border-left: none
+    cursor: pointer
+    transition: 200ms $ease
 </style>

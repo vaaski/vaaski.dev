@@ -8,6 +8,7 @@
         placeholder="paste your code here"
         autofocus
         ref="input"
+        clearable
       />
     </section>
     <section class="settings">
@@ -130,9 +131,9 @@ export default {
     },
   },
   methods: {
-    getSharableUrl() {
+    getSharableUrl(conf) {
       const out = {}
-      const { bookmarkName, input } = this.shareConf
+      const { bookmarkName, input } = { ...this.shareConf, ...conf }
 
       if (bookmarkName && this.conf.bookmarklet) out.bookmarkName = this.bookmarkName
       if (input) out.input = this.input
@@ -161,7 +162,10 @@ export default {
     applyHashConfig() {
       const urlConf = this.parseSharableUrl(this.$route)
       if (urlConf) {
-        if (urlConf.bookmarkName) this.bookmarkName = urlConf.bookmarkName
+        if (urlConf.bookmarkName) {
+          this.conf.bookmarklet = true
+          this.bookmarkName = urlConf.bookmarkName
+        }
         if (urlConf.input) this.input = urlConf.input
         else if (urlConf.output) this.output = urlConf.output
       }
