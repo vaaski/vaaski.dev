@@ -10,7 +10,7 @@
       spellcheck="false"
     ></textarea>
     <div class="bytesize">{{size}} ({{ value.length }} chars)</div>
-    <div class="clear" v-if="clearable" @click="$emit('input', '')">clear</div>
+    <div class="clear" v-if="clearable" @click="clear">clear</div>
   </div>
 </template>
 
@@ -24,9 +24,15 @@ export default {
       return bytesize(this.value)
     },
   },
+  methods: {
+    clear() {
+      this.$emit('input', '')
+      if (typeof this.clearable === "function") this.clearable.apply()
+    }
+  },
   props: {
     value: String,
-    clearable: { type: Boolean, default: false },
+    clearable: { type: [Boolean, Function], default: false },
   },
 }
 </script>

@@ -6,6 +6,17 @@ import router from "./router"
 
 Vue.config.productionTip = false
 
+Vue.mixin({
+  methods: {
+    log(...text) {
+      if (process.env.NODE_ENV !== "development") return
+      const date = new Date().toLocaleTimeString("de")
+
+      console.log(`(${date})[${this.$options.name}]`, ...text)
+    },
+  },
+})
+
 new Vue({
   router,
   // store,

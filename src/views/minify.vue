@@ -1,6 +1,6 @@
 <template>
   <main class="bookmarklet">
-    <section class="before">
+    <section class="before" v-if="!(input === '' && output !== '')">
       <codearea
         v-model="input"
         class="input"
@@ -11,7 +11,7 @@
         clearable
       />
     </section>
-    <section class="settings">
+    <section class="settings" v-if="!(input === '' && output !== '')">
       <div class="setting" v-for="(val, key) in conf" :key="key">
         <input type="checkbox" :name="key" :id="key" v-model="conf[key]" />
         <label :for="key" :title="getConfDesc(key, 'title')">{{ getConfDesc(key, 'label') }}</label>
@@ -25,6 +25,7 @@
         name="output"
         :class="{ error }"
         readonly
+        :clearable="input === '' && output !== ''"
       />
     </section>
     <section class="lower">
@@ -49,11 +50,13 @@
           spellcheck="false"
           @keydown.enter="editBookmarkName = false"
           @keydown.esc="editBookmarkName = false"
+          @blur="editBookmarkName = false"
           :style="{ width: `${bookmarkName.length}ch`}"
         />
         <a
           v-else
           @click="bookmarkClick"
+          @click.right.prevent="bookmarkClick"
           id="bookmark"
           :href="error || output === '' ? '/' : output"
           tabindex="0"
@@ -107,14 +110,17 @@ export default {
     output: "",
     error: false,
     copyText: "copy to clipboard",
+    disableConfigSave: false,
   }),
   async mounted() {
     if (process.env.NODE_ENV === "development") window.minify = this
+    window.onhashchange = this.applyHashConfig
+
     await this.$nextTick()
     this.$refs.input.$el.focus()
+    this.$refs.input.$el.selectionEnd = 0
     this.loadState()
-
-    window.onhashchange = this.applyHashConfig
+    this.applyHashConfig()
   },
   beforeDestroy() {
     window.onhashchange = null
@@ -125,6 +131,8 @@ export default {
     }, 100),
     conf: {
       handler() {
+        if (this.disableConfigSave) return
+
         this.transform()
       },
       deep: true,
@@ -144,9 +152,12 @@ export default {
       const url = new URL(location)
       url.hash = crushed
 
+      this.disableConfigSave = false
+      this.saveState()
+
       return url
     },
-    parseSharableUrl({ hash }) {
+    uncrushHash({ hash }) {
       const decoded = decodeURIComponent(hash.slice(1))
       try {
         const uncrushed = JSONUncrush(decoded)
@@ -155,22 +166,30 @@ export default {
 
         return parsed
       } catch (error) {
-        console.log("hash parsing error", error)
+        this.log("hash parsing error", error)
         return false
       }
     },
-    applyHashConfig() {
-      const urlConf = this.parseSharableUrl(this.$route)
+    async applyHashConfig() {
+      this.log("applyHashConfig")
+      const urlConf = this.uncrushHash(this.$route)
       if (urlConf) {
+        this.disableConfigSave = true
         if (urlConf.bookmarkName) {
           this.conf.bookmarklet = true
           this.bookmarkName = urlConf.bookmarkName
         }
-        if (urlConf.input) this.input = urlConf.input
-        else if (urlConf.output) this.output = urlConf.output
-      }
+        if (urlConf.input) {
+          this.input = urlConf.input
+          await this.$nextTick()
+          this.$refs.input.$el.selectionEnd = 0 // todo this doesn't work
+        } else if (urlConf.output) this.output = urlConf.output
+
+        window.location.hash = ""
+      } else this.disableConfigSave = false
     },
     saveState() {
+      if (this.disableConfigSave) return this.log("didn't save config")
       const { conf, input } = this
       ls("vaaski.dev-minify-conf", conf)
       ls("vaaski.dev-minify-input", input)
@@ -182,8 +201,6 @@ export default {
       const input = ls("vaaski.dev-minify-input", input)
       if (input) this.input = input
       else this.input = ""
-
-      this.applyHashConfig()
     },
     getConfDesc(key, val) {
       return this.confDesc[key] ? this.confDesc[key][val] || "" : ""
@@ -225,6 +242,7 @@ export default {
     async transform() {
       let out = this.input
       this.saveState()
+      this.log("transform")
 
       if (out === "") return (this.output = "")
       try {
