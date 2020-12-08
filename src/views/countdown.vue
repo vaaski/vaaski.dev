@@ -42,6 +42,8 @@ export default {
         document.title = `${document.location.host} // ${this.name} ${this.$route.name}`
     },
     tick() {
+      if (document.hidden) return
+
       let time = this.to
       time = calcDuration(time - Date.now())
       const past = time.past
