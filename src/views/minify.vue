@@ -14,7 +14,9 @@
     <section class="settings" v-if="!(input === '' && output !== '')">
       <div class="setting" v-for="(val, key) in conf" :key="key">
         <input type="checkbox" :name="key" :id="key" v-model="conf[key]" />
-        <label :for="key" :title="getConfDesc(key, 'title')">{{ getConfDesc(key, 'label') }}</label>
+        <label :for="key" :title="getConfDesc(key, 'title')">{{
+          getConfDesc(key, "label")
+        }}</label>
       </div>
     </section>
     <section class="after">
@@ -33,10 +35,11 @@
         <button class="copy" @click="copy(output)">{{ copyText }}</button>
       </div>
       <div class="bookmark" v-if="conf.bookmarklet">
-        <label
-          @click="bookmarkClick"
-          for="bookmark"
-        >bookmark:{{bookmarkName === "bookmarklet" ? " (click to rename)" : ""}}</label>
+        <label @click="bookmarkClick" for="bookmark"
+          >bookmark:{{
+            bookmarkName === "bookmarklet" ? " (click to rename)" : ""
+          }}</label
+        >
         <input
           v-if="editBookmarkName"
           type="text"
@@ -51,7 +54,7 @@
           @keydown.enter="editBookmarkName = false"
           @keydown.esc="editBookmarkName = false"
           @blur="editBookmarkName = false"
-          :style="{ width: `${bookmarkName.length}ch`}"
+          :style="{ width: `${bookmarkName.length}ch` }"
         />
         <a
           v-else
@@ -60,7 +63,8 @@
           id="bookmark"
           :href="error || output === '' ? '/' : output"
           tabindex="0"
-        >{{ bookmarkName }}</a>
+          >{{ bookmarkName }}</a
+        >
       </div>
     </section>
   </main>
@@ -91,7 +95,7 @@ export default {
         label: "IIFE",
       },
       bookmarklet: {
-        title: "url encode and prefix with 'javascript:'",
+        title: "url encode and convert to bookmarklet format",
         label: "bookmarklet",
       },
       minify: {
@@ -115,12 +119,16 @@ export default {
   async mounted() {
     if (process.env.NODE_ENV === "development") window.minify = this
     window.onhashchange = this.applyHashConfig
+    window.getSharableUrl = this.getSharableUrl
 
     await this.$nextTick()
     this.$refs.input.$el.focus()
     this.$refs.input.$el.selectionEnd = 0
     this.loadState()
     this.applyHashConfig()
+
+    await wait(500)
+    if (!_minify) _minify = await this.importMinify()
   },
   beforeDestroy() {
     window.onhashchange = null
@@ -206,6 +214,7 @@ export default {
       return this.confDesc[key] ? this.confDesc[key][val] || "" : ""
     },
     async importMinify() {
+      console.log("loading minify.js")
       const { default: _minify } = await import(
         /* webpackChunkName: "minifyChunk" */ "../assets/min"
       )

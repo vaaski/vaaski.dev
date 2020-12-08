@@ -31,5 +31,16 @@
       "minify": true,
       "bookmarkName": "youtube thumbnailer"
     }
+  },
+  {
+    "name": "youtube sidebar cleanup",
+    "desc": "removes YouTube's unnecessary sidebar items.",
+    "file": "youtubeSidebarCleanup.js",
+    "settings": {
+      "iife": true,
+      "bookmarklet": true,
+      "minify": true,
+      "bookmarkName": "youtube sidebar cleanup"
+    }
   }
 ]

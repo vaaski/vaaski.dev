@@ -14,7 +14,7 @@
     </div>
     <div class="routes" ref="routes" @click="expand(false)">
       <template v-for="({ text, to, title, hr }, i) in navigation">
-        <hr v-if="hr" :key="hr+i" :style="{ 'transition-delay': `${i * 50}ms` }" />
+        <hr v-if="hr" :key="hr + i" :style="{ 'transition-delay': `${i * 50}ms` }" />
         <router-link
           class="link"
           v-else-if="!to.startsWith('https://')"
@@ -24,7 +24,8 @@
           :title="title"
           @click.native="expanded = false"
           @focus.native="expand(true)"
-        >{{ text }}</router-link>
+          >{{ text }}</router-link
+        >
         <a
           v-else
           target="_blank"
@@ -35,7 +36,8 @@
           :key="to"
           :title="title"
           @focus="expand(true)"
-        >{{ text }}</a>
+          >{{ text }}</a
+        >
       </template>
     </div>
   </nav>
@@ -66,11 +68,12 @@ export default {
 @import "../assets/globals"
 
 $bezier = cubic-bezier(0.76, 0, 0.24, 1)
+$transitionLen = 500ms
 
 nav
   display: flex
   flex-direction: column
-  transition: background 1s $bezier, width 1000ms linear
+  transition: background $transitionLen $bezier, width $transitionLen linear
   padding: 24px
   width: 0
 
@@ -82,7 +85,7 @@ nav
     left: 0
     background: linear-gradient(30deg, #19182d 0, #0c0c14 100%)
     opacity: 0
-    transition: opacity 1s $bezier
+    transition: opacity $transitionLen $bezier
     pointer-events: none
 
   >.hamburger
@@ -90,7 +93,7 @@ nav
     // padding: 24px
     padding-bottom: 16px
     width: 24px
-    transition: 1s $bezier
+    transition: $transitionLen $bezier
     transition-property: width, opacity
     opacity: 0.5
     align-self: flex-end
@@ -103,7 +106,7 @@ nav
       background: $fg
       margin-bottom: 6px
       margin-left: auto
-      transition: 1s $bezier
+      transition: $transitionLen $bezier
       transition-property: width, box-shadow
       box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0)
 
@@ -117,7 +120,7 @@ nav
     align-items: flex-end
     flex-direction: column
     width: 0
-    transition: width 1s $bezier, opacity 750ms $bezier
+    transition: width $transitionLen $bezier, opacity ($transitionLen - ($transitionLen / 4))$bezier
     align-self: flex-end
     opacity: 0
     transition-delay: 0s
@@ -132,7 +135,7 @@ nav
       align-self: flex-end
       margin: 4px 0
       margin-right: 24px
-      transition: 1s $bezier
+      transition: $transitionLen $bezier
 
     >.link
       margin: 4px 0
@@ -140,7 +143,7 @@ nav
       text-decoration: none
       position: relative
       margin-right: -24px
-      transition: margin-right 1s $bezier, letter-spacing 100ms linear, padding-right 100ms linear, text-shadow 100ms linear
+      transition: margin-right $transitionLen $bezier, letter-spacing 100ms linear, padding-right 100ms linear, text-shadow 100ms linear
       letter-spacing: 0
       padding: 0
       white-space: nowrap
@@ -175,7 +178,7 @@ nav
 
   &.expanded
     width: 100%
-    transition: background 1s $bezier, width 0s
+    transition: background $transitionLen $bezier, width 0s
 
     >.overlay
       opacity: 0.85
@@ -200,7 +203,7 @@ nav
     >.routes
       width: 100%
       opacity: 1
-      transition-delay: 300ms
+      transition-delay: ($transitionLen / 2)
       pointer-events: unset
 
       >hr

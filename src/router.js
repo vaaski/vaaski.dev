@@ -19,6 +19,25 @@ const routes = [
         "./views/minify.vue"
       ),
   },
+  {
+    path: "/m",
+    redirect: "/minify",
+  },
+  {
+    path: "/countdown/:to?/:name?",
+    alias: "/cd/:to?/:name?",
+    name: "countdown",
+    component: () =>
+      // eslint-disable-next-line no-inline-comments
+      import(
+        /* webpackChunkName: "countdown" */
+        "./views/countdown.vue"
+      ),
+  },
+  {
+    path: "*",
+    redirect: "/",
+  },
 ]
 
 const router = new VueRouter({

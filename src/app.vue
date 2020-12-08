@@ -33,7 +33,7 @@ export default {
         title: "home",
       },
       {
-        text: "minify/bookmarklet",
+        text: "minify js",
         to: "/minify",
         title: "minify your code and convert to bookmarklet format",
       },
