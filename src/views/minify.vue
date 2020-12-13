@@ -77,7 +77,7 @@ let _minify
 import codearea from "../components/codearea"
 
 const { wait, copyToClipboard, debounce, ls } = require("../assets/utils")
-const { JSONCrush, JSONUncrush } = require("../assets/JSONCrush")
+const { JSONCrush, JSONUncrush } = require("../assets/JSONCrush.js")
 
 export default {
   name: "minify",

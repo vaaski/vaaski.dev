@@ -6,12 +6,14 @@
   </main>
 </template>
 
-<script>
-const logo = require("../components/logo").default
-export default {
+<script lang="ts">
+import Vue from "vue"
+import logo from "../components/logo.vue"
+
+export default Vue.extend({
   name: "home",
   components: { logo },
-}
+})
 </script>
 
 <style lang="stylus">

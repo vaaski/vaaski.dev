@@ -7,7 +7,7 @@
 <script>
 import TransitionText from "../components/transition-text.vue"
 
-const { calcDuration, timeDown, formatDuration } = require("../assets/countdown")
+const { calcDuration, timeDown, formatDuration } = require("../assets/countdown.js")
 
 export default {
   name: "countdown",

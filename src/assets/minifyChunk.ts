@@ -9,7 +9,7 @@ registerPreset("minify", min)
 registerPlugin("@babel/plugin-syntax-import-meta", syntaxImportMeta)
 registerPreset("@babel/preset-env", presetEnv)
 
-export default (_code, { minify, env, iife } = {}) => {
+export default (_code: string = "", { minify, env, iife }: any = {}) => {
   const presets = []
   let code = _code
   if (minify && !iife) presets.push(["minify", { builtIns: false }])
