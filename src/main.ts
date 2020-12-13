@@ -1,4 +1,18 @@
 import Vue from "vue"
+
+import * as Sentry from "@sentry/browser"
+import { Integrations } from "@sentry/tracing"
+
+Sentry.init({
+  Vue,
+  dsn: "https://c8e4a921785d44139ef8bd65db34e2a1@o105856.ingest.sentry.io/5555374",
+  autoSessionTracking: true,
+  integrations: [new Integrations.BrowserTracing()],
+  tracesSampleRate: 1.0,
+  logErrors: true,
+  release: `vaaski.dev@${process.env.VERSION}`,
+} as any)
+
 import app from "./app.vue"
 import "./registerServiceWorker"
 import router from "./router"

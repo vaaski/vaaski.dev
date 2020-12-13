@@ -1,6 +1,6 @@
 {
   "name": "vaaski.dev",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --port 80",
@@ -10,6 +10,8 @@
     "@babel/plugin-syntax-import-meta": "^7.10.4",
     "@babel/preset-env": "^7.11.0",
     "@babel/standalone": "^7.11.3",
+    "@sentry/tracing": "^5.29.0",
+    "@sentry/vue": "^5.29.0",
     "babel-preset-minify": "^0.5.1",
     "byte-size": "^7.0.0",
     "core-js": "^3.6.5",

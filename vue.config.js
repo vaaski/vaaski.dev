@@ -4,6 +4,12 @@ module.exports = {
   },
   chainWebpack: config => {
     config.plugins.delete("prefetch")
+
+    config.plugin("define").tap(args => {
+      const v = JSON.stringify(require("./package.json").version)
+      args[0]["process.env"]["VERSION"] = v
+      return args
+    })
   },
   productionSourceMap: false,
   pwa: {
