@@ -1,14 +1,13 @@
 // ==UserScript==
-// @name         youtube sidebar cleanup
-// @version      0
-// @description  removes YouTube's unnecessary sidebar items.
+// @name         youtube cleanup
+// @version      3
+// @description  cleans up YouTubes ui.
 // @author       vaaski
 // @match        https://www.youtube.com/*
 // @grant        none
+// @run-at       document-end
 // ==/UserScript==
-
-// removes YouTube's unnecessary sidebar items like
-// "Library", "Your Videos" and "Your Movies"
+/* eslint-disable no-inline-comments */
 
 const title = s => `[title='${s}']`
 const removeByTitle = [
@@ -19,8 +18,20 @@ const removeByTitle = [
   "Originals",
   "YouTube Music",
 ]
-const removeBySelector = ["#guide-wrapper #footer", ...removeByTitle.map(t => title(t))]
-console.log(removeBySelector)
+const removeBySelector = [
+  "#guide-wrapper #footer",
+  "#sections>ytd-guide-section-renderer:nth-child(2)", // subscription section in sidebar
+  "ytd-feed-filter-chip-bar-renderer",
+  "#voice-search-button",
+  ...removeByTitle.map(t => title(t)),
+]
+
+// "[is-post] img:not([width])" are the (often animated) pictures in "YouTube posts"
+const customCSS = `
+[is-post] img:not([width]) {
+  display: none;
+}
+`
 
 /**
  * get an element with querySelector or wait for it using MutationObserver
@@ -28,29 +39,42 @@ console.log(removeBySelector)
  * @param {HTMLElement} parent the parent in which to search for
  * @returns {Promise<HTMLElement>}
  */
-const getElement = (selector, parent = document) => {
+const getElement = (selector, parent = document.querySelector("ytd-app")) => {
   return new Promise(res => {
     let query = parent.querySelector(selector)
     if (query) return res(query)
 
-    new MutationObserver((list, obs) => {
+    let timeout = 0
+    const observer = new MutationObserver((list, obs) => {
       for (const mutation of list) {
         if (mutation.type === "childList") {
           query = parent.querySelector(selector)
           if (query) {
             obs.disconnect()
+            clearTimeout(timeout)
             return res(query)
           }
         }
       }
-    }).observe(parent, { childList: true, subtree: true })
+    })
+    observer.observe(parent, { childList: true, subtree: true })
+
+    timeout = setTimeout(() => {
+      observer.disconnect()
+      console.log(`observer for ${selector} timed out`)
+      return res(document.createElement("div"))
+    }, 5e3)
   })
 }
 
 !(async () => {
+  const customStyles = document.createElement("style")
+  customStyles.innerHTML = customCSS
+  document.body.appendChild(customStyles)
+
   removeBySelector.forEach(async t => {
     const el = await getElement(t)
-    el.style.display = "none"
+    el.remove()
   })
 
   const showMore = await getElement(title("Show more"))
