@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         youtube cleanup
-// @version      3
+// @version      4
 // @description  cleans up YouTubes ui.
 // @author       vaaski
 // @match        https://www.youtube.com/*
@@ -28,6 +28,7 @@ const removeBySelector = [
 
 // "[is-post] img:not([width])" are the (often animated) pictures in "YouTube posts"
 const customCSS = `
+${removeBySelector.join()},
 [is-post] img:not([width]) {
   display: none;
 }
