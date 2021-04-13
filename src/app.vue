@@ -1,7 +1,9 @@
 <script lang="ts">
 import { defineComponent } from "vue"
+import navbar from "./components/navbar.vue"
 
 export default defineComponent({
+  components: { navbar },
   setup() {},
 })
 </script>
@@ -9,11 +11,7 @@ export default defineComponent({
 <template>
   <div class="h-screen w-screen">
     <nav id="nav">
-      <div class="flex h-full mx-auto w-full max-w-5xl items-center">
-        <div id="left">vaaski</div>
-        <div id="spacer" class="flex-grow"></div>
-        <div id="right">github</div>
-      </div>
+      <navbar />
     </nav>
 
     <div id="route">
@@ -22,15 +20,40 @@ export default defineComponent({
   </div>
 </template>
 
-<style>
-#app {
-  @apply bg-clr-bg text-clr-white;
+<style lang="scss">
+* {
+  user-select: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+#app,
+body,
+html {
+  @apply bg-clr-bg text-clr-white font-sans;
+  @apply overflow-x-hidden;
 }
 
 nav#nav {
-  @apply h-16 w-full top-0 fixed;
-  @apply px-5;
-  @apply ring-clr-dark ring-2;
-  @apply bg-clr-bg;
+  @apply h-nav w-full top-0 fixed;
+  @apply px-10;
+  @apply ring-white ring-opacity-15 ring-1;
+  @apply bg-clr-bg-trans;
+
+  backdrop-filter: blur(4px);
+}
+
+#route {
+  @apply h-full w-full;
+
+  > main {
+    @apply w-full;
+
+    &:not(.full) {
+      @apply pt-nav;
+    }
+  }
 }
 </style>
