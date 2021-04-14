@@ -4,16 +4,19 @@
       <logo class="m-auto h-1/2" />
     </div>
     <div id="spacer" class="flex-grow"></div>
-    <div id="right">github</div>
+    <div id="right">
+      <external-link href="https://github.com/vaaski">github</external-link>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue"
-import logo from "@/components/logo.vue"
+import Logo from "@/components/logo.vue"
+import ExternalLink from "@/components/external-link.vue"
 
 export default defineComponent({
-  components: { logo },
+  components: { Logo, ExternalLink },
   setup() {},
 })
 </script>
