@@ -39,7 +39,6 @@ html {
 nav#nav {
   @apply h-nav w-full top-0 fixed;
   @apply px-10;
-  @apply ring-white ring-opacity-15 ring-1;
   @apply bg-clr-bg-trans;
 
   backdrop-filter: blur(4px);
