@@ -1,0 +1,5 @@
+{
+  "script": "./lib/index.js",
+  "name": "vaaski.dev",
+  "node_args": "-r dotenv/config"
+}
