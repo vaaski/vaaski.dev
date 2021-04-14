@@ -3,6 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.svg" id="favicon-svg" />
+    <script>
+      const favicon = document.querySelector("#favicon-svg")
+      const darkFavicon = b => (favicon.href = b ? "/favicon-dark.svg" : "/favicon.svg")
+
+      const darkModeQ = window.matchMedia("(prefers-color-scheme: dark)")
+      darkFavicon(darkModeQ.matches)
+      darkModeQ.addListener(e => darkFavicon(e.matches))
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>vaaski</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
