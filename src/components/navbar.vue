@@ -4,8 +4,11 @@
       <logo class="m-auto h-1/2" />
     </div>
     <div id="spacer" class="flex-grow"></div>
-    <div id="right">
-      <external-link href="https://github.com/vaaski">github</external-link>
+    <div id="right" class="flex child-space">
+      <router-link to="/contact">contact</router-link>
+      <external-link href="https://github.com/vaaski"
+        >github</external-link
+      >
     </div>
   </div>
 </template>
@@ -20,3 +23,11 @@ export default defineComponent({
   setup() {},
 })
 </script>
+
+<style lang="scss" scoped>
+.child-space {
+  > *:not(:last-child) {
+    @apply mr-5;
+  }
+}
+</style>

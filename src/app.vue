@@ -32,7 +32,31 @@ export default defineComponent({
 input[type="text"],
 textarea {
   @apply bg-clr-bg text-clr-white;
-  @apply ring-1 ring-clr-accent-pink;
+}
+
+a.link {
+  @apply text-clr-accent-blue;
+}
+
+.animate-underline {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 1px;
+    width: 100%;
+    height: 1px;
+    background-color: var(--clr-accent-blue);
+    transform-origin: center;
+    transform: translate(-50%, 0) scaleX(0);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &:hover::after {
+    transform: translate(-50%, 0) scaleX(1);
+  }
 }
 
 #app,

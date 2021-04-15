@@ -1,7 +1,7 @@
 :root {
   --clr-bg: hsla(207, 43%, 15%, 1);
   --clr-bg-trans: hsla(207, 43%, 15%, 0.75);
-  --clr-dark: hsla(215, 32%, 30%, 1);
+  --clr-dark: hsla(207, 43%, 13%, 1);
   --clr-white: hsla(96, 71%, 99%, 1);
   --clr-accent-pink: hsla(335, 71%, 64%, 1);
   --clr-accent-blue: hsla(189, 92%, 45%, 1);
