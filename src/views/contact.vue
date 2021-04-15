@@ -76,70 +76,75 @@ export default defineComponent({
 
 <template>
   <main class="flex flex-col h-full items-center justify-center">
-    <section v-if="success === null" class="max-w-85/100">
-      <h1 class="mb-2 text-4xl">contact me</h1>
-      <p class="text-white text-opacity-50 -sm:text-sm">
-        use the form below to get in touch and i'll respond within 48 hours.
-      </p>
+    <transition-group name="fade">
+      <section v-if="success === null" class="max-w-85/100">
+        <h1 class="mb-2 text-4xl">contact me</h1>
+        <p class="text-white text-opacity-50 -sm:text-sm">
+          use the form below to get in touch and i'll respond within 48 hours.
+        </p>
 
-      <form :onsubmit="submit" class="flex flex-col mt-5">
-        <input
-          v-model="form.name"
-          @input="valid.name = true"
-          type="text"
-          name="name"
-          placeholder="name"
-          autocomplete="name"
-          spellcheck="false"
-          class="input"
-          :class="{ invalid: !valid.name }"
-        />
-        <input
-          v-model="form.email"
-          @input="valid.email = true"
-          type="text"
-          name="email"
-          placeholder="email"
-          autocomplete="email"
-          spellcheck="false"
-          class="input"
-          :class="{ invalid: !valid.email }"
-        />
-        <textarea
-          v-model="form.message"
-          @input="valid.message = true"
-          name="message"
-          placeholder="message"
-          @keydown="onkeydown"
-          maxlength="1500"
-          autocomplete="off"
-          class="min-h-25 input"
-          style="resize: none"
-          :class="{ invalid: !valid.message }"
-        />
+        <form :onsubmit="submit" class="flex flex-col mt-5">
+          <input
+            v-model="form.name"
+            @input="valid.name = true"
+            type="text"
+            name="name"
+            placeholder="name"
+            autocomplete="name"
+            spellcheck="false"
+            class="input"
+            :class="{ invalid: !valid.name }"
+          />
+          <input
+            v-model="form.email"
+            @input="valid.email = true"
+            type="text"
+            name="email"
+            placeholder="email"
+            autocomplete="email"
+            spellcheck="false"
+            class="input"
+            :class="{ invalid: !valid.email }"
+          />
+          <textarea
+            v-model="form.message"
+            @input="valid.message = true"
+            name="message"
+            placeholder="message"
+            @keydown="onkeydown"
+            maxlength="1500"
+            autocomplete="off"
+            class="min-h-25 input"
+            style="resize: none"
+            :class="{ invalid: !valid.message }"
+          />
 
-        <button type="submit" class="button">submit</button>
-      </form>
-    </section>
+          <button type="submit" class="button">submit</button>
+        </form>
+      </section>
 
-    <section v-if="success === false">
-      <h1 class="text-clr-accent-pink mb-2 text-3xl">hmm, looks like something went wrong.</h1>
-      <p class="text-white text-opacity-75">
-        please send me
-        <a href="mailto:admin@vaa.ski" target="_blank" class="animate-underline link"
-          >an email</a
-        >
-        instead or <router-link to="/" class="animate-underline link">return home</router-link>
-      </p>
-    </section>
+      <section v-if="success === false">
+        <h1 class="text-clr-accent-pink mb-2 text-3xl">
+          hmm, looks like something went wrong.
+        </h1>
+        <p class="text-white text-opacity-75">
+          please send me
+          <a href="mailto:admin@vaa.ski" target="_blank" class="animate-underline link"
+            >an email</a
+          >
+          instead or
+          <router-link to="/" class="animate-underline link">return home</router-link>
+        </p>
+      </section>
 
-    <section v-if="success === true">
-      <h1 class="mb-2 text-3xl">message sent.</h1>
-      <p class="text-white text-opacity-75">
-        i will most likely respond within 48 hours. you can go
-        <router-link to="/" class="animate-underline link">back home</router-link> now.
-      </p>
-    </section>
+      <section v-if="success === true">
+        <h1 class="mb-2 text-3xl">message sent.</h1>
+        <p class="text-white text-opacity-75">
+          i will most likely respond within 48 hours. you can go
+          <router-link to="/" class="animate-underline link">back home</router-link> now.
+        </p>
+      </section>
+    </transition-group>
   </main>
 </template>
 
@@ -147,7 +152,6 @@ export default defineComponent({
 .input {
   @apply bg-clr-dark rounded;
   @apply my-2 py-2 px-3;
-  @apply min-w-75;
   @apply outline-none focus:outline-none;
   @apply transition-all hover:(ring-1 ring-clr-accent-blue) focus:(ring-1 ring-clr-accent-blue);
 

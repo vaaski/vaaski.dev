@@ -1,14 +1,16 @@
 <template>
   <div class="flex h-full mx-auto w-full max-w-5xl items-center">
-    <div id="left" class="flex h-full justify-center">
+    <div
+      @click="$router.push('/')"
+      id="left"
+      class="cursor-pointer flex h-full justify-center"
+    >
       <logo class="m-auto h-1/2" />
     </div>
     <div id="spacer" class="flex-grow"></div>
     <div id="right" class="flex child-space">
-      <router-link to="/contact">contact</router-link>
-      <external-link href="https://github.com/vaaski"
-        >github</external-link
-      >
+      <router-link to="/contact" class="transition-colors">contact</router-link>
+      <external-link href="https://github.com/vaaski">github</external-link>
     </div>
   </div>
 </template>
@@ -29,5 +31,9 @@ export default defineComponent({
   > *:not(:last-child) {
     @apply mr-5;
   }
+}
+
+.router-link-exact-active {
+  @apply text-white text-opacity-50;
 }
 </style>

@@ -15,7 +15,11 @@ export default defineComponent({
     </nav>
 
     <div id="route">
-      <router-view />
+      <router-view v-slot="{ Component }">
+        <transition name="fade">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </div>
   </div>
 </template>
@@ -67,7 +71,7 @@ html {
 }
 
 nav#nav {
-  @apply h-nav w-full top-0 fixed;
+  @apply h-nav w-full top-0 fixed z-10;
   @apply px-10;
   @apply bg-clr-bg-trans;
 
@@ -84,5 +88,16 @@ nav#nav {
       @apply pt-nav;
     }
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: 100ms;
+  position: absolute;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
