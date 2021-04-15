@@ -1,5 +1,5 @@
 <template>
-  <a :href="href" target="_blank" class="flex items-center" rel="noopener noreferrer">
+  <a :href="href" title="opens in new tab" target="_blank" class="flex items-center" rel="noopener noreferrer">
     <slot></slot>
     <svg-icon name="external" class="ml-1 inline-block" />
   </a>

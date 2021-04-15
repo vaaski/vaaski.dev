@@ -18,6 +18,7 @@
   "devDependencies": {
     "@babel/preset-typescript": "^7.13.0",
     "@types/node": "^14.14.37",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@vitejs/plugin-vue": "^1.2.1",
     "@vue/compiler-sfc": "^3.0.5",
     "@vuedx/typescript-plugin-vue": "^0.6.3",

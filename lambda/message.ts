@@ -1,5 +1,4 @@
 import got from "got"
-import querystring from "querystring"
 
 export interface FunctionsEvent {
   body: string
@@ -15,7 +14,7 @@ export type Handler = (event: FunctionsEvent) => Promise<{ statusCode: number; b
 
 const token = process.env.TELEGRAM_TOKEN
 const chat_id = process.env.TELEGRAM_TO
-const telegram = m => `https://api.telegram.org/bot${token}/${m}`
+const telegram = (m: string) => `https://api.telegram.org/bot${token}/${m}`
 
 const send = async text => {
   const url = new URL(telegram("sendMessage"))
@@ -36,11 +35,15 @@ const send = async text => {
 }
 
 export const handler: Handler = async event => {
-  console.log(event.body)
-  const payload = querystring.parse(event.body)
+  if (event.httpMethod.toLowerCase() !== "post") return { statusCode: 404 }
+
+  const payload = JSON.parse(event.body) as Record<string, string>
+  const message = Object.entries(payload)
+    .map(([type, val]) => `${type}: ${val}`)
+    .join("\n")
 
   if (payload) {
-    await send(JSON.stringify(payload, null, 2))
+    await send(message)
     return { statusCode: 200 }
   }
 

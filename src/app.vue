@@ -29,6 +29,12 @@ export default defineComponent({
   display: none;
 }
 
+input[type="text"],
+textarea {
+  @apply bg-clr-bg text-clr-white;
+  @apply ring-1 ring-clr-accent-pink;
+}
+
 #app,
 body,
 html {

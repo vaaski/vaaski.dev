@@ -7,6 +7,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("./views/home.vue"),
   },
   {
+    path: "/contact",
+    name: "contact",
+    component: () => import("./views/contact.vue"),
+  },
+  {
     path: "/:pathMatch(.*)*",
     redirect: "/",
   },
