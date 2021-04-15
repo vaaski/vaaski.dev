@@ -7,8 +7,6 @@
     "dev": "vite --port 8080",
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview",
-    "back:build": "rimraf lib && tsc -p tsconfig.backend.json",
-    "back:dev": "nodemon",
     "commit": "cz -S"
   },
   "dependencies": {
@@ -21,14 +19,10 @@
     "@vue/compiler-sfc": "^3.0.5",
     "@vuedx/typescript-plugin-vue": "^0.6.3",
     "commitizen": "4.2.2",
-    "dotenv": "^8.2.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
-    "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
-    "rimraf": "^2.7.1",
     "sass": "^1.32.8",
-    "ts-node": "^9.1.1",
     "typescript": "^4.1.3",
     "vite": "^2.1.5",
     "vite-plugin-svg-icons": "^0.4.1",
