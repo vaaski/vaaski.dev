@@ -112,7 +112,7 @@ export default defineComponent({
             name="message"
             placeholder="message"
             @keydown="onkeydown"
-            maxlength="1500"
+            :maxlength="1500"
             autocomplete="off"
             class="min-h-25 input"
             style="resize: none"
