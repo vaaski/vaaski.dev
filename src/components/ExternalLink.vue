@@ -1,14 +1,14 @@
 <template>
   <a :href="href" title="opens in new tab" target="_blank" class="flex items-center" rel="noopener noreferrer">
     <slot></slot>
-    <svg-icon name="external" class="ml-1 inline-block" />
+    <SvgIcon name="external" class="ml-1 inline-block" />
   </a>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue"
 
-import SvgIcon from "@/components/svg-icon.vue"
+import SvgIcon from "@/components/SvgIcon.vue"
 
 export default defineComponent({
   components: { SvgIcon },

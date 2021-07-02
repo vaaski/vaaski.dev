@@ -5,20 +5,20 @@
       id="left"
       class="cursor-pointer flex h-full justify-center"
     >
-      <logo class="m-auto h-1/2" />
+      <Logo class="m-auto h-1/2" />
     </div>
     <div id="spacer" class="flex-grow"></div>
     <div id="right" class="flex child-space">
-      <router-link to="/contact" class="transition-colors">contact</router-link>
-      <external-link href="https://github.com/vaaski">github</external-link>
+      <RouterLink to="/contact" class="transition-colors">contact</RouterLink>
+      <ExternalLink href="https://github.com/vaaski">github</ExternalLink>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue"
-import Logo from "@/components/logo.vue"
-import ExternalLink from "@/components/external-link.vue"
+import Logo from "@/components/Logo.vue"
+import ExternalLink from "@/components/ExternalLink.vue"
 
 export default defineComponent({
   components: { Logo, ExternalLink },

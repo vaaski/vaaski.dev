@@ -133,7 +133,7 @@ export default defineComponent({
             >an email</a
           >
           instead or
-          <router-link to="/" class="animate-underline link">return home</router-link>
+          <RouterLink to="/" class="animate-underline link">return home</RouterLink>
         </p>
       </section>
 
@@ -141,7 +141,7 @@ export default defineComponent({
         <h1 class="mb-2 text-3xl">message sent.</h1>
         <p class="text-white text-opacity-75">
           i will most likely respond within 48 hours. you can go
-          <router-link to="/" class="animate-underline link">back home</router-link> now.
+          <RouterLink to="/" class="animate-underline link">back home</RouterLink> now.
         </p>
       </section>
     </transition-group>

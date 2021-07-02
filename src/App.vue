@@ -1,9 +1,9 @@
 <script lang="ts">
 import { defineComponent } from "vue"
-import navbar from "./components/navbar.vue"
+import Navbar from "./components/Navbar.vue"
 
 export default defineComponent({
-  components: { navbar },
+  components: { Navbar },
   setup() {},
 })
 </script>
@@ -11,7 +11,7 @@ export default defineComponent({
 <template>
   <div class="h-screen w-screen">
     <nav id="nav">
-      <navbar />
+      <Navbar />
     </nav>
 
     <div id="route">
