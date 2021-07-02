@@ -33,6 +33,6 @@
     "vite-plugin-pwa": "^0.7.3",
     "vite-plugin-svg-icons": "^0.4.3",
     "vite-plugin-windicss": "^0.14.6",
-    "vue-tsc": "^0.0.15"
+    "vue-tsc": "^0.2.0"
   }
 }
