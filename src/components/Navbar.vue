@@ -10,6 +10,7 @@
     <div id="spacer" class="flex-grow"></div>
     <div id="right" class="flex child-space">
       <RouterLink to="/contact" class="transition-colors">contact</RouterLink>
+      <RouterLink to="/time" class="transition-colors">time</RouterLink>
       <ExternalLink href="https://github.com/vaaski">github</ExternalLink>
     </div>
   </div>
@@ -34,6 +35,6 @@ export default defineComponent({
 }
 
 .router-link-exact-active {
-  @apply text-white text-opacity-50;
+  @apply text-clr-white opacity-50;
 }
 </style>

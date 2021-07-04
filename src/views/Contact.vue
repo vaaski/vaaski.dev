@@ -79,7 +79,7 @@ export default defineComponent({
     <transition-group name="fade">
       <section v-if="success === null" class="max-w-85/100">
         <h1 class="mb-2 text-4xl">contact me</h1>
-        <p class="text-white text-opacity-50 -sm:text-sm">
+        <p class="text-clr-white opacity-50 -sm:text-sm">
           use the form below to get in touch and i'll respond within 48 hours.
         </p>
 
@@ -127,7 +127,7 @@ export default defineComponent({
         <h1 class="text-clr-accent-pink mb-2 text-3xl">
           hmm, looks like something went wrong.
         </h1>
-        <p class="text-white text-opacity-75">
+        <p class="text-clr-white opacity-75">
           please send me
           <a href="mailto:admin@vaa.ski" target="_blank" class="animate-underline link"
             >an email</a
@@ -139,7 +139,7 @@ export default defineComponent({
 
       <section v-if="success === true">
         <h1 class="mb-2 text-3xl">message sent.</h1>
-        <p class="text-white text-opacity-75">
+        <p class="text-clr-white opacity-75">
           i will most likely respond within 48 hours. you can go
           <RouterLink to="/" class="animate-underline link">back home</RouterLink> now.
         </p>
@@ -153,7 +153,8 @@ export default defineComponent({
   @apply bg-clr-dark rounded;
   @apply my-2 py-2 px-3;
   @apply outline-none focus:outline-none;
-  @apply transition-all hover:(ring-1 ring-clr-accent-blue) focus:(ring-1 ring-clr-accent-blue);
+  @apply transition-all hover:(ring-1 ring-clr-accent-blue);
+  @apply focus:(ring-2 ring-clr-accent-blue) focus:hover:(ring-2);
 
   &.invalid {
     @apply ring-2 ring-clr-accent-pink;

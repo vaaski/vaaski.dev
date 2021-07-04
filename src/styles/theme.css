@@ -6,3 +6,12 @@
   --clr-accent-pink: hsla(335, 71%, 64%, 1);
   --clr-accent-blue: hsla(189, 92%, 45%, 1);
 }
+
+:root.light {
+  --clr-bg: hsla(207, 43%, 95%, 1);
+  --clr-bg-trans: hsla(207, 43%, 95%, 0.75);
+  --clr-dark: hsla(207, 43%, 92%, 1);
+  --clr-white: hsla(96, 71%, 1%, 1);
+  --clr-accent-pink: hsla(335, 71%, 64%, 1);
+  --clr-accent-blue: hsla(189, 92%, 35%, 1);
+}

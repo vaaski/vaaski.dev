@@ -12,9 +12,19 @@
       const favicon = document.querySelector("#favicon-svg")
       const darkFavicon = b => (favicon.href = b ? "/favicon-dark.svg" : "/favicon.svg")
 
-      const darkModeQ = window.matchMedia("(prefers-color-scheme: dark)")
-      darkFavicon(darkModeQ.matches)
-      darkModeQ.addListener(e => darkFavicon(e.matches))
+      const activateDarkMode = bool => {
+        const el = window.document.documentElement
+        el.classList.add(bool ? "dark" : "light")
+        el.classList.remove(bool ? "light" : "dark")
+
+        darkFavicon(bool)
+      }
+
+      window.document.addEventListener("DOMContentLoaded", () => {
+        const dark = window.matchMedia("(prefers-color-scheme:dark)")
+        activateDarkMode(dark.matches)
+        dark.onchange = ({ matches }) => activateDarkMode(matches)
+      })
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>vaaski</title>
