@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useDebounceFn, useEventListener, useResizeObserver } from "@vueuse/core";
+import { useDebounceFn, useEventListener } from "@vueuse/core";
 import { computed, defineProps, onMounted, ref } from "vue";
 
 const props = defineProps({
@@ -12,7 +12,7 @@ const props = defineProps({
 const space = computed(() => props.letter === " ")
 
 const letter = ref<HTMLElement | null>(null)
-const style = ref({ width: "20px" })
+const style = ref({ width: "1ch" })
 const beforeEnter = (el: Element) => {
   style.value = { width: `${el.scrollWidth}px` }
 }
