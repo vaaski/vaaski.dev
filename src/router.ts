@@ -12,6 +12,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("./views/Contact.vue"),
   },
   {
+    path: "/time",
+    name: "time",
+    component: () => import("./views/Time.vue"),
+  },
+  {
     path: "/:pathMatch(.*)*",
     redirect: "/",
   },
