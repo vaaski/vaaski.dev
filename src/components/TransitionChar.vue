@@ -29,9 +29,9 @@ useEventListener(window, "resize", useDebounceFn(setInitialSize, 250))
 
 <template>
   <div :class="{ space }" :style="style" class="wrap">
-    <transition name="letter" @enter="beforeEnter">
+    <Transition name="letter" @enter="beforeEnter">
       <div :key="props.letter" ref="letter">{{ props.letter }}</div>
-    </transition>
+    </Transition>
   </div>
 </template>
 
