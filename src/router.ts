@@ -17,6 +17,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("./views/Time.vue"),
   },
   {
+    path: "/cd",
+    name: "cd",
+    component: () => import("./views/Countdown.vue"),
+  },
+  {
     path: "/:pathMatch(.*)*",
     redirect: "/",
   },
