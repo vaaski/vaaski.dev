@@ -18,7 +18,6 @@ const split = computed(() => props.text.split(""))
 const wait = (t: number): Promise<void> => new Promise(r => setTimeout(r, t))
 const leave = async (_el: Element, done: () => void) => {
   const el = _el as HTMLElement
-  console.log(el)
 
   el.style.width = "0px"
   el.style.opacity = "1"
@@ -34,7 +33,12 @@ const leave = async (_el: Element, done: () => void) => {
 <template>
   <div class="flex">
     <TransitionGroup @leave="leave" :css="false">
-      <TransitionChar v-for="(letter, i) in split" :letter="letter" :key="i" />
+      <TransitionChar
+        v-for="(letter, i) in split"
+        :letter="letter"
+        :duration="props.duration"
+        :key="i"
+      />
     </TransitionGroup>
   </div>
 </template>
