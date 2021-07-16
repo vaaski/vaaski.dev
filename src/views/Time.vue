@@ -2,10 +2,11 @@
 import type { Ref } from "vue"
 
 import { computed, watchEffect } from "vue"
-import { useDocumentVisibility, useNow, useTitle } from "@vueuse/core"
 import { useRoute } from "vue-router"
+import { useDocumentVisibility, useNow, useTitle } from "@vueuse/core"
 
 import TransitionText from "@/components/TransitionText.vue"
+import { useBackgroundTitle } from "@/time"
 
 const route = useRoute()
 let locale = ""
@@ -19,16 +20,7 @@ const display = computed(getTime(time.now))
 const titleTime = useNow({ interval: 100 })
 const titleDisplay = computed(getTime(titleTime))
 
-const visible = computed(() => useDocumentVisibility().value === "visible")
-
-const initialTitle = document.title
-const title = computed(() => {
-  if (visible.value) return initialTitle
-  else return `${titleDisplay.value} - ${initialTitle}`
-})
-
-watchEffect(() => (visible.value ? time.resume() : time.pause()))
-useTitle(title)
+useBackgroundTitle(titleDisplay, time)
 </script>
 
 <template>

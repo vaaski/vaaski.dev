@@ -18,7 +18,7 @@ export default defineComponent({
       </div>
     </section>
 
-    <section class="bg-gradient-to-t from-gray-900">
+    <section class="bg-gradient-to-t mx-auto from-gray-900 w-full px-10">
       <div class="flex h-full max-width items-center justify-center">
         <p class="font-mono font-light opacity-50">coming soon</p>
       </div>
@@ -28,7 +28,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 section {
-  @apply w-full px-10 mx-auto;
   height: calc(100vh - var(--nav-height));
 
   &:first-child {
@@ -36,7 +35,9 @@ section {
   }
 
   > .max-width {
-    @apply max-w-5xl mx-auto w-full;
+    width: 100%;
+    max-width: 64rem;
+    margin: auto;
   }
 }
 </style>

@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import type { RenderSettings } from "@/time"
 
-import { ref } from "@vue/reactivity"
+import { ref, computed } from "vue"
 import { useRoute } from "vue-router"
 
 import TransitionText from "@/components/TransitionText.vue"
 import { useTimestamp } from "@vueuse/core"
-import { computed } from "@vue/runtime-core"
-import { renderTime } from "@/time"
+import { renderTime, useBackgroundTitle } from "@/time"
 
 const route = useRoute()
 const query: Record<string, string> = {
@@ -29,14 +28,18 @@ const renderSettings: RenderSettings = {
   m: query.s.includes("m") ?? true,
 }
 
-const now = useTimestamp()
+const time = useTimestamp()
 const endTimestamp = parseInt(query.t, 36) * 1e3
 const end = new Date(endTimestamp).getTime()
-const text = computed(() => renderTime(end - now.value, renderSettings))
+const display = computed(() => renderTime(end - time.value, renderSettings))
+
+const titleTime = useTimestamp({ interval: 100 })
+const titleDisplay = computed(() => renderTime(end - titleTime.value, renderSettings))
+useBackgroundTitle(titleDisplay)
 </script>
 
 <template>
   <main class="flex h-full w-full full justify-center items-center">
-    <TransitionText :text="text" style="font-size: 9vw" :duration="250" />
+    <TransitionText :text="display" style="font-size: 9vw" :duration="250" />
   </main>
 </template>
