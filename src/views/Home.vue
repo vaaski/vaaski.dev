@@ -28,6 +28,9 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 section {
+  width: 100%;
+  padding: 0 2.5rem;
+  margin: auto;
   height: calc(100vh - var(--nav-height));
 
   &:first-child {
@@ -35,9 +38,9 @@ section {
   }
 
   > .max-width {
-    width: 100%;
     max-width: 64rem;
     margin: auto;
+    width: 100%;
   }
 }
 </style>
