@@ -2,22 +2,28 @@
 import type { RenderSettings } from "@/time"
 
 import { ref, computed } from "vue"
-import { useRoute } from "vue-router"
+import { useRoute, useRouter } from "vue-router"
 
 import TransitionText from "@/components/TransitionText.vue"
 import { useTimestamp } from "@vueuse/core"
-import { renderTime, useBackgroundTitle } from "@/time"
+import { renderTime, useBackgroundTitle, decodeStamp } from "@/time"
 
 const route = useRoute()
+const router = useRouter()
 const query: Record<string, string> = {
   s: "mhdMy",
   ...route.query,
 }
 
+let endDate: Date
+
 if (!query.t) {
+  if (query.T) {
+    if (!isNaN(parseInt(query.T))) endDate = new Date(parseInt(query.T))
+    else endDate = new Date(query.T)
+  } else throw Error("missing time parameter")
   // todo redirect to setup page
-  throw Error("missing time parameter")
-}
+} else endDate = decodeStamp(query.t)
 
 const renderSettings: RenderSettings = {
   y: query.s.includes("y") ?? true,
@@ -29,8 +35,7 @@ const renderSettings: RenderSettings = {
 }
 
 const time = useTimestamp()
-const endTimestamp = parseInt(query.t, 36) * 1e3
-const end = new Date(endTimestamp).getTime()
+const end = endDate.getTime()
 const display = computed(() => renderTime(end - time.value, renderSettings))
 
 const titleTime = useTimestamp({ interval: 100 })

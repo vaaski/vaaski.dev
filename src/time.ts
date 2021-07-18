@@ -98,3 +98,6 @@ export const useBackgroundTitle = (titleDisplay: Ref<string>, pausable?: Pausabl
   if (pausable) watchEffect(() => (visible.value ? pausable.resume() : pausable.pause()))
   useTitle(title)
 }
+
+export const encodeStamp = (d: Date): string => Math.round(d.getTime() / 1e3).toString(36)
+export const decodeStamp = (s: string): Date => new Date(parseInt(s, 36) * 1e3)

@@ -18,7 +18,8 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/cd",
-    name: "cd",
+    alias: "/countdown",
+    name: "countdown",
     component: () => import("./views/Countdown.vue"),
   },
   {
