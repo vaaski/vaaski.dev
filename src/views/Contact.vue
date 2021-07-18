@@ -76,7 +76,7 @@ export default defineComponent({
 
 <template>
   <main class="flex flex-col h-full items-center justify-center">
-    <transition-group name="fade">
+    <TransitionGroup name="fade">
       <section v-if="success === null" class="max-w-85/100">
         <h1 class="mb-2 text-4xl">contact me</h1>
         <p class="text-clr-white opacity-50 -sm:text-sm">
@@ -144,7 +144,7 @@ export default defineComponent({
           <RouterLink to="/" class="animate-underline link">back home</RouterLink> now.
         </p>
       </section>
-    </transition-group>
+    </TransitionGroup>
   </main>
 </template>
 

@@ -16,9 +16,9 @@ export default defineComponent({
 
     <div id="route">
       <router-view v-slot="{ Component }">
-        <transition name="fade">
-          <component :is="Component" />
-        </transition>
+        <Transition name="fade">
+          <Component :is="Component" />
+        </Transition>
       </router-view>
     </div>
   </div>
