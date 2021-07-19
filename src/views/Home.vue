@@ -26,7 +26,7 @@ export default defineComponent({
   </main>
 </template>
 
-<style lang="scss" scoped>
+<style lang="postcss" scoped>
 section {
   width: 100%;
   padding: 0 2.5rem;

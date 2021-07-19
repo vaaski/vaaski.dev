@@ -27,7 +27,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="postcss" scoped>
 .child-space {
   > *:not(:last-child) {
     @apply mr-5;

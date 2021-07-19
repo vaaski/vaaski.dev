@@ -148,7 +148,7 @@ export default defineComponent({
   </main>
 </template>
 
-<style lang="scss" scoped>
+<style lang="postcss" scoped>
 .input {
   @apply bg-clr-dark rounded;
   @apply my-2 py-2 px-3;

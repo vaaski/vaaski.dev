@@ -24,7 +24,7 @@ export default defineComponent({
   </div>
 </template>
 
-<style lang="scss">
+<style lang="postcss">
 * {
   user-select: none;
 }
