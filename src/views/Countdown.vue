@@ -6,7 +6,7 @@ import { useRoute, useRouter } from "vue-router"
 
 import TransitionText from "@/components/TransitionText.vue"
 import { useTimestamp } from "@vueuse/core"
-import { renderTime, useBackgroundTitle, decodeStamp } from "@/time"
+import { parseTime, renderTime, useBackgroundTitle, decodeStamp } from "@/time"
 
 const route = useRoute()
 const router = useRouter()
@@ -19,10 +19,9 @@ let endDate: Date
 
 if (!query.t) {
   if (query.T) {
-    if (!isNaN(parseInt(query.T))) endDate = new Date(parseInt(query.T))
-    else endDate = new Date(query.T)
+    endDate = parseTime(query.T)
   } else throw Error("missing time parameter")
-  // todo redirect to setup page
+  // todo catch and redirect to setup page
 } else endDate = decodeStamp(query.t)
 
 const renderSettings: RenderSettings = {

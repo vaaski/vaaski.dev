@@ -101,3 +101,24 @@ export const useBackgroundTitle = (titleDisplay: Ref<string>, pausable?: Pausabl
 
 export const encodeStamp = (d: Date): string => Math.round(d.getTime() / 1e3).toString(36)
 export const decodeStamp = (s: string): Date => new Date(parseInt(s, 36) * 1e3)
+
+export const parseTime = (s: string | number | Date): Date => {
+  const simple = new Date(s)
+  if (!isNaN(simple.getTime())) return simple
+
+  if (typeof s === "string") {
+    const relativeReg = /(\d{1,2}):(\d\d):?(\d\d)?/
+    const relativeMatch = relativeReg.exec(s)
+    const relative = new Date()
+    if (relativeMatch) {
+      const [, h, m, s] = relativeMatch
+      relative.setHours(parseInt(h) || 0, parseInt(m) || 0, parseInt(s) || 0, 0)
+      return relative
+    }
+
+    const unixStampString = new Date(parseInt(s))
+    if (!isNaN(unixStampString.getTime())) return unixStampString
+  }
+
+  throw "invalid date"
+}
