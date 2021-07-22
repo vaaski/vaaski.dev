@@ -1,6 +1,15 @@
 import { Pausable, useDocumentVisibility, useTitle } from "@vueuse/core"
 import { computed, Ref, watchEffect } from "vue"
 
+export interface RenderSettings {
+  y: boolean
+  M: boolean
+  w: boolean
+  d: boolean
+  h: boolean
+  m: boolean
+}
+
 interface TimeDistance {
   year?: number
   month?: number
@@ -12,29 +21,28 @@ interface TimeDistance {
   past: boolean
 }
 
-export interface RenderSettings {
-  y: boolean
-  M: boolean
-  w: boolean
-  d: boolean
-  h: boolean
-  m: boolean
-}
+const second = 1000
+const minute = second * 60
+const hour = minute * 60
+const day = hour * 24
+const week = day * 7
+const month = week * 4
+const year = month * 12
 
-const calcDuration = (ms: number): TimeDistance => {
+const calcDistance = (ms: number): TimeDistance => {
   let past = false
   if (ms < 0) {
     ms = -ms
     past = true
   }
   return {
-    year: Math.floor(ms / (1e3 * 60 * 60 * 24 * 7 * 4 * 12)),
-    month: Math.floor(ms / (1e3 * 60 * 60 * 24 * 7 * 4)) % 12,
-    week: Math.floor(ms / (1e3 * 60 * 60 * 24)) % 4,
-    day: Math.floor(ms / (1e3 * 60 * 60 * 24)) % 7,
-    hour: Math.floor(ms / (1e3 * 60 * 60)) % 24,
-    minute: Math.floor(ms / (1e3 * 60)) % 60,
-    second: Math.floor(ms / 1e3) % 60,
+    year: Math.floor(ms / year),
+    month: Math.floor(ms / month) % 12,
+    week: Math.floor(ms / week) % 4,
+    day: Math.floor(ms / day) % 7,
+    hour: Math.floor(ms / hour) % 24,
+    minute: Math.floor(ms / minute) % 60,
+    second: Math.floor(ms / second) % 60,
     past,
   }
 }
@@ -53,7 +61,7 @@ const timestamp = (distance: TimeDistance) => {
 
 export const renderTime = (ms: number, settings: RenderSettings): string => {
   if (isNaN(ms)) throw Error("invalid time")
-  const distance = calcDuration(ms)
+  const distance = calcDistance(ms)
 
   if (!settings.y && distance.month && distance.year) {
     distance.month += distance.year * 12
@@ -103,6 +111,8 @@ export const encodeStamp = (d: Date): string => Math.round(d.getTime() / 1e3).to
 export const decodeStamp = (s: string): Date => new Date(parseInt(s, 36) * 1e3)
 
 export const parseTime = (s: string | number | Date): Date => {
+  if (typeof s === "string" && /^\d{4}-\d\d-\d\d$/.exec(s)) s += "T00:00"
+
   const simple = new Date(s)
   if (!isNaN(simple.getTime())) return simple
 
