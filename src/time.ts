@@ -1,6 +1,3 @@
-import { Pausable, useDocumentVisibility, useTitle } from "@vueuse/core"
-import { computed, Ref, watchEffect } from "vue"
-
 export interface RenderSettings {
   y: boolean
   M: boolean
@@ -92,19 +89,6 @@ export const renderTime = (ms: number, settings: RenderSettings): string => {
   if (distance.past) stamp = `${stamp} ago`
   else stamp = `in ${stamp}`
   return stamp
-}
-
-export const useBackgroundTitle = (titleDisplay: Ref<string>, pausable?: Pausable): void => {
-  const visible = computed(() => useDocumentVisibility().value === "visible")
-
-  const initialTitle = document.title
-  const title = computed(() => {
-    if (visible.value) return initialTitle
-    else return `${titleDisplay.value} - ${initialTitle}`
-  })
-
-  if (pausable) watchEffect(() => (visible.value ? pausable.resume() : pausable.pause()))
-  useTitle(title)
 }
 
 export const encodeStamp = (d: Date): string => Math.round(d.getTime() / 1e3).toString(36)

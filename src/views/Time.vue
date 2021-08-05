@@ -6,7 +6,7 @@ import { useRoute } from "vue-router"
 import { useDocumentVisibility, useNow, useTitle } from "@vueuse/core"
 
 import TransitionText from "@/components/TransitionText.vue"
-import { useBackgroundTitle } from "@/time"
+import { useBackgroundTitle } from "@/util"
 
 const route = useRoute()
 let locale = ""

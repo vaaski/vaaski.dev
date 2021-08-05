@@ -6,7 +6,8 @@ import { useRoute, useRouter } from "vue-router"
 
 import TransitionText from "@/components/TransitionText.vue"
 import { useTimestamp } from "@vueuse/core"
-import { parseTime, renderTime, useBackgroundTitle, decodeStamp } from "@/time"
+import { parseTime, renderTime, decodeStamp } from "@/time"
+import { useBackgroundTitle } from "@/util"
 
 const route = useRoute()
 const router = useRouter()
