@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { RenderSettings } from "@/time"
 
-import { ref, computed } from "vue"
+import { computed } from "vue"
 import { useRoute, useRouter } from "vue-router"
 
 import TransitionText from "@/components/TransitionText.vue"
@@ -11,7 +11,16 @@ import { useBackgroundTitle } from "@/util"
 
 const route = useRoute()
 const router = useRouter()
-const query: Record<string, string> = {
+
+interface ExpectedQuery {
+  /** render settings */
+  s?: string
+  /** timestamp in shortened string format */
+  t?: string
+  /** timestamp for Date.parse */
+  T?: string
+}
+const query: ExpectedQuery = {
   s: "mhdMy",
   ...route.query,
 }
@@ -26,12 +35,13 @@ if (!query.t) {
 } else endDate = decodeStamp(query.t)
 
 const renderSettings: RenderSettings = {
-  y: query.s.includes("y") ?? true,
-  M: query.s.includes("M") ?? true,
-  w: query.s.includes("w") ?? true,
-  d: query.s.includes("d") ?? true,
-  h: query.s.includes("h") ?? true,
-  m: query.s.includes("m") ?? true,
+  y: query.s?.includes("y") ?? true,
+  M: query.s?.includes("M") ?? true,
+  w: query.s?.includes("w") ?? true,
+  d: query.s?.includes("d") ?? true,
+  h: query.s?.includes("h") ?? true,
+  m: query.s?.includes("m") ?? true,
+  s: query.s?.includes("s") ?? true,
 }
 
 const time = useTimestamp()

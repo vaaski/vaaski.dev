@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import type { Ref } from "vue"
 
-import { computed, watchEffect } from "vue"
+import { computed } from "vue"
 import { useRoute } from "vue-router"
-import { useDocumentVisibility, useNow, useTitle } from "@vueuse/core"
+import { useNow } from "@vueuse/core"
 
 import TransitionText from "@/components/TransitionText.vue"
 import { useBackgroundTitle } from "@/util"

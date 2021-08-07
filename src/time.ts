@@ -5,6 +5,7 @@ export interface RenderSettings {
   d: boolean
   h: boolean
   m: boolean
+  s: boolean
 }
 
 interface TimeDistance {
@@ -14,7 +15,7 @@ interface TimeDistance {
   day?: number
   hour?: number
   minute?: number
-  second: number
+  second?: number
   past: boolean
 }
 
@@ -45,13 +46,15 @@ const calcDistance = (ms: number): TimeDistance => {
 }
 
 const timestamp = (distance: TimeDistance) => {
-  let str = `${distance.second}s`
+  let str = ""
+  if (distance.second) str = `${distance.second}s`
   if (distance.minute) str = `${distance.minute}m ${str}`
   if (distance.hour) str = `${distance.hour}h ${str}`
   if (distance.day) str = `${distance.day}d ${str}`
   if (distance.week) str = `${distance.week}w ${str}`
   if (distance.month) str = `${distance.month}mo ${str}`
   if (distance.year) str = `${distance.year}y ${str}`
+  str = str.trim()
 
   return str
 }
@@ -80,9 +83,12 @@ export const renderTime = (ms: number, settings: RenderSettings): string => {
     distance.minute += distance.hour * 60
     delete distance.hour
   }
-  if (!settings.m && distance.minute) {
+  if (!settings.m && distance.second && distance.minute) {
     distance.second += distance.minute * 60
     delete distance.minute
+  }
+  if (!settings.s && distance.second && !isNaN(distance.second)) {
+    delete distance.second
   }
 
   let stamp = timestamp(distance)
