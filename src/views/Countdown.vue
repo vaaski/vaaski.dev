@@ -19,6 +19,8 @@ interface ExpectedQuery {
   t?: string
   /** timestamp for Date.parse */
   T?: string
+  /** name of the countdown */
+  n?: string
 }
 const query: ExpectedQuery = {
   s: "mhdMy",
@@ -54,7 +56,16 @@ useBackgroundTitle(titleDisplay)
 </script>
 
 <template>
-  <main class="flex h-full w-full full justify-center items-center">
+  <main class="flex flex-col h-full w-full full justify-center items-center">
+    <h1 v-if="query.n" class="opacity-50 text-3xl">{{ query.n }}</h1>
     <TransitionText :text="display" style="font-size: 9vw" :duration="250" />
   </main>
 </template>
+
+<style scoped lang="scss">
+h1 {
+  max-width: 90vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+</style>
