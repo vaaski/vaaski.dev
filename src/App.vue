@@ -1,25 +1,22 @@
-<script lang="ts">
-import { defineComponent } from "vue"
+<script lang="ts" setup>
 import Navbar from "./components/Navbar.vue"
-
-export default defineComponent({
-  components: { Navbar },
-  setup() {},
-})
+// import BackgroundRain from "./components/BackgroundRain.vue"
 </script>
 
 <template>
+  <!-- <BackgroundRain /> -->
+
   <div class="h-screen w-screen">
     <nav id="nav">
       <Navbar />
     </nav>
 
     <div id="route">
-      <router-view v-slot="{ Component }">
+      <RouterView v-slot="{ Component }">
         <Transition name="fade">
           <Component :is="Component" />
         </Transition>
-      </router-view>
+      </RouterView>
     </div>
   </div>
 </template>
@@ -66,12 +63,12 @@ a.link {
 #app,
 body,
 html {
-  @apply bg-clr-bg text-clr-white font-sans;
+  @apply bg-clr-bg font-sans text-clr-white;
   @apply overflow-x-hidden;
 }
 
 nav#nav {
-  @apply h-nav w-full top-0 fixed z-10;
+  @apply h-nav w-full top-0 z-10 fixed;
   @apply px-10;
   @apply bg-clr-bg-trans;
 
