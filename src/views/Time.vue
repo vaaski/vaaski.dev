@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Ref } from "vue"
-import type { Fullscreen } from "@/App.vue"
+import type { UseFullscreenReturn } from "@vueuse/core"
 
 import { computed, inject } from "vue"
 import { useRoute } from "vue-router"
@@ -23,7 +23,7 @@ const titleDisplay = computed(getTime(titleTime))
 
 useBackgroundTitle(titleDisplay, time)
 
-const fullscreen = inject<Fullscreen>("fullscreen")
+const fullscreen = inject<UseFullscreenReturn>("fullscreen")
 if (!fullscreen) throw new Error("fullscreen couldn't be injected")
 </script>
 

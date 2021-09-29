@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { RenderSettings } from "@/time"
+import type { UseFullscreenReturn } from "@vueuse/core"
 
-import { computed } from "vue"
+import { computed, inject } from "vue"
 import { useRoute, useRouter } from "vue-router"
 
 import TransitionText from "@/components/TransitionText.vue"
@@ -53,12 +54,20 @@ const display = computed(() => renderTime(end - time.value, renderSettings))
 const titleTime = useTimestamp({ interval: 100 })
 const titleDisplay = computed(() => renderTime(end - titleTime.value, renderSettings))
 useBackgroundTitle(titleDisplay)
+
+const fullscreen = inject<UseFullscreenReturn>("fullscreen")
+if (!fullscreen) throw new Error("fullscreen couldn't be injected")
 </script>
 
 <template>
   <main class="flex flex-col h-full w-full full justify-center items-center">
     <h1 v-if="query.n" class="opacity-50 text-3xl">{{ query.n }}</h1>
-    <TransitionText :text="display" style="font-size: 9vw" :duration="250" />
+    <TransitionText
+      :text="display"
+      @click="fullscreen.toggle()"
+      style="font-size: 9vw"
+      :duration="250"
+    />
   </main>
 </template>
 

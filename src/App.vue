@@ -6,8 +6,6 @@ import Navbar from "./components/Navbar.vue"
 
 const fullscreen = useFullscreen(document.body)
 provide("fullscreen", fullscreen)
-
-export type Fullscreen = typeof fullscreen
 </script>
 
 <template>
@@ -28,7 +26,7 @@ export type Fullscreen = typeof fullscreen
   </div>
 </template>
 
-<style lang="postcss">
+<style lang="scss">
 * {
   user-select: none;
 }

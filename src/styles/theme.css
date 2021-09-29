@@ -5,6 +5,8 @@
   --clr-white: hsla(96, 71%, 99%, 1);
   --clr-accent-pink: hsla(335, 71%, 64%, 1);
   --clr-accent-blue: hsla(189, 92%, 45%, 1);
+
+  --ease-quart: cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 :root.light {

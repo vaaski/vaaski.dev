@@ -3,7 +3,7 @@
     <div @click="$router.push('/')" class="cursor-pointer flex h-full nav-left justify-center">
       <Logo class="m-auto h-1/2" />
     </div>
-    <div class="flex-grow"></div>
+    <div class="flex-grow nav-spacer"></div>
     <div class="flex nav-right child-space">
       <RouterLink to="/contact" class="transition-colors">contact</RouterLink>
       <RouterLink to="/time" class="transition-colors">time</RouterLink>
@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Fullscreen } from "@/App.vue"
+import type { UseFullscreenReturn } from "@vueuse/core"
 
 import { inject } from "vue"
 import Logo from "@/components/Logo.vue"
@@ -21,7 +21,7 @@ import ExternalLink from "@/components/ExternalLink.vue"
 
 // const hide = ref(true)
 
-const fullscreen = inject<Fullscreen>("fullscreen")
+const fullscreen = inject<UseFullscreenReturn>("fullscreen")
 if (!fullscreen) throw new Error("fullscreen couldn't be injected")
 
 const hide = fullscreen.isFullscreen
@@ -39,16 +39,22 @@ const hide = fullscreen.isFullscreen
 }
 
 .nav-right,
+.nav-spacer,
 .nav-left {
-  transition: opacity 0.2s ease-in-out;
+  transition: 500ms var(--ease-quart);
 }
 
 .hide {
   .nav-right {
     opacity: 0;
+    width: 0;
   }
   .nav-left {
     opacity: 0.125;
+    flex-grow: 1;
+  }
+  .nav-spacer {
+    flex-grow: 0;
   }
 }
 </style>
