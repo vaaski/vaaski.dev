@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import type { Ref } from "vue"
+import type { Fullscreen } from "@/App.vue"
 
-import { computed } from "vue"
+import { computed, inject } from "vue"
 import { useRoute } from "vue-router"
 import { useNow } from "@vueuse/core"
 
@@ -21,10 +22,17 @@ const titleTime = useNow({ interval: 100 })
 const titleDisplay = computed(getTime(titleTime))
 
 useBackgroundTitle(titleDisplay, time)
+
+const fullscreen = inject<Fullscreen>("fullscreen")
+if (!fullscreen) throw new Error("fullscreen couldn't be injected")
 </script>
 
 <template>
   <main class="flex h-full w-full items-center justify-center full">
-    <TransitionText :text="display" style="font-size: 15vw"></TransitionText>
+    <TransitionText
+      :text="display"
+      @click="fullscreen.toggle()"
+      style="font-size: 15vw"
+    ></TransitionText>
   </main>
 </template>

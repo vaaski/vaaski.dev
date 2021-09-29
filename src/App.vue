@@ -1,6 +1,13 @@
 <script lang="ts" setup>
+import { provide } from "vue"
+import { useFullscreen } from "@vueuse/core"
 import Navbar from "./components/Navbar.vue"
 // import BackgroundRain from "./components/BackgroundRain.vue"
+
+const fullscreen = useFullscreen(document.body)
+provide("fullscreen", fullscreen)
+
+export type Fullscreen = typeof fullscreen
 </script>
 
 <template>
