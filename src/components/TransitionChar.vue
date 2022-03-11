@@ -41,7 +41,7 @@ useEventListener(window, "resize", useDebounceFn(setInitialSize, 250))
   </div>
 </template>
 
-<style scoped lang="postcss">
+<style scoped lang="scss">
 @keyframes fadeIn {
   from {
     opacity: 0;

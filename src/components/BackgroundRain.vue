@@ -1,33 +1,39 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue"
-
-const canvas = ref<HTMLCanvasElement | null>(null)
-
-onMounted(() => {
-  if (!canvas.value) throw Error("canvas ref is falsy")
-  if (!canvas.value.getContext) return console.log("canvas.getContext is falsy")
-
-  const ctx = canvas.value.getContext("2d")
-  if (!ctx) throw Error("ctx is falsy")
-
-  ctx.fillStyle = "rgb(200, 0, 0)"
-  ctx.fillRect(10, 10, 50, 50)
-
-  ctx.fillStyle = "rgba(0, 0, 200, 0.5)"
-  ctx.fillRect(30, 30, 50, 50)
-})
 </script>
 
 <template>
-  <div class="background-rain">
-    <canvas ref="canvas" height="500" width="500"></canvas>
-  </div>
+  <div class="background-rain"></div>
 </template>
 
 <style scoped lang="scss">
 .background-rain {
+  position: absolute;
   height: 100%;
   width: 100%;
+  background: var(--clr-bg);
+  background: radial-gradient(
+      114.65% 101.91% at 46.6% -41.6%,
+      #3d5e7a 0%,
+      rgba(22, 40, 55, 0) 100%
+    ),
+    radial-gradient(
+      113.08% 100.52% at 150.44% 20.22%,
+      rgba(11, 22, 31, 0.51) 0%,
+      rgba(22, 40, 55, 0) 100%
+    ),
+    radial-gradient(
+      96.96% 86.19% at -29.13% 72.24%,
+      rgba(11, 22, 31, 0.51) 0%,
+      rgba(22, 40, 55, 0) 100%
+    ),
+    radial-gradient(
+      143.58% 127.62% at 69.77% 127.62%,
+      rgba(0, 63, 116, 0.42) 0%,
+      rgba(0, 0, 0, 0) 100%
+    ),
+    black;
+  z-index: -1;
 
   canvas {
     position: absolute;

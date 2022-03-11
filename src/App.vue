@@ -2,15 +2,12 @@
 import { provide } from "vue"
 import { useFullscreen } from "@vueuse/core"
 import Navbar from "./components/Navbar.vue"
-// import BackgroundRain from "./components/BackgroundRain.vue"
 
 const fullscreen = useFullscreen(document.body)
 provide("fullscreen", fullscreen)
 </script>
 
 <template>
-  <!-- <BackgroundRain /> -->
-
   <div class="h-screen w-screen">
     <nav id="nav">
       <Navbar />

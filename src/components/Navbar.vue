@@ -27,7 +27,7 @@ if (!fullscreen) throw new Error("fullscreen couldn't be injected")
 const hide = fullscreen.isFullscreen
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .child-space {
   > *:not(:last-child) {
     @apply mr-5;
