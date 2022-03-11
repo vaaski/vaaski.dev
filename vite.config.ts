@@ -2,7 +2,10 @@ import { resolve } from "path"
 import { defineConfig } from "vite"
 import vue from "@vitejs/plugin-vue"
 import WindiCSS from "vite-plugin-windicss"
-import viteSvgIcons from "vite-plugin-svg-icons"
+
+// import viteSvgIcons from "vite-plugin-svg-icons"
+import { createSvgIconsPlugin } from "vite-plugin-svg-icons"
+
 import { VitePWA } from "vite-plugin-pwa"
 
 const color = "#162837"
@@ -40,9 +43,14 @@ export default defineConfig({
         fileExtensions: ["vue", "html", "ts"],
       },
     }),
-    viteSvgIcons({
+    // viteSvgIcons({
+    //   iconDirs: [resolve(process.cwd(), "src/icons")],
+    //   symbolId: "icon-[dir]-[name]",
+    // }),
+    createSvgIconsPlugin({
       iconDirs: [resolve(process.cwd(), "src/icons")],
       symbolId: "icon-[dir]-[name]",
+      inject: "body-first",
     }),
   ],
   resolve: {

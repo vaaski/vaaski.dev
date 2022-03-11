@@ -4,7 +4,7 @@ import router from "./router"
 
 import "./styles"
 import "virtual:windi.css"
-import "vite-plugin-svg-icons/register"
+import "virtual:svg-icons-register"
 
 import * as Sentry from "@sentry/vue"
 import { Integrations } from "@sentry/tracing"
