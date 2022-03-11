@@ -7,8 +7,7 @@
     "dev": "vite --port 8080",
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview --port 8080",
-    "functions": "rimraf netlify/functions && netlify-lambda build lambda",
-    "commit": "cz -S"
+    "functions": "rimraf netlify/functions && netlify-lambda build lambda"
   },
   "dependencies": {
     "@sentry/tracing": "^6.10.0-beta.2",
@@ -25,7 +24,6 @@
     "@typescript-eslint/parser": "^4.28.3",
     "@vitejs/plugin-vue": "^1.2.5",
     "@vuedx/typescript-plugin-vue": "^0.7.4",
-    "commitizen": "^4.2.4",
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
@@ -36,7 +34,7 @@
     "typescript": "^4.3.5",
     "vite": "^2.4.2",
     "vite-plugin-pwa": "^0.8.1",
-    "vite-plugin-svg-icons": "^1.0.1",
+    "vite-plugin-svg-icons": "^0.1.0",
     "vite-plugin-windicss": "^1.2.4",
     "vue-tsc": "^0.3.0"
   }
