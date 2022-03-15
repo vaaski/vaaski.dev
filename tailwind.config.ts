@@ -6,6 +6,7 @@ const colors = {
   "clr-bg-trans": "var(--clr-bg-trans)",
   "clr-dark": "var(--clr-dark)",
   "clr-white": "var(--clr-white)",
+  "clr-navbar": "var(--clr-navbar)",
   "clr-accent-pink": "var(--clr-accent-pink)",
   "clr-accent-blue": "var(--clr-accent-blue)",
 }

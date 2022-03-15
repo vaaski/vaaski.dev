@@ -75,7 +75,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <main class="flex flex-col h-full items-center justify-center">
+  <main class="flex flex-col h-full full items-center justify-center">
     <TransitionGroup name="fade">
       <section v-if="success === null" class="max-w-85/100">
         <h1 class="mb-2 text-4xl">contact me</h1>
@@ -150,19 +150,52 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .input {
-  @apply bg-clr-dark rounded;
+  background: rgba(0, 0, 0, 0.075);
+  @apply rounded;
   @apply my-2 py-2 px-3;
   @apply outline-none focus:outline-none;
-  @apply transition-all hover:(ring-1 ring-clr-accent-blue);
-  @apply focus:(ring-2 ring-clr-accent-blue) focus:hover:(ring-2);
+  transition: 250ms cubic-bezier(0.76, 0, 0.24, 1);
+  box-shadow: 0 0 0 rgba(255, 255, 255, 0.05);
+
+  &:hover {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+  }
+
+  &:focus,
+  &:hover:focus {
+    transition: 500ms cubic-bezier(0.76, 0, 0.24, 1);
+    box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.5);
+  }
 
   &.invalid {
-    @apply ring-2 ring-clr-accent-pink;
+    box-shadow: 0 0 3px 1px var(--clr-accent-pink);
+
+    &:hover {
+      box-shadow: 0 0 15px  var(--clr-accent-pink);
+    }
+
+    &:focus,
+    &:hover:focus {
+      transition: 500ms cubic-bezier(0.76, 0, 0.24, 1);
+      box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.5);
+    }
   }
 }
 
 .button {
-  @apply bg-clr-dark rounded mt-2 py-3 outline-none focus:outline-none;
-  @apply transition-all hover:(ring-1 ring-clr-accent-blue);
+  background: rgba(0, 0, 0, 0.075);
+  @apply rounded outline-none mt-2 py-3 focus:outline-none;
+  transition-delay: 0;
+  transition: 250ms cubic-bezier(0.76, 0, 0.24, 1);
+
+  &:hover {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+  }
+
+  &:active,
+  &:hover:active {
+    transition: 100ms cubic-bezier(0.76, 0, 0.24, 1);
+    box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.5);
+  }
 }
 </style>

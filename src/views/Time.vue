@@ -28,7 +28,7 @@ if (!fullscreen) throw new Error("fullscreen couldn't be injected")
 </script>
 
 <template>
-  <main class="flex h-full w-full items-center justify-center full">
+  <main class="flex w-full items-center justify-center full">
     <TransitionText
       :text="display"
       @click="fullscreen.toggle()"

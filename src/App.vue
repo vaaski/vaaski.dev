@@ -1,10 +1,25 @@
 <script lang="ts" setup>
-import { provide } from "vue"
-import { useFullscreen } from "@vueuse/core"
-import Navbar from "./components/Navbar.vue"
+import { provide, ref } from "vue"
+import { useEventListener, useFullscreen } from "@vueuse/core"
+import Navbar from "@/components/Navbar.vue"
+import BackgroundRain from "@/components/BackgroundRain.vue"
 
 const fullscreen = useFullscreen(document.body)
 provide("fullscreen", fullscreen)
+
+const backgroundRainHeight = ref<number | undefined>(undefined)
+let lastEnteredRouteEl: HTMLElement | null = null
+
+const setBackgroundRainHeight = () => {
+  backgroundRainHeight.value = lastEnteredRouteEl?.scrollHeight
+}
+
+useEventListener(window, "resize", setBackgroundRainHeight)
+
+const onRouteEnter = (el: HTMLElement) => {
+  lastEnteredRouteEl = el
+  setBackgroundRainHeight()
+}
 </script>
 
 <template>
@@ -14,8 +29,9 @@ provide("fullscreen", fullscreen)
     </nav>
 
     <div id="route">
+      <BackgroundRain :style="{ height: `${backgroundRainHeight}px` }" />
       <RouterView v-slot="{ Component }">
-        <Transition name="fade">
+        <Transition @enter="onRouteEnter" name="fade">
           <Component :is="Component" />
         </Transition>
       </RouterView>
@@ -65,23 +81,24 @@ a.link {
 #app,
 body,
 html {
-  @apply bg-clr-bg font-sans text-clr-white;
+  @apply font-sans text-clr-white;
   @apply overflow-x-hidden;
 }
 
 nav#nav {
   @apply h-nav w-full top-0 z-10 fixed;
   @apply px-10;
-  @apply bg-clr-bg-trans;
 
   backdrop-filter: blur(4px);
 }
 
 #route {
-  @apply h-full w-full;
+  @apply w-full;
+  position: relative;
 
   > main {
     @apply w-full;
+    min-height: 100vh;
 
     &:not(.full) {
       @apply pt-nav;
@@ -91,7 +108,7 @@ nav#nav {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: 100ms;
+  transition: var(--route-transition);
   position: absolute;
 }
 

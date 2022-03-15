@@ -30,6 +30,7 @@ const setInitialSize = () => {
 }
 
 onMounted(setInitialSize)
+// todo set transition to 0 while resizing
 useEventListener(window, "resize", useDebounceFn(setInitialSize, 250))
 </script>
 

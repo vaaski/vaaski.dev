@@ -1,11 +1,3 @@
-<script lang="ts">
-import { defineComponent } from "vue"
-
-export default defineComponent({
-  setup() {},
-})
-</script>
-
 <template>
   <main class="mx-auto full">
     <section class="flex flex-col h-screen justify-center">
@@ -18,7 +10,7 @@ export default defineComponent({
       </div>
     </section>
 
-    <section class="bg-gradient-to-t mx-auto from-gray-900 w-full px-10 light:from-gray-300">
+    <section class="bg-gradient-to-t mx-auto w-full px-10">
       <div class="flex h-full max-width items-center justify-center">
         <p class="font-mono font-light opacity-50">coming soon</p>
       </div>
