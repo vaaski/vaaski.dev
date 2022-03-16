@@ -6,30 +6,30 @@ import "./styles"
 import "virtual:windi.css"
 import "virtual:svg-icons-register"
 
-import * as Sentry from "@sentry/vue"
-import { Integrations } from "@sentry/tracing"
+// import * as Sentry from "@sentry/vue"
+// import { Integrations } from "@sentry/tracing"
 
 const app = createApp(App)
 
-Sentry.init({
-  app,
-  dsn: "https://c8e4a921785d44139ef8bd65db34e2a1@o105856.ingest.sentry.io/5555374",
-  integrations: [
-    new Integrations.BrowserTracing({
-      routingInstrumentation: Sentry.vueRouterInstrumentation(router),
-      tracingOrigins: [
-        "localhost",
-        "https://vaaski.dev",
-        "https://vaaski.com",
-        "https://vaa.ski",
-      ],
-    }),
-  ],
-  tracesSampleRate: 1.0,
-  logErrors: true,
-  trackComponents: true,
-  hooks: ["activate", "create", "destroy", "mount", "update"],
-})
+// Sentry.init({
+//   app,
+//   dsn: "https://c8e4a921785d44139ef8bd65db34e2a1@o105856.ingest.sentry.io/5555374",
+//   integrations: [
+//     new Integrations.BrowserTracing({
+//       routingInstrumentation: Sentry.vueRouterInstrumentation(router),
+//       tracingOrigins: [
+//         "localhost",
+//         "https://vaaski.dev",
+//         "https://vaaski.com",
+//         "https://vaa.ski",
+//       ],
+//     }),
+//   ],
+//   tracesSampleRate: 1.0,
+//   logErrors: true,
+//   trackComponents: true,
+//   hooks: ["activate", "create", "destroy", "mount", "update"],
+// })
 
 app.use(router).mount("#app")
 
