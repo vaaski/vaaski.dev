@@ -20,12 +20,19 @@
         darkFavicon(bool)
       }
 
-      window.document.addEventListener("DOMContentLoaded", () => {
-        const dark = window.matchMedia("(prefers-color-scheme:dark)")
-        activateDarkMode(dark.matches)
-        dark.onchange = ({ matches }) => activateDarkMode(matches)
-      })
+      activateDarkMode(true)
+      // window.document.addEventListener("DOMContentLoaded", () => {
+      //   const dark = window.matchMedia("(prefers-color-scheme:dark)")
+      //   activateDarkMode(dark.matches)
+      //   dark.onchange = ({ matches }) => activateDarkMode(matches)
+      // })
     </script>
+    <style>
+      html, body {
+        background: #1f303d;
+      }
+    </style>
+    <!-- TODO: eliminate FART https://github.com/resync-tv/resync/commit/591f0163b2118d4671ed37c904638e40a1ce42b5 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>vaaski</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" />

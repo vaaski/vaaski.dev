@@ -79,7 +79,7 @@ export default defineComponent({
     <TransitionGroup name="fade">
       <section v-if="success === null" class="max-w-85/100">
         <h1 class="mb-2 text-4xl">contact me</h1>
-        <p class="text-clr-white opacity-50 -sm:text-sm">
+        <p class="opacity-50 -sm:text-sm">
           use the form below to get in touch and i'll respond within 48 hours.
         </p>
 
@@ -149,11 +149,32 @@ export default defineComponent({
 </template>
 
 <style lang="scss" scoped>
+section {
+  padding: 2rem 3.5rem;
+  border-radius: 25px;
+  background: linear-gradient(-45deg, rgba(0, 0, 0, 0.125), transparent);
+  box-shadow: 0 0 45px rgba(0, 0, 0, 0.125);
+  backdrop-filter: blur(10px);
+
+  @media (max-width: 640px) {
+    padding: 2rem;
+  }
+
+  // @media (prefers-color-scheme: light) {
+  //   color: white;
+  //   background: transparent;
+  //   box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+  //   box-shadow: none;
+  // }
+}
+
+// todo: refactor all these colors into theme colors
 .input {
-  background: rgba(0, 0, 0, 0.075);
   @apply rounded;
   @apply my-2 py-2 px-3;
   @apply outline-none focus:outline-none;
+
+  background: rgba(0, 0, 0, 0.075);
   transition: 250ms cubic-bezier(0.76, 0, 0.24, 1);
   box-shadow: 0 0 0 rgba(255, 255, 255, 0.05);
 
@@ -167,11 +188,25 @@ export default defineComponent({
     box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.5);
   }
 
+  // @media (prefers-color-scheme: light) {
+  //   color: white;
+  //   background: transparent;
+  //   box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.125);
+
+  //   &::placeholder {
+  //     color: rgba(255, 255, 255, 0.25);
+  //   }
+
+  //   &:hover {
+  //     box-shadow: 0 0 15px rgba(255, 255, 255, 0.125);
+  //   }
+  // }
+
   &.invalid {
     box-shadow: 0 0 3px 1px var(--clr-accent-pink);
 
     &:hover {
-      box-shadow: 0 0 15px  var(--clr-accent-pink);
+      box-shadow: 0 0 15px var(--clr-accent-pink);
     }
 
     &:focus,
@@ -183,8 +218,9 @@ export default defineComponent({
 }
 
 .button {
-  background: rgba(0, 0, 0, 0.075);
   @apply rounded outline-none mt-2 py-3 focus:outline-none;
+
+  background: rgba(0, 0, 0, 0.075);
   transition-delay: 0;
   transition: 250ms cubic-bezier(0.76, 0, 0.24, 1);
 
@@ -197,5 +233,14 @@ export default defineComponent({
     transition: 100ms cubic-bezier(0.76, 0, 0.24, 1);
     box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.5);
   }
+
+  // @media (prefers-color-scheme: light) {
+  //   background: rgba(255, 255, 255, 0.025);
+  //   color: white;
+
+  //   &:hover {
+  //     box-shadow: 0 0 15px rgba(255, 255, 255, 0.25);
+  //   }
+  // }
 }
 </style>

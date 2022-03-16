@@ -1,6 +1,7 @@
 import { defineConfig } from "vite-plugin-windicss"
 import defaultTheme from "windicss/defaultTheme"
 
+// todo: get rid of tailwind
 const colors = {
   "clr-bg": "var(--clr-bg)",
   "clr-bg-trans": "var(--clr-bg-trans)",

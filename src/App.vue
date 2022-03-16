@@ -4,11 +4,13 @@ import { useEventListener } from "@vueuse/core"
 import Navbar from "@/components/Navbar.vue"
 import BackgroundRain from "@/components/BackgroundRain.vue"
 
-const backgroundRainHeight = ref<number | undefined>(undefined)
+const rainHeight = ref<number | undefined>(undefined)
+const rainWidth = ref<number | undefined>(undefined)
 let lastEnteredRouteEl: Element | null = null
 
 const setBackgroundRainHeight = () => {
-  backgroundRainHeight.value = lastEnteredRouteEl?.scrollHeight
+  rainHeight.value = lastEnteredRouteEl?.scrollHeight
+  rainWidth.value = lastEnteredRouteEl?.scrollWidth
 }
 
 useEventListener(window, "resize", setBackgroundRainHeight)
@@ -26,7 +28,7 @@ const onRouteEnter = (el: Element) => {
     </nav>
 
     <div id="route">
-      <BackgroundRain :style="{ height: `${backgroundRainHeight}px` }" />
+      <BackgroundRain :rain-height="rainHeight ?? 0" :rain-width="rainWidth ?? 0" />
       <RouterView v-slot="{ Component }">
         <Transition @enter="onRouteEnter" name="fade">
           <Component :is="Component" />
@@ -96,6 +98,8 @@ nav#nav {
   > main {
     @apply w-full;
     min-height: 100vh;
+    position: absolute;
+    z-index: 2;
 
     &:not(.full) {
       @apply pt-nav;
