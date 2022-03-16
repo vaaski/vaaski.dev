@@ -3,8 +3,8 @@ import { defineConfig } from "vite"
 import vue from "@vitejs/plugin-vue"
 import WindiCSS from "vite-plugin-windicss"
 
-// import viteSvgIcons from "vite-plugin-svg-icons"
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons"
+import { visualizer } from "rollup-plugin-visualizer"
 
 import { VitePWA } from "vite-plugin-pwa"
 
@@ -51,6 +51,10 @@ export default defineConfig({
       iconDirs: [resolve(process.cwd(), "src/icons")],
       symbolId: "icon-[dir]-[name]",
       inject: "body-first",
+    }),
+    visualizer({
+      filename: "./dist/stats.html",
+      title: "bundle analysis",
     }),
   ],
   resolve: {
