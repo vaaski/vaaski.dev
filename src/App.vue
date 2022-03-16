@@ -8,7 +8,7 @@ const fullscreen = useFullscreen(document.body)
 provide("fullscreen", fullscreen)
 
 const backgroundRainHeight = ref<number | undefined>(undefined)
-let lastEnteredRouteEl: HTMLElement | null = null
+let lastEnteredRouteEl: Element | null = null
 
 const setBackgroundRainHeight = () => {
   backgroundRainHeight.value = lastEnteredRouteEl?.scrollHeight
@@ -16,7 +16,7 @@ const setBackgroundRainHeight = () => {
 
 useEventListener(window, "resize", setBackgroundRainHeight)
 
-const onRouteEnter = (el: HTMLElement) => {
+const onRouteEnter = (el: Element) => {
   lastEnteredRouteEl = el
   setBackgroundRainHeight()
 }

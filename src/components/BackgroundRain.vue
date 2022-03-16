@@ -13,7 +13,7 @@ import { ref, onMounted } from "vue"
   left: 0;
   height: 100%;
   width: 100%;
-  min-height: 100vh;
+  min-height: 150vh;
   min-width: 100vw;
   background: var(--clr-bg);
   background: var(--bg-gradient);
