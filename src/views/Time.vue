@@ -1,13 +1,12 @@
 <script lang="ts" setup>
 import type { Ref } from "vue"
-import type { UseFullscreenReturn } from "@vueuse/core"
 
-import { computed, inject } from "vue"
+import { computed } from "vue"
 import { useRoute } from "vue-router"
 import { useNow } from "@vueuse/core"
 
 import TransitionText from "@/components/TransitionText.vue"
-import { useBackgroundTitle } from "@/util"
+import { useBackgroundTitle, fullscreen } from "@/util"
 
 const route = useRoute()
 let locale = ""
@@ -22,9 +21,6 @@ const titleTime = useNow({ interval: 100 })
 const titleDisplay = computed(getTime(titleTime))
 
 useBackgroundTitle(titleDisplay, time)
-
-const fullscreen = inject<UseFullscreenReturn>("fullscreen")
-if (!fullscreen) throw new Error("fullscreen couldn't be injected")
 </script>
 
 <template>

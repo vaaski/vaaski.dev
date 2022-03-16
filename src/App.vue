@@ -1,11 +1,8 @@
 <script lang="ts" setup>
-import { provide, ref } from "vue"
-import { useEventListener, useFullscreen } from "@vueuse/core"
+import { ref } from "vue"
+import { useEventListener } from "@vueuse/core"
 import Navbar from "@/components/Navbar.vue"
 import BackgroundRain from "@/components/BackgroundRain.vue"
-
-const fullscreen = useFullscreen(document.body)
-provide("fullscreen", fullscreen)
 
 const backgroundRainHeight = ref<number | undefined>(undefined)
 let lastEnteredRouteEl: Element | null = null

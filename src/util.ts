@@ -1,4 +1,4 @@
-import { Pausable, useDocumentVisibility, useTitle } from "@vueuse/core"
+import { Pausable, useDocumentVisibility, useFullscreen, useTitle } from "@vueuse/core"
 import { computed, Ref, watchEffect } from "vue"
 
 export const useBackgroundTitle = (titleDisplay: Ref<string>, pausable?: Pausable): void => {
@@ -14,3 +14,5 @@ export const useBackgroundTitle = (titleDisplay: Ref<string>, pausable?: Pausabl
   if (pausable) watchEffect(() => (visible.value ? pausable.resume() : pausable.pause()))
   useTitle(title)
 }
+
+export const fullscreen = useFullscreen(document.body)

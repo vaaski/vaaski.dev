@@ -1,5 +1,8 @@
 <template>
-  <div :class="{ hide }" class="flex h-full mx-auto text-clr-navbar w-full max-w-5xl items-center">
+  <div
+    :class="{ hide }"
+    class="flex h-full mx-auto text-clr-navbar w-full max-w-5xl items-center"
+  >
     <div @click="$router.push('/')" class="cursor-pointer flex h-full nav-left justify-center">
       <Logo class="m-auto h-1/2" />
     </div>
@@ -13,14 +16,9 @@
 </template>
 
 <script setup lang="ts">
-import type { UseFullscreenReturn } from "@vueuse/core"
-
-import { inject } from "vue"
 import Logo from "@/components/Logo.vue"
 import ExternalLink from "@/components/ExternalLink.vue"
-
-const fullscreen = inject<UseFullscreenReturn>("fullscreen")
-if (!fullscreen) throw new Error("fullscreen couldn't be injected")
+import { fullscreen } from "@/util"
 
 const hide = fullscreen.isFullscreen
 </script>

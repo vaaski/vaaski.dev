@@ -1,17 +1,16 @@
 <script setup lang="ts">
 import type { RenderSettings } from "@/time"
-import type { UseFullscreenReturn } from "@vueuse/core"
 
-import { computed, inject } from "vue"
-import { useRoute, useRouter } from "vue-router"
+import { computed } from "vue"
+import { useRoute } from "vue-router"
 
 import TransitionText from "@/components/TransitionText.vue"
 import { useTimestamp } from "@vueuse/core"
 import { parseTime, renderTime, decodeStamp } from "@/time"
-import { useBackgroundTitle } from "@/util"
+import { useBackgroundTitle, fullscreen } from "@/util"
 
 const route = useRoute()
-const router = useRouter()
+// const router = useRouter()
 
 interface ExpectedQuery {
   /** render settings */
@@ -54,9 +53,6 @@ const display = computed(() => renderTime(end - time.value, renderSettings))
 const titleTime = useTimestamp({ interval: 100 })
 const titleDisplay = computed(() => renderTime(end - titleTime.value, renderSettings))
 useBackgroundTitle(titleDisplay)
-
-const fullscreen = inject<UseFullscreenReturn>("fullscreen")
-if (!fullscreen) throw new Error("fullscreen couldn't be injected")
 </script>
 
 <template>
