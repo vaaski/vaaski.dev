@@ -30,7 +30,7 @@ const onRouteEnter = (el: Element) => {
     <div id="route">
       <BackgroundRain :rain-height="rainHeight ?? 0" :rain-width="rainWidth ?? 0" />
       <RouterView v-slot="{ Component }">
-        <Transition @enter="onRouteEnter" name="fade">
+        <Transition name="fade" @enter="onRouteEnter">
           <Component :is="Component" />
         </Transition>
       </RouterView>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { usePreferredDark } from "@vueuse/core"
-import { computed, toRefs } from "vue"
+// import { usePreferredDark } from "@vueuse/core"
+import { computed, toRefs, defineProps } from "vue"
 
 const props = defineProps({
   rainWidth: {

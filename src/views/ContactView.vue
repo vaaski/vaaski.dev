@@ -86,7 +86,6 @@ export default defineComponent({
         <form :onsubmit="submit" class="flex flex-col mt-5">
           <input
             v-model="form.name"
-            @input="valid.name = true"
             type="text"
             name="name"
             placeholder="name"
@@ -94,10 +93,10 @@ export default defineComponent({
             spellcheck="false"
             class="input"
             :class="{ invalid: !valid.name }"
+            @input="valid.name = true"
           />
           <input
             v-model="form.email"
-            @input="valid.email = true"
             type="text"
             name="email"
             placeholder="email"
@@ -105,18 +104,19 @@ export default defineComponent({
             spellcheck="false"
             class="input"
             :class="{ invalid: !valid.email }"
+            @input="valid.email = true"
           />
           <textarea
             v-model="form.message"
-            @input="valid.message = true"
             name="message"
             placeholder="message"
-            @keydown="onkeydown"
             :maxlength="1500"
             autocomplete="off"
             class="min-h-25 input"
             style="resize: none"
             :class="{ invalid: !valid.message }"
+            @input="valid.message = true"
+            @keydown="onkeydown"
           />
 
           <button type="submit" class="button">submit</button>

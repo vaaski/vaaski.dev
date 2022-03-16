@@ -6,7 +6,7 @@
     <RouterLink to="/" class="cursor-pointer flex h-full nav-left justify-center logo">
       <Logo class="m-auto h-1/2" />
     </RouterLink>
-    <div class="flex-grow nav-spacer"></div>
+    <div class="flex-grow nav-spacer" />
     <div class="flex nav-right child-space">
       <RouterLink to="/contact" class="transition-colors">contact</RouterLink>
       <!-- <RouterLink to="/time" class="transition-colors">time</RouterLink> -->
