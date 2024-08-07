@@ -1,0 +1,3 @@
+[build]
+	command = "bunx nuxi generate"
+	publish = ".output/public"
