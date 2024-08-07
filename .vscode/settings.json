@@ -1,6 +1,0 @@
-{
-  "typescript.tsdk": "node_modules\\typescript\\lib",
-  "vetur.validation.style": false,
-  "windicss.enableCodeFolding": false,
-  "windicss.sortOnSave": true
-}
