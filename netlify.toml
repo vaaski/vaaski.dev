@@ -1,3 +1,4 @@
 [build]
 	command = "bunx nuxi generate"
 	publish = ".output/public"
+  environment = { NODE_VERSION = "20.16.0" }
