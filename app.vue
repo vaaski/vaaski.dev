@@ -1,6 +1,8 @@
+<script setup lang="ts">
+import "@/assets/index.css"
+</script>
+
 <template>
-  <div>
-    <NuxtRouteAnnouncer />
-    <NuxtWelcome />
-  </div>
+  <AppHero />
+  <div>something else</div>
 </template>
