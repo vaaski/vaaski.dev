@@ -40,7 +40,13 @@ const wordmarkClick = async () => {
 <template>
   <div id="nav-bar">
     <div class="left">
-      <NuxtLink class="wordmark" @click.native="wordmarkClick">vaaski.dev</NuxtLink>
+      <ClientOnly>
+        <NuxtLink class="wordmark" @click.native="wordmarkClick">vaaski.dev</NuxtLink>
+
+        <template #fallback>
+          <NuxtLink class="wordmark" to="/">vaaski.dev</NuxtLink>
+        </template>
+      </ClientOnly>
     </div>
     <div class="spacer"></div>
     <div class="right">
