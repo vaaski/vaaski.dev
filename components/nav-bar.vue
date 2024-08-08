@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import Hamburger from "@/assets/icons/hamburger.vue"
+
+import { Popover, PopoverContent } from "@/components/ui/popover"
+
+const hamburgerOpen = ref(false)
 </script>
 
 <template>
@@ -14,7 +18,22 @@ import Hamburger from "@/assets/icons/hamburger.vue"
       <AutoLink to="https://github.com/vaaski">github</AutoLink>
     </div>
     <div class="hamburger">
-      <Hamburger />
+      <Popover :open="hamburgerOpen" @update:open="hamburgerOpen = $event">
+        <PopoverTrigger>
+          <Hamburger />
+        </PopoverTrigger>
+        <PopoverContent align="end">
+          <div class="popover-links">
+            <AutoLink @click="hamburgerOpen = false" to="#projects">projects</AutoLink>
+            <AutoLink @click="hamburgerOpen = false" to="https://github.com/vaaski"
+              >contact</AutoLink
+            >
+            <AutoLink @click="hamburgerOpen = false" to="https://github.com/vaaski"
+              >github</AutoLink
+            >
+          </div>
+        </PopoverContent>
+      </Popover>
     </div>
   </div>
   <div class="navlight"></div>
@@ -65,35 +84,36 @@ import Hamburger from "@/assets/icons/hamburger.vue"
   display: flex;
   gap: 1.2rem;
   margin: 0 2rem;
+
+  a {
+    --background-x-pad: 0.55em;
+    --background-y-pad: 0.2em;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: hsla(0, 0%, 100%, 0.5);
+    text-shadow: 0 0 15px hsla(0, 0%, 0%, 1);
+    padding: var(--background-y-pad) var(--background-x-pad);
+    margin: calc(var(--background-y-pad) * -1) calc(var(--background-x-pad) * -1);
+    border-radius: 1em;
+    transition: 75ms linear;
+    transition-property: color, background, text-shadow, box-shadow;
+
+    &:not(.wordmark):where(:hover, :focus, :active),
+    &.wordmark:where(:focus, :active) {
+      color: hsla(0, 0%, 100%, 1);
+      background: hsla(0, 0%, 100%, 0.1);
+      text-shadow: 0 0 15px hsla(0, 0%, 100%, 0.75);
+      box-shadow: 0 0 10px hsla(0, 0%, 100%, 0.125);
+    }
+  }
 }
 
 .hamburger {
   display: none;
   margin: 0 2rem;
   color: hsla(0, 0%, 100%, 0.5);
-}
-
-a {
-  --background-x-pad: 0.55em;
-  --background-y-pad: 0.2em;
-
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.1rem;
-  color: hsla(0, 0%, 100%, 0.5);
-  padding: var(--background-y-pad) var(--background-x-pad);
-  margin: calc(var(--background-y-pad) * -1) calc(var(--background-x-pad) * -1);
-  border-radius: 1em;
-  transition: 75ms linear;
-  transition-property: color, background, text-shadow, box-shadow;
-
-  &:not(.wordmark):where(:hover, :focus, :active),
-  &.wordmark:where(:focus, :active) {
-    color: hsla(0, 0%, 100%, 1);
-    background: hsla(0, 0%, 100%, 0.1);
-    text-shadow: 0 0 15px hsla(0, 0%, 100%, 0.75);
-    box-shadow: 0 0 10px hsla(0, 0%, 100%, 0.125);
-  }
 }
 
 @media (max-width: 500px) {
@@ -103,6 +123,16 @@ a {
 
   .hamburger {
     display: flex;
+  }
+}
+
+.popover-links {
+  display: flex;
+  flex-direction: column;
+
+  a {
+    color: hsla(0, 0%, 100%, 0.75);
+    margin: 0.5rem 0;
   }
 }
 </style>

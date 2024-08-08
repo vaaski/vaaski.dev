@@ -11,7 +11,7 @@
   },
   "framework": "nuxt",
   "aliases": {
-    "components": "@/shad",
+    "components": "@/components",
     "utils": "@/lib/utils"
   }
 }
