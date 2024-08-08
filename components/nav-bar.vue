@@ -20,7 +20,10 @@ const links: Link[] = [
   { name: "github", to: "https://github.com/vaaski" },
 ]
 
-const scrollTop = () => {
+const route = useRoute()
+const router = useRouter()
+const wordmarkClick = async () => {
+  if (route.path !== "/") await router.push("/")
   window.scrollTo({ top: 0, behavior: "smooth" })
 }
 </script>
@@ -28,9 +31,7 @@ const scrollTop = () => {
 <template>
   <div id="nav-bar">
     <div class="left">
-      <AutoLink class="wordmark" :to="{ path: '/' }" @click="scrollTop"
-        >vaaski.dev</AutoLink
-      >
+      <NuxtLink class="wordmark" @click.native="wordmarkClick">vaaski.dev</NuxtLink>
     </div>
     <div class="spacer"></div>
     <div class="right">
