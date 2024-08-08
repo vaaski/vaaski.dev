@@ -9,7 +9,6 @@
       </div>
     </div>
     <div class="backdrop"></div>
-    <div class="navlight"></div>
 
     <div class="bottom-rounder"></div>
   </div>
@@ -30,16 +29,14 @@
     gap: 4rem;
   }
 
-  .backdrop,
-  .navlight {
+  .backdrop {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-  }
+    pointer-events: none;
 
-  .backdrop {
     z-index: 1;
     opacity: 0.5;
     background: radial-gradient(
@@ -63,16 +60,6 @@
         rgba(0, 0, 0, 0) 100%
       );
   }
-
-  .navlight {
-    z-index: 3;
-    background: radial-gradient(
-      50% 28.82% at 50% 0%,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(0, 0, 0, 0) 100%
-    );
-    opacity: 0.75;
-  }
 }
 
 .logo {
@@ -92,7 +79,7 @@
   --extra-height: 10px;
   --curve-color: black;
 
-  z-index: 4;
+  z-index: 3;
   position: absolute;
   bottom: var(--extra-height);
   width: 100%;

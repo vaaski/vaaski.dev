@@ -5,11 +5,12 @@
     </div>
     <div class="spacer"></div>
     <div class="right">
-      <AutoLink to="https://github.com/vaaski">projects</AutoLink>
+      <AutoLink to="#projects">projects</AutoLink>
       <AutoLink to="https://github.com/vaaski">contact</AutoLink>
       <AutoLink to="https://github.com/vaaski">github</AutoLink>
     </div>
   </div>
+  <div class="navlight"></div>
 </template>
 
 <style scoped>
@@ -21,6 +22,7 @@
   margin-top: 1rem;
   width: 100%;
   max-width: min(750px, 90vw);
+  backdrop-filter: blur(10px);
 
   background: linear-gradient(
     216.04deg,
@@ -33,6 +35,22 @@
   .spacer {
     flex-grow: 1;
   }
+}
+
+.navlight {
+  z-index: 4;
+  background: radial-gradient(
+    50% 28.82% at 50% 0%,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  opacity: 0.75;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
 }
 
 .left,

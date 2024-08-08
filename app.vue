@@ -5,7 +5,7 @@ import "@fontsource-variable/outfit"
 <template>
   <NavBar />
   <AppHero />
-  <div>something else</div>
+  <AppProjects />
 </template>
 
 <style>
@@ -20,6 +20,16 @@ body,
   position: relative;
   font-family: "Outfit Variable", sans-serif;
   overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: unset;
 }
 
 a {

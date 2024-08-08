@@ -36,6 +36,7 @@ svg {
   transform: translate(-50%, -50%);
   z-index: 2;
   opacity: 0.2;
+  pointer-events: none;
   background: radial-gradient(
       25.31% 23.93% at 50% 50%,
       rgba(255, 255, 255, 0.3) 0%,
