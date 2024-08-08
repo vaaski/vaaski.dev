@@ -144,7 +144,7 @@ li.project-item a {
     height: 4rem;
     width: auto;
     margin: 1.5rem 2rem;
-    filter: drop-shadow(0 0 32px hsla(0, 0%, 100%, 0.25));
+    // filter: drop-shadow(0 0 32px hsla(0, 0%, 100%, 0.25));
   }
 
   .text {
