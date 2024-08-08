@@ -88,8 +88,8 @@
 }
 
 .bottom-rounder {
-  --curve-height: 25px;
-  --extra-height: 20px;
+  --curve-height: 20px;
+  --extra-height: 10px;
   --curve-color: black;
 
   z-index: 4;
