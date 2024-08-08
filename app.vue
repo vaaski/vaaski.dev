@@ -4,14 +4,14 @@ import "@fontsource-variable/outfit"
 
 <template>
   <NavBar />
-  <AppHero />
-  <AppProjects />
+  <NuxtPage />
 </template>
 
 <style>
 html,
 body,
-#__nuxt {
+#__nuxt,
+main {
   margin: 0;
   height: 100%;
   background: #000;
