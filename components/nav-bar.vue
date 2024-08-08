@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import Hamburger from "@/assets/icons/hamburger.vue"
+</script>
+
 <template>
   <div id="nav-bar">
     <div class="left">
@@ -8,6 +12,9 @@
       <AutoLink to="#projects">projects</AutoLink>
       <AutoLink to="https://github.com/vaaski">contact</AutoLink>
       <AutoLink to="https://github.com/vaaski">github</AutoLink>
+    </div>
+    <div class="hamburger">
+      <Hamburger />
     </div>
   </div>
   <div class="navlight"></div>
@@ -60,6 +67,12 @@
   margin: 0 2rem;
 }
 
+.hamburger {
+  display: none;
+  margin: 0 2rem;
+  color: hsla(0, 0%, 100%, 0.5);
+}
+
 a {
   --background-x-pad: 0.55em;
   --background-y-pad: 0.2em;
@@ -80,6 +93,16 @@ a {
     background: hsla(0, 0%, 100%, 0.1);
     text-shadow: 0 0 15px hsla(0, 0%, 100%, 0.75);
     box-shadow: 0 0 10px hsla(0, 0%, 100%, 0.125);
+  }
+}
+
+@media (max-width: 500px) {
+  .right {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
   }
 }
 </style>
