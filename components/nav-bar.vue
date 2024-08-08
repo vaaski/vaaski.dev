@@ -93,7 +93,7 @@ const hamburgerOpen = ref(false)
     font-weight: 400;
     font-size: 1.1rem;
     color: hsla(0, 0%, 100%, 0.5);
-    text-shadow: 0 0 15px hsla(0, 0%, 0%, 1);
+    text-shadow: 0 0 20px hsla(0, 0%, 0%, 1);
     padding: var(--background-y-pad) var(--background-x-pad);
     margin: calc(var(--background-y-pad) * -1) calc(var(--background-x-pad) * -1);
     border-radius: 1em;
