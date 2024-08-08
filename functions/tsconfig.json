@@ -1,0 +1,7 @@
+{
+  "files": ["*.mts"],
+  "compilerOptions": {
+    "types": ["@netlify/functions"],
+    "rootDir": "."
+  }
+}

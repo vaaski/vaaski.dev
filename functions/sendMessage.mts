@@ -1,0 +1,31 @@
+import type { Context } from "@netlify/functions"
+
+const token = process.env.TELEGRAM_TOKEN
+const chat_id = process.env.TELEGRAM_TO
+if (!token || !chat_id) throw new Error("missing env vars")
+
+const telegramURL = (m: string) => `https://api.telegram.org/bot${token}/${m}`
+
+export default async (req: Request, context: Context) => {
+  if (req.method.toLowerCase() !== "post") {
+    return new Response("Invalid request", { status: 400 })
+  }
+
+  const url = new URL(telegramURL("sendMessage"))
+  const payload = (await req.json()) as Record<string, string>
+  const text = Object.entries(payload)
+    .map(([type, val]) => `${type}: ${val}`)
+    .join("\n")
+
+  if (payload && text) {
+    const searchParams = { text, chat_id }
+    for (const param of Object.entries(searchParams)) {
+      url.searchParams.set(...param)
+    }
+
+    await fetch(url.toString(), { method: "POST" })
+    return new Response("Message sent", { status: 200 })
+  }
+
+  return new Response("Invalid request", { status: 400 })
+}
