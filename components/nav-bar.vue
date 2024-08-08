@@ -24,6 +24,15 @@ const route = useRoute()
 const router = useRouter()
 const wordmarkClick = async () => {
   if (route.path !== "/") await router.push("/")
+
+  const scrollListener = () => {
+    if (window.scrollY === 0) {
+      window.removeEventListener("scroll", scrollListener)
+      if (window.location.hash) window.location.hash = ""
+    }
+  }
+  window.addEventListener("scroll", scrollListener)
+
   window.scrollTo({ top: 0, behavior: "smooth" })
 }
 </script>
@@ -70,7 +79,7 @@ const wordmarkClick = async () => {
   margin-top: 1rem;
   width: 100%;
   max-width: min(750px, 90vw);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(5px);
 
   background: linear-gradient(
     216.04deg,

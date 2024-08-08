@@ -9,6 +9,7 @@
       </div>
     </div>
     <div class="backdrop"></div>
+    <StarryBackdrop class="starry-backdrop" />
 
     <div class="bottom-rounder"></div>
   </div>
@@ -22,6 +23,16 @@
   align-items: center;
   position: relative;
 
+  .starry-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+
+    z-index: 1;
+  }
   .backdrop {
     position: absolute;
     top: 0;

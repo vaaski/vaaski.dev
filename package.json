@@ -12,6 +12,8 @@
   "dependencies": {
     "@fontsource-variable/outfit": "^5.0.13",
     "@nuxtjs/tailwindcss": "^6.12.1",
+    "@vueuse/core": "^10.11.1",
+    "@vueuse/nuxt": "^10.11.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-vue-next": "^0.426.0",
