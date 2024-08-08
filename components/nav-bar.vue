@@ -14,16 +14,17 @@
 
 <style scoped>
 #nav-bar {
+  position: fixed;
   display: flex;
   z-index: 5;
-  padding: 1.5rem 0;
+  padding: 1.25rem 0;
   margin-top: 1rem;
   width: 100%;
-  max-width: 700px;
+  max-width: min(750px, 90vw);
 
   font-style: normal;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 1.1rem;
   color: hsla(0, 0%, 100%, 0.5);
 
   background: linear-gradient(

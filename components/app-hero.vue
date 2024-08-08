@@ -1,9 +1,18 @@
 <template>
   <div id="app-hero">
-    <VaaskiLogo class="logo" />
+    <div class="content">
+      <VaaskiLogo class="logo" />
+      <div class="tagline">
+        i build stuff for the web
+        <br />
+        using typescript, vue and go
+      </div>
+    </div>
     <div class="backdrop"></div>
     <div class="logo-glow"></div>
     <div class="navlight"></div>
+
+    <div class="bottom-rounder"></div>
   </div>
 </template>
 
@@ -15,11 +24,11 @@
   align-items: center;
   position: relative;
 
-  .logo {
-    max-width: 320px;
-    height: auto;
+  .content {
     z-index: 4;
-    filter: drop-shadow(0 0 32px hsla(274, 100%, 90%, 0.2));
+    display: flex;
+    align-items: center;
+    gap: 4rem;
   }
 
   .backdrop,
@@ -80,6 +89,43 @@
       rgba(0, 0, 0, 0) 100%
     );
     opacity: 0.75;
+  }
+}
+
+.logo {
+  max-width: 320px;
+  height: auto;
+  filter: drop-shadow(0 0 32px hsla(274, 100%, 90%, 0.3));
+}
+
+.tagline {
+  font-size: 2.5rem;
+  font-weight: 250;
+  color: hsla(0, 0%, 100%, 0.75);
+  text-shadow: 0 0 36px hsla(0, 0%, 100%, 0.25);
+}
+
+.bottom-rounder {
+  --curve-height: 25px;
+  --extra-height: 20px;
+  --curve-color: black;
+
+  z-index: 4;
+  position: absolute;
+  bottom: var(--extra-height);
+  width: 100%;
+  height: var(--curve-height);
+  background: var(--curve-color);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  box-shadow: 0 0 75px hsla(0, 0%, 100%, 0.25);
+
+  &::after {
+    position: absolute;
+    content: "";
+    top: var(--curve-height);
+    height: var(--extra-height);
+    width: 100%;
+    background: var(--curve-color);
   }
 }
 </style>
