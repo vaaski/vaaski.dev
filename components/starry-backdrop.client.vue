@@ -4,7 +4,7 @@ const canvas = ref<HTMLCanvasElement>()
 const { width, height } = useWindowSize()
 
 onMounted(async () => {
-  await nextTick()
+  await nextTick() // https://nuxt.com/docs/guide/directory-structure/components#client-components
   if (!canvas.value) throw new Error("canvas is not defined")
 
   const ctx = canvas.value.getContext("2d")

@@ -58,7 +58,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
     ),
     hsla(0, 0%, 0%, 0.25);
   box-shadow: 0px -1px 0 rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(5px);
   padding: 0.5rem 2rem;
   border-radius: 5px;
 }
