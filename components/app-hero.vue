@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<style scoped lang="css">
+<style scoped>
 #app-hero {
   height: 100vh;
   display: flex;
