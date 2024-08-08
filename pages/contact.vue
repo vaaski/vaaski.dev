@@ -5,9 +5,24 @@ const message = ref("")
 
 const view = ref<"form" | "success" | "error">("form")
 
-const formSubmit = () => {
-  console.log({ name, email, message })
-  view.value = Math.random() > 0.5 ? "success" : "error"
+const formSubmit = async () => {
+  try {
+    const res = await fetch("/.netlify/functions/sendMessage", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name.value,
+        email: email.value,
+        message: message.value,
+      }),
+    })
+    console.log(res)
+    view.value = "success"
+  } catch {
+    view.value = "error"
+  }
 }
 </script>
 
@@ -15,7 +30,12 @@ const formSubmit = () => {
   <main>
     <div class="panel">
       <h1>contact</h1>
-      <form @submit.prevent="formSubmit" v-if="view === 'form'">
+      <form
+        @submit.prevent="formSubmit"
+        v-if="view === 'form'"
+        action="/.netlify/functions/sendMessageNative"
+        method="post"
+      >
         <input
           v-model="name"
           placeholder="name"
