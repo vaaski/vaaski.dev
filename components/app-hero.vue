@@ -1,8 +1,9 @@
 <template>
   <div id="app-hero">
     <VaaskiLogo class="logo" />
-    <div class="logo-glow"></div>
     <div class="backdrop"></div>
+    <div class="logo-glow"></div>
+    <div class="navlight"></div>
   </div>
 </template>
 
@@ -17,12 +18,13 @@
   .logo {
     max-width: 320px;
     height: auto;
-    z-index: 1;
+    z-index: 4;
     filter: drop-shadow(0 0 32px hsla(274, 100%, 90%, 0.2));
   }
 
   .backdrop,
-  .logo-glow {
+  .logo-glow,
+  .navlight {
     position: absolute;
     top: 0;
     left: 0;
@@ -31,6 +33,7 @@
   }
 
   .backdrop {
+    z-index: 1;
     opacity: 0.5;
     background: radial-gradient(
         91.96% 141.6% at -22.42% 69.4%,
@@ -55,6 +58,7 @@
   }
 
   .logo-glow {
+    z-index: 2;
     opacity: 0.2;
     background: radial-gradient(
         25.31% 23.93% at 50% 50%,
@@ -66,6 +70,16 @@
         rgba(255, 255, 255, 0.31) 0%,
         rgba(0, 0, 0, 0) 100%
       );
+  }
+
+  .navlight {
+    z-index: 3;
+    background: radial-gradient(
+      50% 28.82% at 50% 0%,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    opacity: 0.75;
   }
 }
 </style>

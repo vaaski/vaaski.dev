@@ -1,13 +1,13 @@
 <template>
   <div id="nav-bar">
     <div class="left">
-      <a href="https://github.com/vaaski">vaaski.dev</a>
+      <AutoLink to="/">vaaski.dev</AutoLink>
     </div>
     <div class="spacer"></div>
     <div class="right">
-      <a href="https://github.com/vaaski">projects</a>
-      <a href="https://github.com/vaaski">contact</a>
-      <a href="https://github.com/vaaski">github</a>
+      <AutoLink to="https://github.com/vaaski">projects</AutoLink>
+      <AutoLink to="https://github.com/vaaski">contact</AutoLink>
+      <AutoLink to="https://github.com/vaaski">github</AutoLink>
     </div>
   </div>
 </template>
@@ -15,7 +15,7 @@
 <style scoped>
 #nav-bar {
   display: flex;
-  z-index: 2;
+  z-index: 5;
   padding: 1.5rem 0;
   margin-top: 1rem;
   width: 100%;
