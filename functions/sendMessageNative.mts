@@ -27,7 +27,7 @@ export default async (req: Request, context: Context) => {
     }
 
     await fetch(url.toString(), { method: "POST" })
-    return Response.redirect("/", 302)
+    return Response.redirect(req.referrer ?? "https://vaaski.dev", 302)
   }
 
   return new Response("Invalid request", { status: 400 })
