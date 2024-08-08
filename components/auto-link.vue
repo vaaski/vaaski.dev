@@ -1,10 +1,17 @@
 <script setup lang="ts">
+import type {
+  RouteLocationAsPathGeneric,
+  RouteLocationAsRelativeGeneric,
+} from "vue-router"
+
 const properties = defineProps<{
-  to: string
+  to: string | RouteLocationAsRelativeGeneric | RouteLocationAsPathGeneric
 }>()
 
 const target = computed(() => {
-  if (properties.to.startsWith("http")) return "_blank"
+  if (typeof properties.to === "string" && properties.to.startsWith("http")) {
+    return "_blank"
+  }
 })
 </script>
 

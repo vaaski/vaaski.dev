@@ -19,7 +19,6 @@ main {
   font-family: sans-serif;
   position: relative;
   font-family: "Outfit Variable", sans-serif;
-  overflow-x: hidden;
 }
 
 h1,

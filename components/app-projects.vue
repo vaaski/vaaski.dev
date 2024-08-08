@@ -77,7 +77,7 @@ const projects: Project[] = [
 
 <template>
   <div class="app-projects">
-    <a href="#projects" class="anchor"></a>
+    <div id="projects"></div>
     <h1>past work</h1>
 
     <ul class="project-list">
@@ -224,5 +224,10 @@ li.project-item a {
       backdrop-filter: blur(10px);
     }
   }
+}
+
+#projects {
+  position: absolute;
+  top: -60px;
 }
 </style>

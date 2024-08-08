@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import type {
+  RouteLocationAsPathGeneric,
+  RouteLocationAsRelativeGeneric,
+} from "vue-router"
+
 import Hamburger from "@/assets/icons/hamburger.vue"
 
 import { Popover, PopoverContent } from "@/components/ui/popover"
@@ -7,23 +12,29 @@ const hamburgerOpen = ref(false)
 
 type Link = {
   name: string
-  href: string
+  to: string | RouteLocationAsRelativeGeneric | RouteLocationAsPathGeneric
 }
 const links: Link[] = [
-  { name: "projects", href: "#projects" },
-  { name: "contact", href: "/contact" },
-  { name: "github", href: "https://github.com/vaaski" },
+  { name: "projects", to: { path: "/", hash: "#projects" } },
+  { name: "contact", to: "/contact" },
+  { name: "github", to: "https://github.com/vaaski" },
 ]
+
+const scrollTop = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" })
+}
 </script>
 
 <template>
   <div id="nav-bar">
     <div class="left">
-      <AutoLink class="wordmark" to="/">vaaski.dev</AutoLink>
+      <AutoLink class="wordmark" :to="{ path: '/' }" @click="scrollTop"
+        >vaaski.dev</AutoLink
+      >
     </div>
     <div class="spacer"></div>
     <div class="right">
-      <AutoLink v-for="link in links" :key="link.name" :to="link.href">{{
+      <AutoLink v-for="link in links" :key="link.name" :to="link.to">{{
         link.name
       }}</AutoLink>
     </div>
@@ -38,7 +49,7 @@ const links: Link[] = [
               v-for="link in links"
               :key="link.name"
               @click="hamburgerOpen = false"
-              :to="link.href"
+              :to="link.to"
             >
               {{ link.name }}
             </AutoLink>
