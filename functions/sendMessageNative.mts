@@ -16,9 +16,7 @@ export default async (req: Request, context: Context) => {
   const payload = await req.formData()
 
   payload.append("method", "native")
-  const text = Object.entries(payload)
-    .map(([type, val]) => `${type}: ${val}`)
-    .join("\n")
+  const text = [...payload.entries()].map(([type, val]) => `${type}: ${val}`).join("\n")
 
   console.log(payload)
   console.log(text)
