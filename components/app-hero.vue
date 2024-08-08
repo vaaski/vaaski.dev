@@ -101,6 +101,7 @@
 
 @media (max-width: 900px) {
   .content {
+    margin-top: 4rem;
     flex-direction: column;
     text-align: center;
   }
