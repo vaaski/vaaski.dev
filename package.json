@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@fontsource-variable/outfit": "^5.0.13",
+    "@nuxtjs/tailwindcss": "^6.12.1",
     "nuxt": "^3.12.4",
+    "shadcn-nuxt": "^0.10.4",
     "vue": "latest"
   },
   "devDependencies": {
