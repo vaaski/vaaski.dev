@@ -39,7 +39,7 @@ const hamburgerOpen = ref(false)
   <div class="navlight"></div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 #nav-bar {
   position: fixed;
   display: flex;

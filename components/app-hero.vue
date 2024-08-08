@@ -16,7 +16,7 @@
 
 <style scoped lang="scss">
 #app-hero {
-  height: 100vh;
+  height: 100svh;
   display: flex;
   justify-content: center;
   align-items: center;
