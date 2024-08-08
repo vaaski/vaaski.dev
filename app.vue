@@ -13,12 +13,16 @@ body,
 #__nuxt,
 main {
   margin: 0;
-  height: 100%;
   background: #000;
   color: #fff;
   font-family: sans-serif;
   position: relative;
   font-family: "Outfit Variable", sans-serif;
+  overflow-x: hidden;
+}
+
+main {
+  min-height: 100svh;
 }
 
 h1,
