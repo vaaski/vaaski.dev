@@ -38,12 +38,12 @@
 .left,
 .right {
   display: flex;
-  gap: 1rem;
+  gap: 1.2rem;
   margin: 0 2rem;
 }
 
 a {
-  --background-x-pad: 0.75em;
+  --background-x-pad: 0.55em;
   --background-y-pad: 0.2em;
 
   font-style: normal;
