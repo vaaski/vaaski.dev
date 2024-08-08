@@ -37,7 +37,7 @@ a {
 }
 
 #nav-bar {
-  position: absolute;
+  position: fixed;
   left: 50%;
   transform: translateX(-50%);
 }

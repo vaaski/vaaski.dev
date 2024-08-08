@@ -63,7 +63,6 @@ const scrollTop = () => {
 
 <style scoped lang="scss">
 #nav-bar {
-  position: fixed;
   display: flex;
   z-index: 5;
   padding: 1.25rem 0;
