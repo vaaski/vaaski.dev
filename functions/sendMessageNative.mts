@@ -11,6 +11,7 @@ export default async (req: Request, context: Context) => {
     return new Response("Invalid request", { status: 400 })
   }
 
+  console.log(req)
   const url = new URL(telegramURL("sendMessage"))
   const payload = await req.formData()
 
