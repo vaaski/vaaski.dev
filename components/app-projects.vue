@@ -53,8 +53,7 @@ const projects: Project[] = [
   },
   {
     name: "fuckvoicemessages",
-    description:
-      "Convert voice messages to transcripts and text to voice messages using the openai API and Telegram.",
+    description: "Convert voice messages to text using the openai API and Telegram.",
     icon: NoVoiceIcon,
     externalLink: "https://github.com/vaaski/fuckvoicemessages",
     externalLinkText: "vaaski/fuckvoicemessages",
@@ -114,17 +113,17 @@ const projects: Project[] = [
 
 h1 {
   margin: 1em auto;
-
   font-weight: 200;
-  font-size: 45px;
+  font-size: 3rem;
   text-align: center;
   letter-spacing: 0.4em;
-  text-shadow: 0px 0px 30px hsla(0, 0%, 100%, 1);
+  text-shadow: 0px 0px 30px hsla(0, 0%, 100%, 0.75);
 }
 
 ul {
   list-style-type: none;
   margin: 0 auto;
+  padding: 0;
   margin-bottom: 6rem;
   width: 100%;
   max-width: min(900px, 90vw);
@@ -148,14 +147,19 @@ li.project-item a {
     filter: drop-shadow(0 0 32px hsla(0, 0%, 100%, 0.25));
   }
 
+  .text {
+    margin-right: 1em;
+  }
+
   h2 {
     font-weight: 250;
-    font-size: 2em;
+    font-size: 1.75em;
     margin-bottom: 0.125em;
   }
 
   p {
     color: hsla(0, 0%, 100%, 0.5);
+    font-size: 0.9rem;
   }
 
   .external-link {
@@ -168,10 +172,8 @@ li.project-item a {
     border: 1px solid hsla(0, 0%, 100%, 0.15);
     border-top-width: 0;
     border-right-width: 0;
-    // background: #f0f;
+    backdrop-filter: blur(10px);
   }
-
-  // background: #0ff;
 }
 
 .backdrop {
@@ -188,5 +190,39 @@ li.project-item a {
     rgba(0, 0, 0, 0) 100%
   );
   opacity: 0.6;
+}
+
+@media (max-width: 900px) {
+  h1 {
+    font-size: 2em;
+  }
+
+  li.project-item a {
+    padding: 1em 0;
+
+    .icon svg {
+      height: 2.5rem;
+      margin: 1rem;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+    }
+
+    p {
+      font-size: 0.75rem;
+    }
+
+    .external-link {
+      padding: 0.25em 1.25em;
+      font-size: 0.75rem;
+      border-radius: 0 1em 0 1em;
+      background: hsla(0, 0%, 100%, 0.05);
+      border: 1px solid hsla(0, 0%, 100%, 0.15);
+      border-top-width: 0;
+      border-right-width: 0;
+      backdrop-filter: blur(10px);
+    }
+  }
 }
 </style>

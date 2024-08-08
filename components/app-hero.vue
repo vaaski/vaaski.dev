@@ -14,20 +14,13 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 #app-hero {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-
-  .content {
-    z-index: 4;
-    display: flex;
-    align-items: center;
-    gap: 4rem;
-  }
 
   .backdrop {
     position: absolute;
@@ -62,12 +55,20 @@
   }
 }
 
+.content {
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+
 .logo {
-  max-width: 320px;
+  max-width: min(320px, 75vw);
   filter: drop-shadow(0 0 32px hsla(274, 100%, 90%, 0.3));
 }
 
 .tagline {
+  max-width: 80vw;
   font-size: 2.5rem;
   font-weight: 250;
   color: hsla(0, 0%, 100%, 0.75);
@@ -95,6 +96,21 @@
     height: var(--extra-height);
     width: 100%;
     background: var(--curve-color);
+  }
+}
+
+@media (max-width: 900px) {
+  .content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .tagline {
+    font-size: 1.75rem;
+  }
+
+  .bottom-rounder {
+    --curve-height: 10px;
   }
 }
 </style>

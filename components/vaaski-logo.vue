@@ -30,7 +30,7 @@ svg {
 .logo-glow {
   position: absolute;
   height: 100vh;
-  width: 100vw;
+  aspect-ratio: 4 / 3;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
