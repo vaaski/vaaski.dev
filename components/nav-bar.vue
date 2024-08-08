@@ -4,6 +4,16 @@ import Hamburger from "@/assets/icons/hamburger.vue"
 import { Popover, PopoverContent } from "@/components/ui/popover"
 
 const hamburgerOpen = ref(false)
+
+type Link = {
+  name: string
+  href: string
+}
+const links: Link[] = [
+  { name: "projects", href: "#projects" },
+  { name: "contact", href: "/contact" },
+  { name: "github", href: "https://github.com/vaaski" },
+]
 </script>
 
 <template>
@@ -13,9 +23,9 @@ const hamburgerOpen = ref(false)
     </div>
     <div class="spacer"></div>
     <div class="right">
-      <AutoLink to="#projects">projects</AutoLink>
-      <AutoLink to="https://github.com/vaaski">contact</AutoLink>
-      <AutoLink to="https://github.com/vaaski">github</AutoLink>
+      <AutoLink v-for="link in links" :key="link.name" :to="link.href">{{
+        link.name
+      }}</AutoLink>
     </div>
     <div class="hamburger">
       <Popover :open="hamburgerOpen" @update:open="hamburgerOpen = $event">
@@ -24,13 +34,14 @@ const hamburgerOpen = ref(false)
         </PopoverTrigger>
         <PopoverContent align="end">
           <div class="popover-links">
-            <AutoLink @click="hamburgerOpen = false" to="#projects">projects</AutoLink>
-            <AutoLink @click="hamburgerOpen = false" to="https://github.com/vaaski"
-              >contact</AutoLink
+            <AutoLink
+              v-for="link in links"
+              :key="link.name"
+              @click="hamburgerOpen = false"
+              :to="link.href"
             >
-            <AutoLink @click="hamburgerOpen = false" to="https://github.com/vaaski"
-              >github</AutoLink
-            >
+              {{ link.name }}
+            </AutoLink>
           </div>
         </PopoverContent>
       </Popover>
