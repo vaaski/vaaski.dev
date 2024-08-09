@@ -1,3 +1,7 @@
+<script setup lang="ts">
+useHead({ title: "vaaski.dev // contact" })
+</script>
+
 <template>
   <main>
     <div class="panel">

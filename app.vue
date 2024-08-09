@@ -1,5 +1,15 @@
 <script setup lang="ts">
 import "@fontsource-variable/outfit"
+
+useHead({ title: "vaaski.dev" })
+useSeoMeta({
+  title: "vaaski.dev",
+  ogTitle: "vaaski.dev",
+  description: "vaaski builds stuff for the web using typescript, vue and go",
+  ogDescription: "vaaski builds stuff for the web using typescript, vue and go",
+  ogImage: "https://vaaski.dev/og.png",
+  twitterCard: "summary_large_image",
+})
 </script>
 
 <template>
