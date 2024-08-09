@@ -1,9 +1,12 @@
 <script setup lang="ts">
 const canvas = ref<HTMLCanvasElement>()
 
-const { width, height } = useWindowSize()
+const props = defineProps<{
+  width: number
+  height: number
+}>()
 
-// todo: start fade in on resize or fix ios scrolling issue
+const { width, height } = toRefs(props)
 
 const X_SPEED = 0.1
 
@@ -26,19 +29,29 @@ onMounted(async () => {
   }
 
   let stars = genStars()
+  let opacityOverride = 0
 
-  window.addEventListener("resize", () => {
+  const generateNewStars = useDebounceFn(() => {
     stars = genStars()
+  }, 200)
+
+  watch([width, height], () => {
+    opacityOverride = 0
+    generateNewStars()
   })
 
   const draw = () => {
     ctx.clearRect(0, 0, width.value, height.value)
 
+    if (opacityOverride < 1) opacityOverride += 0.005
+
     for (const star of stars) {
       const opacity = star.y / height.value
 
       ctx.beginPath()
-      ctx.fillStyle = `hsla(0, 0%, 100%, ${(star.size / 7.5) * opacity})`
+      ctx.fillStyle = `hsla(0, 0%, 100%, ${
+        (star.size / 7.5) * opacity * opacityOverride
+      })`
       ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2)
       ctx.fill()
 
@@ -73,6 +86,6 @@ onMounted(async () => {
   }
 }
 canvas {
-  animation: fade-in 2000ms forwards;
+  /* animation: fade-in 2000ms forwards; */
 }
 </style>

@@ -1,5 +1,11 @@
+<script setup lang="ts">
+const hero = ref<HTMLDivElement>()
+
+const { width, height } = useElementSize(hero)
+</script>
+
 <template>
-  <div id="app-hero">
+  <div id="app-hero" ref="hero">
     <div class="content">
       <VaaskiLogo class="logo" />
       <div class="tagline">
@@ -9,7 +15,7 @@
       </div>
     </div>
     <div class="backdrop"></div>
-    <StarryBackdrop class="starry-backdrop" />
+    <StarryBackdrop class="starry-backdrop" :width="width" :height="height" />
 
     <div class="bottom-rounder"></div>
   </div>
