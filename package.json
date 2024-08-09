@@ -15,6 +15,7 @@
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@vueuse/core": "^10.11.1",
     "@vueuse/nuxt": "^10.11.1",
+    "animejs": "^3.2.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-vue-next": "^0.426.0",
@@ -26,6 +27,7 @@
     "vue": "latest"
   },
   "devDependencies": {
+    "@types/animejs": "^3.1.12",
     "sass-embedded": "^1.77.8",
     "typescript": "^5.5.4"
   }
