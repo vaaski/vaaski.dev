@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import anime from "animejs"
 
+const delay = ref(true)
+
 const logoStages = [
   "M.5 0 .5 0 .5 0 .5 0 .5 0 .5 0 .5 0 .5 0 .5 0 43.9409 0 43.9409 0 43.9409 0 .5 0 .5 0 .5 0 .5 0 .5 0 .5 0Z",
   "M96.0308 186 96.0308 186 96.0308 186 96.0308 186 96.0308 186 96.0308 186 96.0308 186 96.0308 186 .5 0 43.9409 0 96.0379 101.889 96.0379 101.889 96.0308 186 96.0308 186 96.0308 186 96.0308 186 96.0308 186 96.0308 186Z",
@@ -24,6 +26,7 @@ const easing = (x: number) => {
 const path = ref<SVGPathElement>()
 onMounted(() => {
   if (!path.value) throw new Error("path is not defined")
+  delay.value = false
 
   const baseAnimation = anime({
     targets: path.value,
@@ -57,7 +60,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="vaaski-logo">
+  <div class="vaaski-logo" :class="{ delay }">
     <svg
       width="312"
       height="186"
@@ -65,7 +68,7 @@ onMounted(() => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path ref="path" :d="logoStages[0]" fill="white" />
+      <path ref="path" :d="logoStages.at(-1)" fill="white" />
     </svg>
 
     <div class="logo-glow"></div>
@@ -73,8 +76,23 @@ onMounted(() => {
 </template>
 
 <style scoped>
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .vaaski-logo {
+  opacity: 0;
+  animation: fade-in 500ms forwards;
   position: relative;
+}
+
+.delay {
+  animation-delay: 500ms;
 }
 
 svg {

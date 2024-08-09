@@ -85,17 +85,3 @@ onMounted(async () => {
     :style="{ width: `${width}px`, height: `${height}px` }"
   ></canvas>
 </template>
-
-<style scoped>
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-canvas {
-  /* animation: fade-in 2000ms forwards; */
-}
-</style>
