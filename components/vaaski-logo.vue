@@ -33,8 +33,6 @@ onMounted(() => {
     duration,
   })
 
-  window.baseAnimation = baseAnimation
-
   anime({
     targets: baseAnimation,
     duration,
@@ -82,6 +80,8 @@ onMounted(() => {
 svg {
   max-width: 100%;
   height: auto;
+  filter: drop-shadow(0 0 32px hsla(274, 100%, 90%, 0.3));
+  -webkit-transform: translateZ(0);
 }
 
 .logo-glow {

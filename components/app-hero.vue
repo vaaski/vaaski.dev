@@ -81,7 +81,6 @@ const { width, height } = useElementSize(hero)
 
 .logo {
   max-width: min(320px, 75vw);
-  filter: drop-shadow(0 0 32px hsla(274, 100%, 90%, 0.3));
 }
 
 .tagline {
