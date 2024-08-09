@@ -5,6 +5,8 @@ const { width, height } = useWindowSize()
 
 // todo: start fade in on resize or fix ios scrolling issue
 
+const X_SPEED = 0.1
+
 onMounted(async () => {
   await nextTick() // https://nuxt.com/docs/guide/directory-structure/components#client-components
   if (!canvas.value) throw new Error("canvas is not defined")
@@ -13,13 +15,13 @@ onMounted(async () => {
   if (!ctx) throw new Error("canvas context is not defined")
 
   const genStars = () => {
-    const amount = Math.floor((width.value * height.value) / 2500)
-    console.log("star amount", amount)
+    const amount = Math.floor((width.value * height.value) / 4500)
     return new Array(amount).fill(0).map(() => ({
       x: Math.random() * width.value,
       y: Math.random() * height.value,
-      size: Math.random() * 0.75 + 0.75,
-      speed: Math.random() * 0.125 + 0.125,
+      size: Math.random() * 2 + 1,
+      speedY: Math.random() * 0.5 + 0.1,
+      speedX: Math.random() * X_SPEED - X_SPEED / 2,
     }))
   }
 
@@ -40,10 +42,13 @@ onMounted(async () => {
       ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2)
       ctx.fill()
 
-      star.y -= star.speed
+      star.y -= star.speedY
+      star.x += star.speedX
 
       if (star.y < -star.size) {
         star.y = height.value + star.size
+      } else if (star.x > width.value || star.x < 0) {
+        star.speedX *= -1
       }
     }
 
