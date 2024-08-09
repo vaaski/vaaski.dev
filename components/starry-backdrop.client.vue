@@ -7,6 +7,9 @@ const props = defineProps<{
 }>()
 
 const { width, height } = toRefs(props)
+const { pixelRatio } = useDevicePixelRatio()
+const scaledWidth = computed(() => width.value * pixelRatio.value)
+const scaledHeight = computed(() => height.value * pixelRatio.value)
 
 const X_SPEED = 0.1
 
@@ -20,15 +23,16 @@ onMounted(async () => {
   const genStars = () => {
     const amount = Math.floor((width.value * height.value) / 4500)
     return new Array(amount).fill(0).map(() => ({
-      x: Math.random() * width.value,
-      y: Math.random() * height.value,
+      x: Math.random() * scaledWidth.value,
+      y: Math.random() * scaledHeight.value,
       size: Math.random() * 2 + 1,
-      speedY: Math.random() * 0.5 + 0.1,
+      speedY: (Math.random() * 0.5 + 0.1) * pixelRatio.value,
       speedX: Math.random() * X_SPEED - X_SPEED / 2,
     }))
   }
 
   let stars = genStars()
+  /** face in stars on re-init */
   let opacityOverride = 0
 
   const generateNewStars = useDebounceFn(() => {
@@ -41,26 +45,27 @@ onMounted(async () => {
   })
 
   const draw = () => {
-    ctx.clearRect(0, 0, width.value, height.value)
+    ctx.clearRect(0, 0, scaledWidth.value, scaledHeight.value)
 
     if (opacityOverride < 1) opacityOverride += 0.005
 
     for (const star of stars) {
-      const opacity = star.y / height.value
+      /** fade out stars on their way up */
+      const posOpacity = star.y / scaledHeight.value
 
       ctx.beginPath()
       ctx.fillStyle = `hsla(0, 0%, 100%, ${
-        (star.size / 7.5) * opacity * opacityOverride
+        (star.size / 7.5) * posOpacity * opacityOverride
       })`
-      ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2)
+      ctx.arc(star.x, star.y, star.size * pixelRatio.value, 0, Math.PI * 2)
       ctx.fill()
 
       star.y -= star.speedY
       star.x += star.speedX
 
       if (star.y < -star.size) {
-        star.y = height.value + star.size
-      } else if (star.x > width.value || star.x < 0) {
+        star.y = scaledHeight.value + star.size
+      } else if (star.x > scaledWidth.value || star.x < 0) {
         star.speedX *= -1
       }
     }
@@ -73,7 +78,12 @@ onMounted(async () => {
 </script>
 
 <template>
-  <canvas ref="canvas" :width="width" :height="height"></canvas>
+  <canvas
+    ref="canvas"
+    :width="width * pixelRatio"
+    :height="height * pixelRatio"
+    :style="{ width: `${width}px`, height: `${height}px` }"
+  ></canvas>
 </template>
 
 <style scoped>
