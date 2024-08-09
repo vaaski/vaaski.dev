@@ -66,4 +66,10 @@ main {
       rgba(0, 0, 0, 0) 100%
     );
 }
+
+@media (max-width: 500px) {
+  .panel {
+    padding: 1rem 1.5rem;
+  }
+}
 </style>
