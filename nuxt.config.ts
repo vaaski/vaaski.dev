@@ -7,5 +7,9 @@ export default defineNuxtConfig({
     options: { scrollBehaviorType: "smooth" },
   },
 
+  experimental: {
+    viewTransition: true,
+  },
+
   modules: ["@nuxtjs/tailwindcss", "shadcn-nuxt", "@vueuse/nuxt"],
 })
