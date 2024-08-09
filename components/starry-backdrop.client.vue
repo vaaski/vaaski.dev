@@ -3,6 +3,8 @@ const canvas = ref<HTMLCanvasElement>()
 
 const { width, height } = useWindowSize()
 
+// todo: start fade in on resize or fix ios scrolling issue
+
 onMounted(async () => {
   await nextTick() // https://nuxt.com/docs/guide/directory-structure/components#client-components
   if (!canvas.value) throw new Error("canvas is not defined")

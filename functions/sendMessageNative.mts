@@ -8,7 +8,7 @@ const telegramURL = (m: string) => `https://api.telegram.org/bot${token}/${m}`
 
 export default async (req: Request, context: Context) => {
   if (req.method.toLowerCase() !== "post") {
-    return new Response("Invalid request", { status: 405 })
+    return Response.redirect("https://vaaski.dev/contact/error", 302)
   }
 
   console.log(req)
@@ -27,8 +27,8 @@ export default async (req: Request, context: Context) => {
     }
 
     await fetch(url.toString(), { method: "POST" })
-    return Response.redirect(req.headers.get("referer") ?? "https://vaaski.dev", 302)
+    return Response.redirect("https://vaaski.dev/contact/success", 302)
   }
 
-  return new Response("Invalid request", { status: 400 })
+  return Response.redirect("https://vaaski.dev/contact/error", 302)
 }
