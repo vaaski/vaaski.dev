@@ -50,9 +50,20 @@ a {
   cursor: pointer;
 }
 
+@keyframes nav-bar-drop-in {
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
 #nav-bar {
   position: fixed;
   left: 50%;
+  top: -4rem;
+  opacity: 0;
   transform: translateX(-50%);
+
+  animation: nav-bar-drop-in 2000ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 2000ms;
 }
 </style>
