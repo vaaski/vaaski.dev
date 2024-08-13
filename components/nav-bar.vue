@@ -137,12 +137,10 @@ const wordmarkClick = async () => {
     transition: 75ms linear;
     transition-property: color, background, text-shadow, box-shadow;
 
-    &:not(.wordmark):where(:hover, :focus, :active),
-    &.wordmark:where(:focus, :active) {
+    &:not(.wordmark):where(:hover, :focus),
+    &.wordmark:where(:focus) {
       color: hsla(0, 0%, 100%, 1);
-      background: hsla(0, 0%, 100%, 0.1);
-      text-shadow: 0 0 15px hsla(0, 0%, 100%, 0.75);
-      box-shadow: 0 0 10px hsla(0, 0%, 100%, 0.125);
+      text-shadow: 0 0 15px hsla(0, 0%, 100%, 0.5);
     }
   }
 }
