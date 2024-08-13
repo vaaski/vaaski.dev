@@ -36,6 +36,7 @@ const { width, height } = useElementSize(hero)
   position: relative;
 
   --tagline-animation-delay: calc(750ms + var(--hero-animation-delay));
+  --tagline-animation-duration: 1500ms;
 }
 
 .starry-backdrop {
@@ -64,11 +65,11 @@ const { width, height } = useElementSize(hero)
   width: 100%;
   height: 100%;
   pointer-events: none;
-  animation: backdrop-fade-in var(--hero-animation-delay) cubic-bezier(0.76, 0, 0.24, 1)
-    forwards;
+  opacity: 0;
+  animation: backdrop-fade-in 2000ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  animation-delay: calc(var(--hero-animation-delay) + 500ms);
 
   z-index: 1;
-  opacity: 0.5;
   background: radial-gradient(
       91.96% 141.6% at -22.42% 69.4%,
       rgba(127, 0, 255, 0.46) 0%,
@@ -105,7 +106,8 @@ const { width, height } = useElementSize(hero)
   align-items: center;
   gap: 0;
 
-  animation: content-animation 1000ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  animation: content-animation var(--tagline-animation-duration)
+    cubic-bezier(0.76, 0, 0.24, 1) forwards;
   animation-delay: var(--tagline-animation-delay);
 }
 
@@ -123,7 +125,7 @@ const { width, height } = useElementSize(hero)
 .logo {
   max-width: min(320px, 75vw);
   transform: scale(1.2);
-  animation: logo-animation 1500ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  animation: logo-animation 1750ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
   animation-delay: var(--hero-animation-delay);
 }
 
@@ -168,7 +170,8 @@ const { width, height } = useElementSize(hero)
   overflow: hidden;
   text-wrap: nowrap;
 
-  animation: tagline-animation 1000ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  animation: tagline-animation var(--tagline-animation-duration)
+    cubic-bezier(0.76, 0, 0.24, 1) forwards;
   animation-delay: var(--tagline-animation-delay);
 }
 
