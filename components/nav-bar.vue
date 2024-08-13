@@ -74,7 +74,6 @@ const wordmarkClick = async () => {
       </Popover>
     </div>
   </div>
-  <div class="navlight"></div>
 </template>
 
 <style scoped lang="scss">
@@ -98,22 +97,6 @@ const wordmarkClick = async () => {
   .spacer {
     flex-grow: 1;
   }
-}
-
-.navlight {
-  z-index: 4;
-  background: radial-gradient(
-    50% 28.82% at 50% 0%,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  opacity: 0.75;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
 }
 
 .left,
