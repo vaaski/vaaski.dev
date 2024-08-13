@@ -139,12 +139,14 @@ li.project-item a {
   background: rgba(255, 255, 255, 0.05);
   box-shadow: 0px -1px 0px rgba(255, 255, 255, 0.25);
   border-radius: 1em;
+  transition: 150ms ease-in-out;
 
   .icon svg {
     height: 4rem;
     width: auto;
     margin: 1.5rem 2rem;
-    // filter: drop-shadow(0 0 32px hsla(0, 0%, 100%, 0.25));
+    filter: drop-shadow(0 0 32px hsla(0, 0%, 100%, 0.25));
+    transform: translateZ(0);
   }
 
   .text {
@@ -173,6 +175,11 @@ li.project-item a {
     border-top-width: 0;
     border-right-width: 0;
     backdrop-filter: blur(10px);
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.125);
+    box-shadow: 0px -1px 0px rgba(255, 255, 255, 0.25), 0 0 150px hsla(0, 0%, 100%, 0.1);
   }
 }
 
