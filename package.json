@@ -19,9 +19,9 @@
     "clsx": "^2.1.1",
     "lucide-vue-next": "^0.426.0",
     "nuxt": "^3.12.4",
-    "radix-vue": "^1.9.3",
+    "radix-vue": "^1.9.4",
     "shadcn-nuxt": "^0.10.4",
-    "tailwind-merge": "^2.4.0",
+    "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "vue": "latest"
   },
