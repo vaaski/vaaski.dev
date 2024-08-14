@@ -3,7 +3,6 @@ import "@fontsource-variable/outfit"
 
 useHead({
   title: "vaaski.dev",
-  htmlAttrs: { lang: "en" },
 })
 
 useSeoMeta({
