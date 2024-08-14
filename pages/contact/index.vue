@@ -29,35 +29,38 @@ const formSubmit = async () => {
 </script>
 
 <template>
-  <h1>contact</h1>
-  <form
-    @submit.prevent="formSubmit"
-    action="/.netlify/functions/sendMessageNative"
-    method="post"
-  >
-    <input
-      v-model="name"
-      placeholder="name"
-      type="text"
-      name="name"
-      required
-      autocomplete="given-name"
-    />
-    <input
-      v-model="email"
-      placeholder="email"
-      type="email"
-      name="email"
-      required
-      autocomplete="email"
-    />
-    <textarea v-model="message" placeholder="message" name="message" required />
-    <button type="submit">send</button>
-  </form>
+  <div class="contact-form">
+    <h1>contact</h1>
+    <form
+      @submit.prevent="formSubmit"
+      action="/.netlify/functions/sendMessageNative"
+      method="post"
+    >
+      <input
+        v-model="name"
+        placeholder="name"
+        type="text"
+        name="name"
+        required
+        autocomplete="given-name"
+      />
+      <input
+        v-model="email"
+        placeholder="email"
+        type="email"
+        name="email"
+        required
+        autocomplete="email"
+      />
+      <textarea v-model="message" placeholder="message" name="message" required />
+      <button type="submit">send</button>
+    </form>
+  </div>
 </template>
 
 <style scoped lang="scss">
-form {
+form,
+.contact-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;

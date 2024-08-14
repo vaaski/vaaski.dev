@@ -7,8 +7,8 @@ export default defineNuxtConfig({
     options: { scrollBehaviorType: "smooth" },
   },
 
-  experimental: {
-    viewTransition: true,
+  app: {
+    pageTransition: { name: "page", mode: "out-in" },
   },
 
   features: {
