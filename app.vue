@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import "@fontsource-variable/outfit"
 
-useHead({ title: "vaaski.dev" })
+useHead({
+  title: "vaaski.dev",
+  htmlAttrs: { lang: "en" },
+})
+
 useSeoMeta({
   title: "vaaski.dev",
   ogTitle: "vaaski.dev",
