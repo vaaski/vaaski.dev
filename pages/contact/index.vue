@@ -98,6 +98,7 @@ button {
 
 input,
 textarea {
+  transition: 200ms ease-in-out;
   &:focus {
     outline: none;
     box-shadow: 0 0 15px hsla(0, 0%, 100%, 0.25);
