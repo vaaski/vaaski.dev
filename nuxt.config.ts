@@ -11,5 +11,9 @@ export default defineNuxtConfig({
     viewTransition: true,
   },
 
+  features: {
+    inlineStyles: false,
+  },
+
   modules: ["@nuxtjs/tailwindcss", "shadcn-nuxt", "@vueuse/nuxt"],
 })
