@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import AnimationIcon from "@/assets/icons/animation.vue"
 import HomeIcon from "@/assets/icons/home.vue"
-import HowtfIcon from "@/assets/icons/howtf.vue"
 import LocalpenIcon from "@/assets/icons/localpen.vue"
 import NoVoiceIcon from "@/assets/icons/no-voice.vue"
 import PresetIcon from "@/assets/icons/preset.vue"
@@ -24,13 +24,6 @@ const projects: Project[] = [
     externalLinkText: "localpen.is",
   },
   {
-    name: "howtf",
-    description: "Look up console commands using the GPT API.",
-    icon: HowtfIcon,
-    externalLink: "https://github.com/vaaski/howtf",
-    externalLinkText: "vaaski/howtf",
-  },
-  {
     name: "telegram-ytdl",
     description: "A simple & fast YouTube download Telegram bot.",
     icon: YtdlIcon,
@@ -43,6 +36,14 @@ const projects: Project[] = [
     icon: HomeIcon,
     externalLink: "https://github.com/vaaski/vaaski.dev",
     externalLinkText: "vaaski/vaaski.dev",
+  },
+  {
+    name: "maver",
+    description:
+      "A faithful reimplementation of the MacOS animated screensavers in Three.js",
+    icon: AnimationIcon,
+    externalLink: "https://github.com/vaaski/maver",
+    externalLinkText: "vaaski/maver",
   },
   {
     name: "Apollo Studio Website",
