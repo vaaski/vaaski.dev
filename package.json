@@ -17,7 +17,7 @@
     "@vueuse/nuxt": "^10.11.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "lucide-vue-next": "^0.428.0",
+    "lucide-vue-next": "^0.435.0",
     "nuxt": "^3.12.4",
     "radix-vue": "^1.9.4",
     "shadcn-nuxt": "^0.10.4",
