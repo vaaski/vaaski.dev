@@ -9,4 +9,17 @@ export default withNuxt().prepend([
 			"unicorn/no-anonymous-default-export": "off",
 		},
 	},
+	{
+		files: ["**/*.vue"],
+		rules: {
+			"unicorn/prevent-abbreviations": [
+				"error",
+				{
+					allowList: {
+						props: true,
+					},
+				},
+			],
+		},
+	},
 ])
