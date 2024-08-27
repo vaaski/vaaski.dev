@@ -8,11 +8,14 @@
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare",
-		"format": "prettier -w ."
+		"format": "prettier -w .",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix"
 	},
 	"dependencies": {
 		"@fontsource-variable/outfit": "^5.0.13",
 		"@netlify/functions": "^2.8.1",
+		"@nuxt/eslint": "^0.5.3",
 		"@nuxtjs/tailwindcss": "^6.12.1",
 		"@vueuse/core": "^11.0.0",
 		"@vueuse/nuxt": "^11.0.0",
@@ -29,6 +32,7 @@
 		"vue": "^3.4.38"
 	},
 	"devDependencies": {
+		"eslint-plugin-unicorn": "^55.0.0",
 		"prettier": "^3.3.3",
 		"sass-embedded": "^1.77.8",
 		"typescript": "^5.5.4"

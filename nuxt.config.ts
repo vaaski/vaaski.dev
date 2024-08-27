@@ -2,6 +2,13 @@ export default defineNuxtConfig({
 	compatibilityDate: "2024-04-03",
 	devtools: { enabled: true },
 
+	modules: [
+		"@nuxtjs/tailwindcss",
+		"shadcn-nuxt",
+		"@vueuse/nuxt",
+		"@nuxt/eslint",
+	],
+
 	router: {
 		options: { scrollBehaviorType: "smooth" },
 	},
@@ -47,6 +54,4 @@ export default defineNuxtConfig({
 			isCustomElement: (tag) => tag.includes("-"),
 		},
 	},
-
-	modules: ["@nuxtjs/tailwindcss", "shadcn-nuxt", "@vueuse/nuxt"],
 })
