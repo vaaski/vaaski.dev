@@ -5,13 +5,24 @@ useHead({
 	title: "vaaski.dev",
 })
 
+const description =
+	"vaaski builds stuff for the web using typescript, vue and go"
+const title = "vaaski.dev"
+
 useSeoMeta({
-	title: "vaaski.dev",
-	ogTitle: "vaaski.dev",
-	description: "vaaski builds stuff for the web using typescript, vue and go",
-	ogDescription: "vaaski builds stuff for the web using typescript, vue and go",
+	title: title,
+	ogTitle: title,
+	twitterTitle: title,
+
+	description: description,
+	ogDescription: description,
+	twitterDescription: description,
+
 	ogImage: "https://vaaski.dev/og.png",
+	twitterImage: "https://vaaski.dev/og.png",
+
 	twitterCard: "summary_large_image",
+	ogUrl: "https://vaaski.dev",
 })
 
 const route = useRoute()
