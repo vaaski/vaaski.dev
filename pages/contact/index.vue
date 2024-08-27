@@ -86,14 +86,6 @@ h1 {
   text-shadow: 0 0 15px hsla(0, 0%, 100%, 0.5);
 }
 
-p {
-  text-align: center;
-}
-
-a {
-  text-decoration: underline;
-}
-
 input,
 textarea,
 button,

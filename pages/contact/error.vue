@@ -11,13 +11,3 @@
     <p><AutoLink to="/">go home</AutoLink></p>
   </div>
 </template>
-
-<style scoped lang="scss">
-p {
-  text-align: center;
-}
-
-a {
-  text-decoration: underline;
-}
-</style>

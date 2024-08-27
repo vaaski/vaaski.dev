@@ -72,4 +72,12 @@ main {
     padding: 1rem 1.5rem;
   }
 }
+
+:deep(p) {
+  text-align: center;
+}
+
+:deep(a) {
+  text-decoration: underline;
+}
 </style>
