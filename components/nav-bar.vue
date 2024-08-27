@@ -41,9 +41,7 @@ const wordmarkClick = async () => {
 	<div id="nav-bar">
 		<div class="left">
 			<ClientOnly>
-				<NuxtLink class="wordmark" @click.native="wordmarkClick"
-					>vaaski.dev</NuxtLink
-				>
+				<NuxtLink class="wordmark" @click.native="wordmarkClick">vaaski.dev</NuxtLink>
 
 				<template #fallback>
 					<NuxtLink class="wordmark" to="/">vaaski.dev</NuxtLink>
@@ -117,8 +115,7 @@ const wordmarkClick = async () => {
 		color: hsla(0, 0%, 100%, 0.5);
 		text-shadow: 0 0 20px hsla(0, 0%, 0%, 1);
 		padding: var(--background-y-pad) var(--background-x-pad);
-		margin: calc(var(--background-y-pad) * -1)
-			calc(var(--background-x-pad) * -1);
+		margin: calc(var(--background-y-pad) * -1) calc(var(--background-x-pad) * -1);
 		border-radius: 1em;
 		transition: 75ms linear;
 		transition-property: color, background, text-shadow, box-shadow;

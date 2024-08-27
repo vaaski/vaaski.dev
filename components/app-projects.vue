@@ -54,8 +54,7 @@ const projects: Project[] = [
 	},
 	{
 		name: "fuckvoicemessages",
-		description:
-			"Convert voice messages to text using the openai API and Telegram.",
+		description: "Convert voice messages to text using the openai API and Telegram.",
 		icon: NoVoiceIcon,
 		externalLink: "https://github.com/vaaski/fuckvoicemessages",
 		externalLinkText: "vaaski/fuckvoicemessages",
@@ -83,11 +82,7 @@ const projects: Project[] = [
 		<h1>past work</h1>
 
 		<ul class="project-list">
-			<li
-				class="project-item"
-				v-for="(item, index) of projects"
-				:key="item.name + index"
-			>
+			<li class="project-item" v-for="(item, index) of projects" :key="item.name + index">
 				<AutoLink :to="item.externalLink">
 					<div class="icon">
 						<component :is="item.icon" />

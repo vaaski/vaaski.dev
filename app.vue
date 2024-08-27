@@ -5,8 +5,7 @@ useHead({
 	title: "vaaski.dev",
 })
 
-const description =
-	"vaaski builds stuff for the web using typescript, vue and go"
+const description = "vaaski builds stuff for the web using typescript, vue and go"
 const title = "vaaski.dev"
 
 useSeoMeta({

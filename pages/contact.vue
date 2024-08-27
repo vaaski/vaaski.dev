@@ -54,8 +54,8 @@ const submitForm = async (data: FormData) => {
 
 				<template #fallback>
 					<p>
-						You don't seem to have JavaScript enabled. Due to abuse, I had to
-						disable the captcha-less form on this website.
+						You don't seem to have JavaScript enabled. Due to abuse, I had to disable the
+						captcha-less form on this website.
 						<br />
 						<br />
 						There might be other ways to contact me, you'll figure it out.

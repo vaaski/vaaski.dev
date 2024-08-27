@@ -11,9 +11,7 @@ const stages = [
 const values = computed(() => stages.join(";"))
 
 const keySplines = computed(() => {
-	return Array.from({ length: stages.length - 1 }, () => "0.87 0 0.13 1").join(
-		";",
-	)
+	return Array.from({ length: stages.length - 1 }, () => "0.87 0 0.13 1").join(";")
 })
 
 const keyTimes = computed(() => {
