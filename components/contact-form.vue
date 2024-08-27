@@ -1,16 +1,13 @@
 <script setup lang="ts">
-export type FormData = {
-  name: string
-  email: string
-  message: string
-  captcha: string
-}
-const emit = defineEmits<(e: "submit", data: FormData) => void>()
+const formData = reactive({
+  name: "",
+  email: "",
+  message: "",
+  captcha: "",
+})
 
-const name = ref("")
-const email = ref("")
-const message = ref("")
-const captchaPayload = ref("")
+export type FormData = typeof formData
+const emit = defineEmits<(e: "submit", data: FormData) => void>()
 
 const submitted = ref(false)
 
@@ -18,51 +15,39 @@ const formSubmit = async () => {
   if (submitted.value) return
   submitted.value = true
 
-  emit("submit", {
-    name: name.value,
-    email: email.value,
-    message: message.value,
-    captcha: captchaPayload.value,
-  })
+  emit("submit", formData)
 }
 </script>
 
 <template>
   <div class="contact-form">
-    <ClientOnly>
-      <h1>contact</h1>
-      <form @submit.prevent="formSubmit">
-        <input
-          v-model="name"
-          placeholder="name"
-          type="text"
-          name="name"
-          required
-          autocomplete="given-name"
-        />
-        <input
-          v-model="email"
-          placeholder="email"
-          type="email"
-          name="email"
-          required
-          autocomplete="email"
-        />
-        <textarea v-model="message" placeholder="message" name="message" required />
-        <CaptchaWidget v-model:payload="captchaPayload" />
-        <button type="submit">send</button>
-      </form>
-
-      <template #fallback>
-        <div class="fallback">
-          You don't seem to have JavaScript enabled. Due to abuse, I had to disable the
-          captcha-less form on this website.
-          <br />
-          <br />
-          There might be other ways to contact me, you'll figure it out.
-        </div>
-      </template>
-    </ClientOnly>
+    <h1>contact</h1>
+    <form @submit.prevent="formSubmit">
+      <input
+        v-model="formData.name"
+        placeholder="name"
+        type="text"
+        name="name"
+        required
+        autocomplete="given-name"
+      />
+      <input
+        v-model="formData.email"
+        placeholder="email"
+        type="email"
+        name="email"
+        required
+        autocomplete="email"
+      />
+      <textarea
+        v-model="formData.message"
+        placeholder="message"
+        name="message"
+        required
+      />
+      <CaptchaWidget v-model:payload="formData.captcha" />
+      <button type="submit">send</button>
+    </form>
   </div>
 </template>
 

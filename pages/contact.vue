@@ -24,32 +24,44 @@ const submitForm = async (data: FormData) => {
 <template>
   <main>
     <div class="panel">
-      <HeightTransition>
-        <ContactForm v-if="formState === 'initial'" @submit="submitForm" />
+      <ClientOnly>
+        <HeightTransition>
+          <ContactForm v-if="formState === 'initial'" @submit="submitForm" />
 
-        <div v-if="formState === 'loading'">
-          <p>loading...</p>
-        </div>
+          <div v-if="formState === 'loading'">
+            <p>loading...</p>
+          </div>
 
-        <div v-if="formState === 'success'">
-          <p>your message has been sent</p>
-          <p>expect a response within 48 hours</p>
-          <br />
-          <p><AutoLink to="/">go home</AutoLink></p>
-        </div>
+          <div v-if="formState === 'success'">
+            <p>your message has been sent</p>
+            <p>expect a response within 48 hours</p>
+            <br />
+            <p><AutoLink to="/">go home</AutoLink></p>
+          </div>
 
-        <div v-if="formState === 'error'">
-          <p>something went wrong</p>
+          <div v-if="formState === 'error'">
+            <p>something went wrong</p>
+            <p>
+              please
+              <AutoLink to="https://github.com/vaaski/vaaski.dev/issues/new">
+                open an issue on github
+              </AutoLink>
+            </p>
+            <br />
+            <p><AutoLink to="/">go home</AutoLink></p>
+          </div>
+        </HeightTransition>
+
+        <template #fallback>
           <p>
-            please
-            <AutoLink to="https://github.com/vaaski/vaaski.dev/issues/new">
-              open an issue on github
-            </AutoLink>
+            You don't seem to have JavaScript enabled. Due to abuse, I had to disable the
+            captcha-less form on this website.
+            <br />
+            <br />
+            There might be other ways to contact me, you'll figure it out.
           </p>
-          <br />
-          <p><AutoLink to="/">go home</AutoLink></p>
-        </div>
-      </HeightTransition>
+        </template>
+      </ClientOnly>
     </div>
 
     <div class="backdrop"></div>
