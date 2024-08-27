@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import { useRouter } from "nuxt/app"
-import { ref } from "vue"
-
 const name = ref("")
 const email = ref("")
 const message = ref("")
+const captchaPayload = ref("")
 
 const router = useRouter()
 const formSubmit = async () => {
   try {
-    const res = await fetch("/.netlify/functions/sendMessage", {
+    const res = await fetch("/.netlify/functions/send-message", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -18,6 +16,7 @@ const formSubmit = async () => {
         name: name.value,
         email: email.value,
         message: message.value,
+        captcha: captchaPayload.value,
       }),
     })
     if (res.status !== 200) throw new Error("something went wrong")
@@ -50,6 +49,7 @@ const formSubmit = async () => {
           autocomplete="email"
         />
         <textarea v-model="message" placeholder="message" name="message" required />
+        <CaptchaWidget v-model:payload="captchaPayload" />
         <button type="submit">send</button>
       </form>
 
@@ -91,7 +91,8 @@ a {
 
 input,
 textarea,
-button {
+button,
+altcha-widget {
   background: transparent;
   padding: 0.5em 1em;
   box-shadow: 0 0 0 1px hsla(0, 0%, 100%, 0.125);

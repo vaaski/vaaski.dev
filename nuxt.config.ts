@@ -28,5 +28,11 @@ export default defineNuxtConfig({
     inlineStyles: false,
   },
 
+  vue: {
+    compilerOptions: {
+      isCustomElement: (tag) => tag.includes("-"),
+    },
+  },
+
   modules: ["@nuxtjs/tailwindcss", "shadcn-nuxt", "@vueuse/nuxt"],
 })

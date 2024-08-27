@@ -1,8 +1,10 @@
 import type { Context } from "@netlify/functions"
+import { verifySolution } from "altcha-lib"
 
 const token = process.env.TELEGRAM_TOKEN
 const chat_id = process.env.TELEGRAM_TO
-if (!token || !chat_id) throw new Error("missing env vars")
+const hmacKey = process.env.HMAC_KEY
+if (!token || !chat_id || !hmacKey) throw new Error("missing env vars")
 
 const telegramURL = (m: string) => `https://api.telegram.org/bot${token}/${m}`
 
@@ -12,10 +14,15 @@ export default async (req: Request, context: Context) => {
   }
 
   const url = new URL(telegramURL("sendMessage"))
-  const payload = (await req.json()) as Record<string, string>
+  const payload: Record<string, string> = await req.json()
+
   const text = Object.entries(payload)
+    .filter(([type]) => type !== "captcha")
     .map(([type, val]) => `${type}: ${val}`)
     .join("\n")
+
+  const ok = await verifySolution(payload.captcha, hmacKey)
+  if (!ok) return new Response("Invalid captcha", { status: 403 })
 
   if (payload && text) {
     const searchParams = { text, chat_id }
