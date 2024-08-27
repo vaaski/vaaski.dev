@@ -1,12 +1,57 @@
 <script setup lang="ts">
+import type { FormData } from "~/components/contact-form.vue"
+
 useHead({ title: "vaaski.dev // contact" })
+
+const formState = ref<"initial" | "loading" | "success" | "error">("initial")
+
+const submitForm = async (data: FormData) => {
+  try {
+    formState.value = "loading"
+    const res = await fetch("/.netlify/functions/send-message", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+    if (res.status !== 200) throw new Error("something went wrong")
+    formState.value = "success"
+  } catch {
+    formState.value = "error"
+  }
+}
 </script>
 
 <template>
   <main>
     <div class="panel">
-      <NuxtPage />
+      <HeightTransition>
+        <ContactForm v-if="formState === 'initial'" @submit="submitForm" />
+
+        <div v-if="formState === 'loading'">
+          <p>loading...</p>
+        </div>
+
+        <div v-if="formState === 'success'">
+          <p>your message has been sent</p>
+          <p>expect a response within 48 hours</p>
+          <br />
+          <p><AutoLink to="/">go home</AutoLink></p>
+        </div>
+
+        <div v-if="formState === 'error'">
+          <p>something went wrong</p>
+          <p>
+            please
+            <AutoLink to="https://github.com/vaaski/vaaski.dev/issues/new">
+              open an issue on github
+            </AutoLink>
+          </p>
+          <br />
+          <p><AutoLink to="/">go home</AutoLink></p>
+        </div>
+      </HeightTransition>
     </div>
+
     <div class="backdrop"></div>
   </main>
 </template>
@@ -25,7 +70,6 @@ main {
   display: flex;
   align-items: stretch;
   flex-direction: column;
-  gap: 1rem;
   padding: 2rem 3rem;
   width: 100%;
   max-width: min(600px, 90vw);
@@ -37,6 +81,19 @@ main {
   );
   box-shadow: 0 0 0 1px hsla(0, 0%, 100%, 0.125);
   border-radius: 2rem;
+
+  > * {
+    // without this the contact form borders are clipped
+    padding: 1px;
+  }
+
+  p {
+    text-align: center;
+  }
+
+  a {
+    text-decoration: underline;
+  }
 }
 
 .backdrop {
@@ -71,13 +128,5 @@ main {
   .panel {
     padding: 1rem 1.5rem;
   }
-}
-
-:deep(p) {
-  text-align: center;
-}
-
-:deep(a) {
-  text-decoration: underline;
 }
 </style>

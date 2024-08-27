@@ -1,4 +1,12 @@
 <script setup lang="ts">
+export type FormData = {
+  name: string
+  email: string
+  message: string
+  captcha: string
+}
+const emit = defineEmits<(e: "submit", data: FormData) => void>()
+
 const name = ref("")
 const email = ref("")
 const message = ref("")
@@ -6,29 +14,16 @@ const captchaPayload = ref("")
 
 const submitted = ref(false)
 
-const router = useRouter()
 const formSubmit = async () => {
   if (submitted.value) return
   submitted.value = true
 
-  try {
-    const res = await fetch("/.netlify/functions/send-message", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: name.value,
-        email: email.value,
-        message: message.value,
-        captcha: captchaPayload.value,
-      }),
-    })
-    if (res.status !== 200) throw new Error("something went wrong")
-    await router.push("/contact/success")
-  } catch {
-    await router.push("/contact/error")
-  }
+  emit("submit", {
+    name: name.value,
+    email: email.value,
+    message: message.value,
+    captcha: captchaPayload.value,
+  })
 }
 </script>
 
