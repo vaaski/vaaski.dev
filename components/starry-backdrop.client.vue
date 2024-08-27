@@ -26,7 +26,7 @@ onMounted(async () => {
 			.fill(0)
 			.map(() => ({
 				x: Math.random() * scaledWidth.value,
-				y: Math.random() * scaledHeight.value,
+				y: Math.random() * scaledHeight.value + scaledHeight.value - 20,
 				size: Math.random() * 1.5 + 0.25,
 				speedY: (Math.random() * 0.25 + 0.05) * pixelRatio.value,
 				speedX: Math.random() * X_SPEED - X_SPEED / 2,
