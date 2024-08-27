@@ -7,19 +7,19 @@ if (!token || !chat_id) throw new Error("missing env vars")
 const telegramURL = (m: string) => `https://api.telegram.org/bot${token}/${m}`
 
 export default async (req: Request, context: Context) => {
+  const redirect = new URL(req.url)
+
   if (req.method.toLowerCase() !== "post") {
-    return Response.redirect("https://vaaski.dev/contact/error", 302)
+    redirect.pathname = "/contact/error"
+    return Response.redirect(redirect.href, 302)
   }
 
-  console.log(req)
   const url = new URL(telegramURL("sendMessage"))
   const payload = await req.formData()
 
   payload.append("method", "native")
   const text = [...payload.entries()].map(([type, val]) => `${type}: ${val}`).join("\n")
 
-  console.log(payload)
-  console.log(text)
   if (payload && text) {
     const searchParams = { text, chat_id }
     for (const param of Object.entries(searchParams)) {
@@ -27,8 +27,10 @@ export default async (req: Request, context: Context) => {
     }
 
     await fetch(url.toString(), { method: "POST" })
-    return Response.redirect("https://vaaski.dev/contact/success", 302)
+    redirect.pathname = "/contact/success"
+    return Response.redirect(redirect.href, 302)
   }
 
-  return Response.redirect("https://vaaski.dev/contact/error", 302)
+  redirect.pathname = "/contact/error"
+  return Response.redirect(redirect.href, 302)
 }
