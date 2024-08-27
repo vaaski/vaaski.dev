@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { cn } from "@/lib/utils"
 import {
 	PopoverContent,
 	type PopoverContentEmits,
@@ -8,6 +7,9 @@ import {
 	useForwardPropsEmits,
 } from "radix-vue"
 import { type HTMLAttributes, computed } from "vue"
+
+// nuxt auto-import doesn't play nice with whatever vscode is thinking
+const cn = twMerge
 
 defineOptions({
 	inheritAttrs: false,
