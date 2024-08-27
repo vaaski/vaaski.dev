@@ -30,31 +30,39 @@ const formSubmit = async () => {
 
 <template>
   <div class="contact-form">
-    <h1>contact</h1>
-    <form
-      @submit.prevent="formSubmit"
-      action="/.netlify/functions/sendMessageNative"
-      method="post"
-    >
-      <input
-        v-model="name"
-        placeholder="name"
-        type="text"
-        name="name"
-        required
-        autocomplete="given-name"
-      />
-      <input
-        v-model="email"
-        placeholder="email"
-        type="email"
-        name="email"
-        required
-        autocomplete="email"
-      />
-      <textarea v-model="message" placeholder="message" name="message" required />
-      <button type="submit">send</button>
-    </form>
+    <ClientOnly>
+      <h1>contact</h1>
+      <form @submit.prevent="formSubmit">
+        <input
+          v-model="name"
+          placeholder="name"
+          type="text"
+          name="name"
+          required
+          autocomplete="given-name"
+        />
+        <input
+          v-model="email"
+          placeholder="email"
+          type="email"
+          name="email"
+          required
+          autocomplete="email"
+        />
+        <textarea v-model="message" placeholder="message" name="message" required />
+        <button type="submit">send</button>
+      </form>
+
+      <template #fallback>
+        <div class="fallback">
+          You don't seem to have JavaScript enabled. Due to abuse, I had to disable the
+          captcha-less form on this website.
+          <br />
+          <br />
+          There might be other ways to contact me, you'll figure it out.
+        </div>
+      </template>
+    </ClientOnly>
   </div>
 </template>
 
@@ -107,5 +115,10 @@ textarea {
 
 textarea {
   resize: none;
+}
+
+.fallback {
+  text-align: center;
+  font-weight: 300;
 }
 </style>
