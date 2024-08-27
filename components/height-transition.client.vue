@@ -1,62 +1,62 @@
 <script setup lang="ts">
 import type { TransitionProps } from "vue"
 
-const props = defineProps({
+const properties = defineProps({
 	duration: {
 		type: Number,
 		default: 500,
 	},
 })
 
-const transitionCSS = `all ${props.duration}ms cubic-bezier(0.76, 0, 0.24, 1)`
+const transitionCSS = `all ${properties.duration}ms cubic-bezier(0.76, 0, 0.24, 1)`
 
 const transition: TransitionProps = {
 	css: false,
-	onBeforeEnter: (el) => {
-		if (!(el instanceof HTMLElement)) throw new Error("invalid element")
-		el.style.height = "0"
-		el.style.overflow = "hidden"
-		el.style.opacity = "0"
+	onBeforeEnter: (element) => {
+		if (!(element instanceof HTMLElement)) throw new Error("invalid element")
+		element.style.height = "0"
+		element.style.overflow = "hidden"
+		element.style.opacity = "0"
 	},
-	onEnter: async (el, done) => {
-		if (!(el instanceof HTMLElement)) throw new Error("invalid element")
+	onEnter: async (element, done) => {
+		if (!(element instanceof HTMLElement)) throw new Error("invalid element")
 		await nextTick()
 
-		el.style.transition = transitionCSS
-		el.style.height = `${el.scrollHeight}px`
-		el.style.opacity = "1"
-		await wait(props.duration)
+		element.style.transition = transitionCSS
+		element.style.height = `${element.scrollHeight}px`
+		element.style.opacity = "1"
+		await wait(properties.duration)
 		done()
 	},
-	onAfterEnter: (el) => {
-		if (!(el instanceof HTMLElement)) throw new Error("invalid element")
-		el.style.height = ""
-		el.style.overflow = ""
-		el.style.transition = ""
-		el.style.opacity = ""
+	onAfterEnter: (element) => {
+		if (!(element instanceof HTMLElement)) throw new Error("invalid element")
+		element.style.height = ""
+		element.style.overflow = ""
+		element.style.transition = ""
+		element.style.opacity = ""
 	},
-	onBeforeLeave: (el) => {
-		if (!(el instanceof HTMLElement)) throw new Error("invalid element")
-		el.style.height = `${el.scrollHeight}px`
-		el.style.overflow = "hidden"
-		el.style.opacity = "1"
+	onBeforeLeave: (element) => {
+		if (!(element instanceof HTMLElement)) throw new Error("invalid element")
+		element.style.height = `${element.scrollHeight}px`
+		element.style.overflow = "hidden"
+		element.style.opacity = "1"
 	},
-	onLeave: async (el, done) => {
-		if (!(el instanceof HTMLElement)) throw new Error("invalid element")
+	onLeave: async (element, done) => {
+		if (!(element instanceof HTMLElement)) throw new Error("invalid element")
 		await nextTick()
 
-		el.style.transition = transitionCSS
-		el.style.height = "0"
-		el.style.opacity = "0"
-		await wait(props.duration)
+		element.style.transition = transitionCSS
+		element.style.height = "0"
+		element.style.opacity = "0"
+		await wait(properties.duration)
 		done()
 	},
-	onAfterLeave: (el) => {
-		if (!(el instanceof HTMLElement)) throw new Error("invalid element")
-		el.style.height = ""
-		el.style.overflow = ""
-		el.style.opacity = ""
-		el.style.transition = ""
+	onAfterLeave: (element) => {
+		if (!(element instanceof HTMLElement)) throw new Error("invalid element")
+		element.style.height = ""
+		element.style.overflow = ""
+		element.style.opacity = ""
+		element.style.transition = ""
 	},
 }
 </script>
@@ -70,6 +70,6 @@ const transition: TransitionProps = {
 		@leave="transition.onLeave"
 		@after-leave="transition.onAfterLeave"
 	>
-		<slot></slot>
+		<slot />
 	</Transition>
 </template>

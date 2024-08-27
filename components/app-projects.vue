@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import AnimationIcon from "@/assets/icons/animation.vue"
-import HomeIcon from "@/assets/icons/home.vue"
-import LocalpenIcon from "@/assets/icons/localpen.vue"
-import NoVoiceIcon from "@/assets/icons/no-voice.vue"
-import PresetIcon from "@/assets/icons/preset.vue"
-import PublicIcon from "@/assets/icons/public.vue"
-import YtdlIcon from "@/assets/icons/ytdl.vue"
+import AnimationIcon from "@/assets/icons/animation-icon.vue"
+import HomeIcon from "@/assets/icons/home-icon.vue"
+import LocalpenIcon from "@/assets/icons/localpen-icon.vue"
+import NoVoiceIcon from "@/assets/icons/no-voice-icon.vue"
+import PresetIcon from "@/assets/icons/preset-icon.vue"
+import PublicIcon from "@/assets/icons/public-icon.vue"
+import YtdlIcon from "@/assets/icons/ytdl-icon.vue"
 
 type Project = {
 	name: string
@@ -78,11 +78,11 @@ const projects: Project[] = [
 
 <template>
 	<div class="app-projects">
-		<div id="projects"></div>
+		<div id="projects" />
 		<h1>past work</h1>
 
 		<ul class="project-list">
-			<li class="project-item" v-for="(item, index) of projects" :key="item.name + index">
+			<li v-for="(item, index) of projects" :key="item.name + index" class="project-item">
 				<AutoLink :to="item.externalLink">
 					<div class="icon">
 						<component :is="item.icon" />
@@ -98,7 +98,7 @@ const projects: Project[] = [
 			</li>
 		</ul>
 
-		<div class="backdrop"></div>
+		<div class="backdrop" />
 	</div>
 </template>
 

@@ -1,3 +1,3 @@
-export { default as Popover } from "./Popover.vue"
-export { default as PopoverContent } from "./PopoverContent.vue"
-export { default as PopoverTrigger } from "./PopoverTrigger.vue"
+export { default as PopoverContent } from "./popover-content.vue"
+export { default as PopoverTrigger } from "./popover-trigger.vue"
+export { default as Popover } from "./popover.vue"

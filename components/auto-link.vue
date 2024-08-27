@@ -9,14 +9,14 @@ const properties = defineProps<{
 }>()
 
 const target = computed(() => {
-	if (typeof properties.to === "string" && properties.to.startsWith("http")) {
-		return "_blank"
-	}
+	return typeof properties.to === "string" && properties.to.startsWith("http")
+		? "_blank"
+		: "_self"
 })
 </script>
 
 <template>
 	<NuxtLink :to="properties.to" :target="target">
-		<slot></slot>
+		<slot />
 	</NuxtLink>
 </template>

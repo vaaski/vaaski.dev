@@ -16,8 +16,8 @@ const keySplines = computed(() => {
 
 const keyTimes = computed(() => {
 	const stepSize = 1 / (stages.length - 1)
-	return Array.from({ length: stages.length }, (_, i) => {
-		return Math.min(i * stepSize, 1)
+	return Array.from({ length: stages.length }, (_, index) => {
+		return Math.min(index * stepSize, 1)
 	})
 		.map((v) => Math.floor(v * 100) / 100)
 		.join(";")
@@ -43,11 +43,11 @@ const keyTimes = computed(() => {
 					:keySplines="keySplines"
 					:keyTimes="keyTimes"
 					:values="values"
-				></animate>
+				/>
 			</path>
 		</svg>
 
-		<div class="logo-glow"></div>
+		<div class="logo-glow" />
 	</div>
 </template>
 

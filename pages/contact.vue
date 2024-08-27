@@ -8,12 +8,12 @@ const formState = ref<"initial" | "loading" | "success" | "error">("initial")
 const submitForm = async (data: FormData) => {
 	try {
 		formState.value = "loading"
-		const res = await fetch("/.netlify/functions/send-message", {
+		const response = await fetch("/.netlify/functions/send-message", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(data),
 		})
-		if (res.status !== 200) throw new Error("something went wrong")
+		if (response.status !== 200) throw new Error("something went wrong")
 		formState.value = "success"
 	} catch {
 		formState.value = "error"
@@ -64,7 +64,7 @@ const submitForm = async (data: FormData) => {
 			</ClientOnly>
 		</div>
 
-		<div class="backdrop"></div>
+		<div class="backdrop" />
 	</main>
 </template>
 

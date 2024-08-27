@@ -30,7 +30,7 @@ const route = useRoute()
 <template>
 	<NavBar :class="{ 'is-home': route.path === '/' }" />
 	<NuxtPage />
-	<div class="navlight"></div>
+	<div class="navlight" />
 </template>
 
 <style lang="scss">

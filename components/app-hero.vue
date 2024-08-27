@@ -16,10 +16,10 @@ const { width, height } = useElementSize(hero)
 				</div>
 			</div>
 		</div>
-		<div class="backdrop"></div>
+		<div class="backdrop" />
 		<StarryBackdrop class="starry-backdrop" :width="width" :height="height" />
 
-		<div class="bottom-rounder"></div>
+		<div class="bottom-rounder" />
 	</div>
 </template>
 

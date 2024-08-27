@@ -4,7 +4,7 @@ import type {
 	RouteLocationAsRelativeGeneric,
 } from "vue-router"
 
-import Hamburger from "@/assets/icons/hamburger.vue"
+import Hamburger from "@/assets/icons/hamburger-icon.vue"
 
 import { Popover, PopoverContent } from "@/components/ui/popover"
 
@@ -41,14 +41,14 @@ const wordmarkClick = async () => {
 	<div id="nav-bar">
 		<div class="left">
 			<ClientOnly>
-				<NuxtLink class="wordmark" @click.native="wordmarkClick">vaaski.dev</NuxtLink>
+				<NuxtLink class="wordmark" @click="wordmarkClick">vaaski.dev</NuxtLink>
 
 				<template #fallback>
 					<NuxtLink class="wordmark" to="/">vaaski.dev</NuxtLink>
 				</template>
 			</ClientOnly>
 		</div>
-		<div class="spacer"></div>
+		<div class="spacer" />
 		<div class="right">
 			<AutoLink v-for="link in links" :key="link.name" :to="link.to">{{
 				link.name
@@ -64,8 +64,8 @@ const wordmarkClick = async () => {
 						<AutoLink
 							v-for="link in links"
 							:key="link.name"
-							@click="hamburgerOpen = false"
 							:to="link.to"
+							@click="hamburgerOpen = false"
 						>
 							{{ link.name }}
 						</AutoLink>

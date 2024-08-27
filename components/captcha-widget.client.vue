@@ -2,27 +2,23 @@
 import "altcha"
 
 const altchaWidget = ref<HTMLElement>()
-const props = defineProps({
+const properties = defineProps({
 	payload: {
 		type: String,
-		required: false,
+		default: "",
 	},
 })
-const emit = defineEmits<(e: "update:payload", value: string) => void>()
-const internalValue = ref(props.payload)
+const emit = defineEmits<(event: "update:payload", value: string) => void>()
+const internalValue = ref(properties.payload)
 
 watch(internalValue, (v) => {
 	emit("update:payload", v || "")
 })
 
-const onStateChange = (ev: CustomEvent | Event) => {
-	if ("detail" in ev) {
-		const { payload, state } = ev.detail
-		if (state === "verified" && payload) {
-			internalValue.value = payload
-		} else {
-			internalValue.value = ""
-		}
+const onStateChange = (event_: CustomEvent | Event) => {
+	if ("detail" in event_) {
+		const { payload, state } = event_.detail
+		internalValue.value = state === "verified" && payload ? payload : ""
 	}
 }
 

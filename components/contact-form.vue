@@ -7,7 +7,7 @@ const formData = reactive({
 })
 
 export type FormData = typeof formData
-const emit = defineEmits<(e: "submit", data: FormData) => void>()
+const emit = defineEmits<(event: "submit", data: FormData) => void>()
 
 const submitted = ref(false)
 

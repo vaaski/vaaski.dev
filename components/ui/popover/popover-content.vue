@@ -18,17 +18,18 @@ const props = withDefaults(
 	{
 		align: "center",
 		sideOffset: 4,
+		class: "",
 	},
 )
 const emits = defineEmits<PopoverContentEmits>()
 
-const delegatedProps = computed(() => {
+const delegatedProperties = computed(() => {
 	const { class: _, ...delegated } = props
 
 	return delegated
 })
 
-const forwarded = useForwardPropsEmits(delegatedProps, emits)
+const forwarded = useForwardPropsEmits(delegatedProperties, emits)
 </script>
 
 <template>
