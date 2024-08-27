@@ -4,8 +4,13 @@ const email = ref("")
 const message = ref("")
 const captchaPayload = ref("")
 
+const submitted = ref(false)
+
 const router = useRouter()
 const formSubmit = async () => {
+  if (submitted.value) return
+  submitted.value = true
+
   try {
     const res = await fetch("/.netlify/functions/send-message", {
       method: "POST",
