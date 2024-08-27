@@ -3,8 +3,8 @@ useHead({ title: "vaaski.dev // home" })
 </script>
 
 <template>
-  <main>
-    <AppHero />
-    <AppProjects />
-  </main>
+	<main>
+		<AppHero />
+		<AppProjects />
+	</main>
 </template>
