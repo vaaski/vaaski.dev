@@ -43,7 +43,6 @@ onUnmounted(async () => {
 <template>
   <altcha-widget
     ref="altchaWidget"
-    debug
     hidefooter
     challengeurl="/.netlify/functions/generate-challenge"
   />
