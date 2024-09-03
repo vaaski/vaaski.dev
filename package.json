@@ -17,6 +17,7 @@
 		"@fontsource-variable/outfit": "^5.0.13",
 		"@netlify/functions": "^2.8.1",
 		"@nuxt/eslint": "^0.5.3",
+		"@nuxtjs/plausible": "^1.0.2",
 		"@nuxtjs/tailwindcss": "^6.12.1",
 		"@vueuse/core": "^11.0.0",
 		"@vueuse/nuxt": "^11.0.0",

@@ -2,7 +2,18 @@ export default defineNuxtConfig({
 	compatibilityDate: "2024-04-03",
 	devtools: { enabled: true },
 
-	modules: ["@nuxtjs/tailwindcss", "shadcn-nuxt", "@vueuse/nuxt", "@nuxt/eslint"],
+	modules: [
+		"@nuxtjs/tailwindcss",
+		"shadcn-nuxt",
+		"@vueuse/nuxt",
+		"@nuxt/eslint",
+		"@nuxtjs/plausible",
+	],
+
+	plausible: {
+		apiHost: "https://plausible.vaaski.dev",
+		domain: "vaaski.dev",
+	},
 
 	router: {
 		options: { scrollBehaviorType: "smooth" },
