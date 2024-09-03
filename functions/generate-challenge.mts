@@ -9,7 +9,6 @@ export default async () => {
 		maxNumber: 100_000,
 	})
 
-	console.log(challenge)
 	return new Response(JSON.stringify(challenge), {
 		headers: {
 			"Content-Type": "application/json",
