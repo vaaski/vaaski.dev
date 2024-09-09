@@ -7,6 +7,7 @@ export default async () => {
 	const challenge = await createChallenge({
 		hmacKey,
 		maxNumber: 100_000,
+		expires: new Date(Date.now() + 1000 * 60 * 60), // 1 hour
 	})
 
 	return new Response(JSON.stringify(challenge), {
