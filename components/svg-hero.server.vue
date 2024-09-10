@@ -12,9 +12,11 @@ const logoStages = [
 ]
 
 const values = computed(() => logoStages.join(";"))
+const easeInOutExpo = "0.87 0 0.13 1"
+const easeOutExpo = "0.16, 1, 0.3, 1"
 
 const keySplines = computed(() => {
-	return Array.from({ length: logoStages.length - 1 }, () => "0.87 0 0.13 1").join(";")
+	return Array.from({ length: logoStages.length - 1 }, () => easeInOutExpo).join(";")
 })
 
 const keyTimes = computed(() => {
@@ -28,6 +30,9 @@ const keyTimes = computed(() => {
 
 const width = 1200
 const height = 630
+
+const logoWidth = 312
+const logoHeight = 186
 
 const STAR_AMOUNT = 30
 const X_SPEED = 0.125
@@ -44,7 +49,7 @@ const stars = Array.from({ length: STAR_AMOUNT })
 			begin: 0,
 		}
 
-		star.begin = Math.random() * (star.duration / 3)
+		star.begin = Math.random() * (star.duration / 4)
 
 		if (Math.random() > 0.5) {
 			star.xSpeed *= -1
@@ -61,13 +66,7 @@ const stars = Array.from({ length: STAR_AMOUNT })
 </script>
 
 <template>
-	<svg
-		:width="width"
-		:height="height"
-		:viewBox="`0 0 ${width} ${height}`"
-		fill="none"
-		xmlns="http://www.w3.org/2000/svg"
-	>
+	<svg :width="width" :height="height">
 		<g filter="url(#s)">
 			<rect x="25" y="25" width="1150" height="580" rx="24" fill="black" />
 			<g opacity="0.75">
@@ -122,16 +121,32 @@ const stars = Array.from({ length: STAR_AMOUNT })
 			/>
 			<rect x="-156" y="-176" width="1512" height="982" fill="url(#p5)" />
 		</g>
+		<!-- logo -->
 		<svg
-			width="312"
-			height="186"
-			:x="width / 2 - 312 / 2"
-			:y="height / 2 - 186 / 2"
-			viewBox="0 0 312 186"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
+			:width="logoWidth"
+			:height="logoHeight"
+			:x="width / 2 - logoWidth / 2"
+			:y="height / 2 - logoHeight / 2"
 		>
-			<path ref="path" fill="white">
+			<path
+				ref="path"
+				fill="white"
+				:transform-origin="`${logoWidth / 2} ${logoHeight / 2}`"
+			>
+				<!-- animate scale-in -->
+				<animateTransform
+					attributeName="transform"
+					from="0 0"
+					to="1 1"
+					begin="0s"
+					dur="2.5s"
+					fill="freeze"
+					type="scale"
+					calcMode="spline"
+					:keySplines="easeOutExpo"
+					keyTimes="0;1"
+				/>
+				<!-- animate path -->
 				<animate
 					attributeName="d"
 					begin="250ms"
