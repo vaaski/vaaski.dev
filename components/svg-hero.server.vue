@@ -66,7 +66,7 @@ const stars = Array.from({ length: STAR_AMOUNT })
 </script>
 
 <template>
-	<svg :width="width" :height="height">
+	<svg :width="width" :height="height" xmlns="http://www.w3.org/2000/svg">
 		<g filter="url(#s)">
 			<rect x="25" y="25" width="1150" height="580" rx="24" fill="black" />
 			<g opacity="0.75">
@@ -127,6 +127,7 @@ const stars = Array.from({ length: STAR_AMOUNT })
 			:height="logoHeight"
 			:x="width / 2 - logoWidth / 2"
 			:y="height / 2 - logoHeight / 2"
+			xmlns="http://www.w3.org/2000/svg"
 		>
 			<path
 				ref="path"
