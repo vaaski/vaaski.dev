@@ -1,75 +1,16 @@
-# Nuxt 3 Minimal Starter
+# vaaski.dev
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+My personal website. Built with [Nuxt](https://nuxt.com), [shadcn-vue](https://shadcn-vue.com) and [Altcha](https://altcha.org).
 
-## Setup
-
-Make sure to install the dependencies:
-
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+<div align="center">
+  <a href="https://vaaski.dev">
+		<!---->
+		<!-- dig into how this was made here: -->
+		<!-- https://github.com/vaaski/vaaski.dev/blob/2024/components/svg-hero.server.vue -->
+		<!---->
+		<!-- you can also see the generated version here: -->
+		<!-- https://vaaski.dev/static-svg -->
+		<!---->
+    <img src=".github/space-logo.svg" />
+  </a>
+</div>
