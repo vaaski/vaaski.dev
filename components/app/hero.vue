@@ -178,7 +178,7 @@ const { width, height } = useElementSize(hero)
 .bottom-rounder {
 	--curve-height: 20px;
 	--extra-height: 10px;
-	--curve-color: black;
+	--curve-color: hsla(0, 0%, 0.25%, 1);
 
 	z-index: 3;
 	position: absolute;
