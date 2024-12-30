@@ -3,11 +3,12 @@ export default defineNuxtConfig({
 	devtools: { enabled: true },
 
 	modules: [
-		"@nuxtjs/tailwindcss",
-		"shadcn-nuxt",
-		"@vueuse/nuxt",
+		"@nuxt/content",
 		"@nuxt/eslint",
 		"@nuxtjs/plausible",
+		"@nuxtjs/tailwindcss",
+		"@vueuse/nuxt",
+		"shadcn-nuxt",
 	],
 
 	plausible: {
