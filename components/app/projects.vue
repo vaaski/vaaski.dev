@@ -98,7 +98,7 @@ const projects: Project[] = [
 			</li>
 		</ul>
 
-		<div class="backdrop" />
+		<div class="backdrop"></div>
 	</div>
 </template>
 
@@ -110,6 +110,9 @@ const projects: Project[] = [
 	background: black;
 	z-index: 3;
 	position: relative;
+	margin-top: -30px;
+
+	clip-path: ellipse(3000px 50% at 50% 50%);
 }
 
 h1 {
@@ -196,7 +199,7 @@ li.project-item a {
 
 	background: radial-gradient(
 		357.3% 137.24% at 50% 100%,
-		rgba(255, 255, 255, 0.1) 0%,
+		rgba(200, 0, 50, 0.1) 0%,
 		rgba(0, 0, 0, 0) 100%
 	);
 	opacity: 0.6;

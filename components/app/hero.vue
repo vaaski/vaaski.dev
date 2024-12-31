@@ -18,8 +18,6 @@ const { width, height } = useElementSize(hero)
 		</div>
 		<div class="backdrop" />
 		<StarryBackdrop class="starry-backdrop" :width="width" :height="height" />
-
-		<div class="bottom-rounder" />
 	</div>
 </template>
 
@@ -173,30 +171,6 @@ const { width, height } = useElementSize(hero)
 	animation: tagline-animation var(--tagline-animation-duration)
 		cubic-bezier(0.76, 0, 0.24, 1) forwards;
 	animation-delay: var(--tagline-animation-delay);
-}
-
-.bottom-rounder {
-	--curve-height: 20px;
-	--extra-height: 10px;
-	--curve-color: hsla(0, 0%, 0.25%, 1);
-
-	z-index: 3;
-	position: absolute;
-	bottom: var(--extra-height);
-	width: 100%;
-	height: var(--curve-height);
-	background: var(--curve-color);
-	border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-	box-shadow: 0 0 75px hsla(0, 0%, 100%, 0.25);
-
-	&::after {
-		position: absolute;
-		content: "";
-		top: var(--curve-height);
-		height: var(--extra-height);
-		width: 100%;
-		background: var(--curve-color);
-	}
 }
 
 @media (max-width: 900px) {
