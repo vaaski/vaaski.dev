@@ -109,8 +109,10 @@ a {
 	opacity: 0.75;
 	position: fixed;
 	top: 0;
-	left: 0;
+	left: 50%;
+	transform: translateX(-50%);
 	width: 100vw;
+	min-width: 800px;
 	height: 100vh;
 	pointer-events: none;
 }
