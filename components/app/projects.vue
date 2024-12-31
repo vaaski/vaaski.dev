@@ -110,9 +110,9 @@ const projects: Project[] = [
 	background: black;
 	z-index: 3;
 	position: relative;
-	margin-top: -30px;
+	margin-top: -2vw;
 
-	clip-path: ellipse(3000px 50% at 50% 50%);
+	clip-path: ellipse(250vw 50% at 50% 50%);
 }
 
 h1 {
