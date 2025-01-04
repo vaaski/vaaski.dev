@@ -2,7 +2,7 @@
 const route = useRoute()
 
 const { data: home } = await useAsyncData(route.path, () =>
-	queryCollection("content").path(route.path.replace("/blog", "")).first(),
+	queryCollection("blog").path(route.path.replace("/blog", "")).first(),
 )
 
 useSeoMeta({
@@ -12,6 +12,14 @@ useSeoMeta({
 </script>
 
 <template>
-	<ContentRenderer v-if="home" :value="home" />
-	<div v-else>{{ route.path }} not found</div>
+	<main>
+		<ContentRenderer v-if="home" :value="home" />
+		<div v-else>{{ route.path }} not found</div>
+	</main>
 </template>
+
+<style scoped lang="scss">
+main {
+	padding-top: var(--nav-height);
+}
+</style>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import "@fontsource-variable/outfit"
+import "@/assets/css/variables.scss"
 
 useHead({
 	title: "vaaski.dev",

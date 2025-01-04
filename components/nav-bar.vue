@@ -16,6 +16,7 @@ type Link = {
 }
 const links: Link[] = [
 	{ name: "projects", to: { path: "/", hash: "#projects" } },
+	{ name: "blog", to: "/blog" },
 	{ name: "contact", to: "/contact" },
 	{ name: "github", to: "https://github.com/vaaski" },
 ]
@@ -80,8 +81,8 @@ const wordmarkClick = async () => {
 #nav-bar {
 	display: flex;
 	z-index: 5;
-	padding: 1.25rem 0;
-	margin-top: 1rem;
+	padding: var(--nav-padding) 0;
+	margin-top: var(--nav-margin);
 	width: 100%;
 	max-width: min(750px, 90vw);
 	backdrop-filter: blur(5px);
@@ -106,12 +107,14 @@ const wordmarkClick = async () => {
 	margin: 0 2rem;
 
 	a {
+		// makes the clickable area larger
 		--background-x-pad: 0.55em;
 		--background-y-pad: 0.2em;
 
 		font-style: normal;
 		font-weight: 400;
-		font-size: 1.1rem;
+		font-size: var(--nav-font-size);
+		line-height: var(--nav-line-height);
 		color: hsla(0, 0%, 100%, 0.5);
 		text-shadow: 0 0 20px hsla(0, 0%, 0%, 1);
 		padding: var(--background-y-pad) var(--background-x-pad);

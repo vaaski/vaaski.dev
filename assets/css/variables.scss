@@ -1,0 +1,11 @@
+:root {
+	--nav-margin: 1rem;
+	--nav-padding: 1.25rem;
+	--nav-line-height: 1.5;
+	--nav-font-size: 1.1rem;
+
+	--nav-height: calc(
+		2 * var(--nav-margin) + 2 * var(--nav-padding) + var(--nav-line-height) *
+			var(--nav-font-size)
+	);
+}
